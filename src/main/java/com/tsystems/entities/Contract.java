@@ -1,7 +1,5 @@
 package com.tsystems.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -10,7 +8,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "contracts",schema = "tmobile")
-@Data
 public class Contract {
 
     @Id
@@ -42,7 +39,55 @@ public class Contract {
         this.customer = customer;
     }
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Integer getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(Integer isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", isBlocked=" + isBlocked +
+                ", balance=" + balance +
+                ", customer=" + customer +
+                '}';
+    }
 
 }

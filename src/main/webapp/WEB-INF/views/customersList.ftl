@@ -14,7 +14,7 @@
             <th>Lastname</th>
             <th>Date of Birth</th>
             <th>Passport Number</th>
-            <th>Passport Date</th>
+            <th>Passport Data</th>
             <th>Address</th>
             <th>Email</th>
             <th>Password</th>
@@ -27,7 +27,7 @@
         <td>${customer.lastname}</td>
         <td>${customer.date_of_birth}</td>
         <td>${customers.passport_number}</td>
-        <td>${customers.passpor_date}</td>
+        <td>${customers.passpor_data}</td>
         <td>${customers.address}</td>
         <td>${customers.email}</td>
         <td>${customers.password}</td>
