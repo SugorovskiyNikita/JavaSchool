@@ -22,5 +22,6 @@
   Password: <input type="text" name="passA" /><br>
   <input type="submit" name="submit" value="Add new customer" />
 </form>
+<a href="/hello"> Hello page</a>
 </body>
 </html>

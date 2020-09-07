@@ -1,4 +1,4 @@
-package com.tsystems.db.entities;
+package com.tsystems.entities;
 
 import lombok.Data;
 

@@ -21,7 +21,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     public ViewResolver getViewResolver() {
         FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
         freeMarkerViewResolver.setOrder(1);
-        freeMarkerViewResolver.setSuffix(".jsp");
+        freeMarkerViewResolver.setSuffix(".ftl");
         freeMarkerViewResolver.setPrefix("");
         return freeMarkerViewResolver;
     }
