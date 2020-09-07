@@ -12,7 +12,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Lastname</th>
-            <th>Date of Birth</th>
+            <th>Day Of Birth</th>
             <th>Passport Number</th>
             <th>Passport Data</th>
             <th>Address</th>
@@ -25,13 +25,13 @@
         <td>${customer.id}</td>
         <td>${customer.name}</td>
         <td>${customer.lastname}</td>
-        <td>${customer.date_of_birth}</td>
-        <td>${customers.passport_number}</td>
-        <td>${customers.passpor_data}</td>
-        <td>${customers.address}</td>
-        <td>${customers.email}</td>
-        <td>${customers.password}</td>
-        <td>${customers.is_blocked}</td>
+        <td>${customer.dateOfBirth}</td>
+        <td>${customer.passportNumber}</td>
+        <td>${customer.passportData}</td>
+        <td>${customer.address}</td>
+        <td>${customer.email}</td>
+        <td>${customer.password}</td>
+        <td>${customer.isBlocked}</td>
     </tr>
 </#list>
     </table>
