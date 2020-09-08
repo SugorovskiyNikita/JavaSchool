@@ -22,7 +22,7 @@
         </tr>
 <#list customers as customer>
     <tr>
-        <td>${customer.id}</td>
+        <td><a href="/customer/${customer.id}">${customer.id}</a></td>
         <td>${customer.name}</td>
         <td>${customer.lastname}</td>
         <td>${customer.dateOfBirth}</td>
