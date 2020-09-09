@@ -5,6 +5,7 @@ import com.tsystems.dao.CustomerDaoImpl;
 import com.tsystems.service.CustomerService;
 import com.tsystems.service.CustomerServiceImpl;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
  * Created by nikita on 07.09.20.
  */
 @Configuration
+@ComponentScan(basePackages = {"com.tsystems.service", "com.tsystems.dao"})
 public class SpringConfig {
 
     @Bean
@@ -32,14 +34,5 @@ public class SpringConfig {
         return dataSource;
     }
 
-    @Bean
-    public CustomerDao getCustomerDao() {
-        return new CustomerDaoImpl(getJdbcTemplate());
-    }
-
-    @Bean
-    public CustomerService getCustomerService() {
-        return new CustomerServiceImpl();
-    }
 
 }

@@ -4,12 +4,14 @@ import com.tsystems.entities.Customer;
 import com.tsystems.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by nikita on 07.09.2020.
  */
+@Repository
 public class CustomerDaoImpl implements CustomerDao {
 
     public final JdbcTemplate jdbcTemplate;
