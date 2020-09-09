@@ -3,6 +3,7 @@ package com.tsystems.entities;
 
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,6 +27,7 @@ public class Customer {
     private String lastname;
 
     @Column(name = "date_of_birth")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateOfBirth;
 
     @Column(name = "passport_number")

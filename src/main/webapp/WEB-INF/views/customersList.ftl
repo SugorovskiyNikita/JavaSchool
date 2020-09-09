@@ -35,7 +35,8 @@
     </tr>
 </#list>
     </table>
-
+    <br>
+    <a href="/addCustomer">Add new Customer</a>
 
 </body>
 </html>
