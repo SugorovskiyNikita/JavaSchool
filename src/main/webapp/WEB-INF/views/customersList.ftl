@@ -32,6 +32,8 @@
         <td>${customer.email}</td>
         <td>${customer.password}</td>
         <td>${customer.isBlocked}</td>
+        <td><a href="/delete/${customer.id}">Delete</a></td>
+        <td><a href="/update/${customer.id}">Edit</a></td>
     </tr>
 </#list>
     </table>

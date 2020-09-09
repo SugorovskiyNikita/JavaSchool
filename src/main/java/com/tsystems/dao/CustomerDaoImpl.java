@@ -21,7 +21,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO customers (name, lastname, date_of_birth, passport_number, passport_date, address, email, password, is_blocked) VALUE (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO customers (name, lastname, date_of_birth, passport_number, passport_data, address, email, password, is_blocked) VALUE (?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, customer.getName(), customer.getLastname(), customer.getDateOfBirth(), customer.getPassportNumber(), customer.getPassportData(), customer.getAddress(), customer.getEmail(), customer.getPassword(), customer.getIsBlocked());
     }
 
@@ -39,8 +39,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void update(Customer customer) {
-        String sql = "UPDATE customers SET name=?, SET lastname=?, SET day_of_birth=?, SET passport_number=?, SET passport_date=?, SET address=?, SET password=?, SET id_blocked=? WHERE id=?";
-        jdbcTemplate.update(sql, customer.getName(), customer.getLastname(), customer.getDateOfBirth(), customer.getPassportNumber(), customer.getPassportData(), customer.getAddress(), customer.getEmail(), customer.getPassword(), customer.getIsBlocked());
+        String sql = "UPDATE customers SET name=?, lastname=?, date_of_birth=?, passport_number=?, passport_data=?, address=?, email=?, password=?, is_blocked=? WHERE id=?";
+        jdbcTemplate.update(sql, customer.getName(), customer.getLastname(), customer.getDateOfBirth(), customer.getPassportNumber(), customer.getPassportData(), customer.getAddress(), customer.getEmail(), customer.getPassword(), customer.getIsBlocked(), customer.getId());
 
     }
 

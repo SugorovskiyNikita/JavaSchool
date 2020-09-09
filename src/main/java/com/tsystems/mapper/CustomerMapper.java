@@ -22,7 +22,7 @@ public class CustomerMapper implements RowMapper<Customer> {
         customer.setIsBlocked(resultSet.getInt("is_blocked"));
         customer.setName(resultSet.getString("name"));
         customer.setLastname(resultSet.getString("lastname"));
-        customer.setPassportData(resultSet.getString("passport_date"));
+        customer.setPassportData(resultSet.getString("passport_data"));
         customer.setPassword(resultSet.getString("password"));
         return customer;
     }

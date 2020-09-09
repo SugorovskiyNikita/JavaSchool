@@ -40,7 +40,7 @@
         <td>${customer.email}</td>
     </tr>
     <tr>
-        <td>ids Blocked</td>
+        <td>id Blocked</td>
         <td>${customer.isBlocked}</td>
     </tr>
 </table>
