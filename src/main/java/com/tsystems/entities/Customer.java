@@ -4,8 +4,8 @@ package com.tsystems.entities;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -50,6 +50,7 @@ public class Customer {
 
     public Customer() {
     }
+
 
 }
 

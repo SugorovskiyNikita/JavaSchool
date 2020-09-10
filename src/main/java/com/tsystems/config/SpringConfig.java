@@ -1,9 +1,5 @@
 package com.tsystems.config;
 
-import com.tsystems.dao.CustomerDao;
-import com.tsystems.dao.CustomerDaoImpl;
-import com.tsystems.service.CustomerService;
-import com.tsystems.service.CustomerServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,7 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="java">
 <head>
     <meta charset="UTF-8">
     <title>Customers List</title>
@@ -20,7 +21,7 @@
             <th>Password</th>
             <th>Is Blocked</th>
         </tr>
-<#list customers as customer>
+<c:forEach items="${customers}" var="customer">
     <tr>
         <td><a href="/customer/${customer.id}">${customer.id}</a></td>
         <td>${customer.name}</td>
@@ -35,7 +36,7 @@
         <td><a href="/delete/${customer.id}">Delete</a></td>
         <td><a href="/update/${customer.id}">Edit</a></td>
     </tr>
-</#list>
+</c:forEach>
     </table>
     <br>
     <a href="/addCustomer">Add new Customer</a>

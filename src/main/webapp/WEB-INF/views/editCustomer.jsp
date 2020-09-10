@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
 <form name="customer" action="/updateCustomer" method="post">
-    Id: <input type="text" name="name" value="${customer.id}"/><br>
+    Id: <input type="text" name="id" value="${customer.id}"/><br>
     Name: <input type="text" name="name" value="${customer.name}"/><br>
     Lastname: <input type="text" name="lastname" value="${customer.lastname}"/><br>
     Birthday: <input type="date" name="dateOfBirth" value="${customer.dateOfBirth}"/><br>
