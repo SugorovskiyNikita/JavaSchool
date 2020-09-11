@@ -8,11 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by nikita on 07.09.2020.
  */
 @Repository
-public class CustomerDaoImpl extends GenericDaoImpl<Customer>  {
-
-    public CustomerDaoImpl() {
-        super();
-    }
+public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao  {
 
     @Override
     public void add(Customer entity) {

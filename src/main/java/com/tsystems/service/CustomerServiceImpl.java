@@ -1,6 +1,7 @@
 package com.tsystems.service;
 
 import com.tsystems.dao.CustomerDao;
+import com.tsystems.dao.CustomerDaoImpl;
 import com.tsystems.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    public CustomerDao customerDao;
+    private CustomerDao customerDao = new CustomerDaoImpl();
+
 
     @Override
     public void addCustomer(Customer customer) {

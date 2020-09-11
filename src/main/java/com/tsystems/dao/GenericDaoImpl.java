@@ -22,9 +22,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public void add(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+        em.merge(entity);
 
     }
 
@@ -36,15 +34,11 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public void update(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+        em.merge(entity);
     }
 
     @Override
     public void delete(T entity) {
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
+        em.merge(entity);
     }
 }
