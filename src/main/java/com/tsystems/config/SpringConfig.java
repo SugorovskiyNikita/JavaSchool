@@ -1,6 +1,5 @@
 package com.tsystems.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -44,11 +43,8 @@ public class SpringConfig {
     }
 
     @Bean
-    @Autowired
-    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
-        JpaTransactionManager txManager = new JpaTransactionManager();
-        txManager.setEntityManagerFactory(emf);
-        return txManager;
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
 

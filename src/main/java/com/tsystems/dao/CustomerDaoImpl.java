@@ -11,22 +11,22 @@ import org.springframework.stereotype.Repository;
 public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao  {
 
     @Override
-    public void add(Customer entity) {
-        super.add(entity);
+    public void add(Customer customer) {
+        em.merge(customer);
     }
 
     @Override
     public Customer getById(int id) {
-        return super.getById(id);
+        return (Customer) em.find(entityClass,id);
     }
 
     @Override
-    public void update(Customer entity) {
-        super.update(entity);
+    public void update(Customer customer) {
+        em.merge(customer);
     }
 
     @Override
-    public void delete(Customer entity) {
-        super.delete(entity);
+    public void delete(Customer customer) {
+        em.remove(customer);
     }
 }

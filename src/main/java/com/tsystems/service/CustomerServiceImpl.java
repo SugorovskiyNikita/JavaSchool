@@ -6,12 +6,14 @@ import com.tsystems.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 
 
 /**
  * Created by nikita on 07.09.2020.
  */
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
