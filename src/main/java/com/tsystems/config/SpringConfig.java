@@ -1,11 +1,15 @@
 package com.tsystems.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
@@ -16,8 +20,14 @@ import javax.sql.DataSource;
 public class SpringConfig {
 
     @Bean
-    public JdbcTemplate getJdbcTemplate() {
-        return new JdbcTemplate(getDataSource());
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+
+        entityManagerFactory.setDataSource(getDataSource());
+        entityManagerFactory.setPackagesToScan("com.tsystems.entities");
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+        return entityManagerFactory;
     }
 
     @Bean
@@ -28,6 +38,14 @@ public class SpringConfig {
         dataSource.setPassword("76459");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         return dataSource;
+    }
+
+    @Bean
+    @Autowired
+    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(emf);
+        return txManager;
     }
 
 

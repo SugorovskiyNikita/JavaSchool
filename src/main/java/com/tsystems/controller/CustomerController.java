@@ -26,12 +26,6 @@ public class CustomerController {
         return "hello";
     }
 
-    @GetMapping("/customers")
-    public String getAllCustomers(Model model) {
-        model.addAttribute("customers", customerService.findAll());
-        return "customersList";
-    }
-
     @GetMapping("/customer/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.getById(id));
@@ -62,8 +56,8 @@ public class CustomerController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@PathVariable("id") int id) {
-        customerService.delete(id);
+    public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.delete(customer);
         return "redirect:/customers";
     }
 }
