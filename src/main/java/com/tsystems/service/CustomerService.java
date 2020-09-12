@@ -1,5 +1,6 @@
 package com.tsystems.service;
 
+import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Customer;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public interface CustomerService {
 
-    void addCustomer(Customer customer);
+    void addCustomer(CustomerDto customerDto);
 
     Customer getById(int id);
 
