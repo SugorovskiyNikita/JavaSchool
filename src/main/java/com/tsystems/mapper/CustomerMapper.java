@@ -1,29 +1,27 @@
 package com.tsystems.mapper;
 
-import com.tsystems.entities.Customer;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.tsystems.dto.CustomerDto;
+import com.tsystems.entities.Customer;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by nikita on 07.09.2020.
  */
-public class CustomerMapper implements RowMapper<Customer> {
+public class CustomerMapper  {
 
-    @Override
-    public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
-        Customer customer = new Customer();
-        customer.setId(resultSet.getInt("id"));
-        customer.setAddress(resultSet.getString("address"));
-        customer.setDateOfBirth(resultSet.getDate("date_of_birth"));
-        customer.setPassportNumber(resultSet.getString("passport_number"));
-        customer.setEmail(resultSet.getString("email"));
-        customer.setIsBlocked(resultSet.getInt("is_blocked"));
-        customer.setName(resultSet.getString("name"));
-        customer.setLastname(resultSet.getString("lastname"));
-        customer.setPassportData(resultSet.getString("passport_data"));
-        customer.setPassword(resultSet.getString("password"));
+    @Autowired
+    ModelMapper modelMapper;
+
+    public CustomerDto convertToDto(Customer customer) {
+        CustomerDto customerDto = modelMapper.map(customer, CustomerDto.class);
+        return customerDto;
+    }
+
+    public Customer convertToEntity(CustomerDto customerDto) {
+        Customer customer = modelMapper.map(customerDto, Customer.class);
         return customer;
     }
+
 }

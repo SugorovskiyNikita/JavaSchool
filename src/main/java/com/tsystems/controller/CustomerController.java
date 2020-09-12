@@ -1,5 +1,6 @@
 package com.tsystems.controller;
 
+import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Customer;
 import com.tsystems.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by nikita on 07.09.20.
  */
-@Controller
+@RestController
 @RequestMapping("/")
 public class CustomerController {
 
@@ -26,12 +27,6 @@ public class CustomerController {
         return "hello";
     }
 
-    @GetMapping("/customers")
-    public String getAllCustomers(Model model) {
-        model.addAttribute("customers", customerService.findAll());
-        return "customersList";
-    }
-
     @GetMapping("/customer/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.getById(id));
@@ -44,8 +39,8 @@ public class CustomerController {
     }
 
     @PostMapping("/addCustomer")
-    public String addCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.addCustomer(customer);
+    public String addCustomer(@RequestBody CustomerDto customerDto) {
+        customerService.addCustomer(customerDto);
         return "redirect:/customers";
     }
 
@@ -62,8 +57,8 @@ public class CustomerController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@PathVariable("id") int id) {
-        customerService.delete(id);
+    public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.delete(customer);
         return "redirect:/customers";
     }
 }
