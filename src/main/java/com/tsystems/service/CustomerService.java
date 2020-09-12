@@ -14,10 +14,10 @@ public interface CustomerService {
 
     void addCustomer(CustomerDto customerDto);
 
-    Customer getById(int id);
+    CustomerDto getById(int id);
 
-    void update(Customer customer);
+    void update(CustomerDto customerDto);
 
-    void delete(Customer customer);
+    void delete(CustomerDto customerDto);
 
 }

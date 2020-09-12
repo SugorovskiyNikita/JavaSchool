@@ -19,36 +19,30 @@ import javax.transaction.Transactional;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepository repository;
-    private final CustomerMapper mapper;
+    @Autowired
+    private CustomerRepository repository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository repository, CustomerMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
-
-    @Autowired
-    private CustomerDao customerDao = new CustomerDaoImpl();
+    private CustomerMapper mapper;
 
     @Override
     public void addCustomer(CustomerDto customerDto) {
-        mapper.convertToDto(repository.save(mapper.convertToEntity(customerDto)));
+        repository.save(mapper.convertToEntity(customerDto));
     }
 
     @Override
-    public Customer getById(int id) {
-        return customerDao.getById(id);
+    public CustomerDto getById(int id) {
+        return mapper.convertToDto(repository.getOne(id));
     }
 
     @Override
-    public void update(Customer customer) {
-        customerDao.update(customer);
+    public void update(CustomerDto customerDto) {
+        repository.save(mapper.convertToEntity(customerDto));
     }
 
     @Override
-    public void delete(Customer customer) {
-        customerDao.delete(customer);
+    public void delete(CustomerDto customerDto) {
+        repository.delete(mapper.convertToEntity(customerDto));
 
     }
 }
