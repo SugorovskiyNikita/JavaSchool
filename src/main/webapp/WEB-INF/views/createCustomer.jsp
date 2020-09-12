@@ -15,7 +15,7 @@
         </div>
         <div>
             <label for="lastname">Lastname</label>
-            <div><input type="text" name="lastmane" id="lastname"></div>
+            <div><input type="text" name="lastname" id="lastname"></div>
         </div>
         <div>
             <label for="dateOfBirth">Birthday</label>
