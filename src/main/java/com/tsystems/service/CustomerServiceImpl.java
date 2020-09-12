@@ -19,7 +19,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao = new CustomerDaoImpl();
 
-
     @Override
     public void addCustomer(Customer customer) {
         customerDao.add(customer);

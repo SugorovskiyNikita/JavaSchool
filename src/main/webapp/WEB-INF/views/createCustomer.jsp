@@ -6,22 +6,43 @@
     <title>Add customer</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</head>
 <body>
 <div class="container">
-<form name="customer" action="/addCustomer" method="post">
-    Name: <input type="text" name="name" /><br>
-    Lastname: <input type="text" name="lastname" /><br>
-    Birthday: <input type="date" name="dateOfBirth" /><br>
-    Passport number: <input type="text" name="passportNumber" /><br>
-    Passport data: <input type="text" name="passportData" /><br>
-    Address: <input type="text" name="address" /><br>
-    Email: <input type="text" name="email" /><br>
-    Password: <input type="text" name="password" /><br>
-    Is Blocked: <input type="text" name="isBlocked" /><br>
-    <input type="submit" name="submit" value="Add new customer" />
-</form>
-
+    <form name="customer" action="/addCustomer" method="post">
+        <div>
+            <label for="name">Name</label>
+            <div><input type="text" name="name" id="name"></div>
+        </div>
+        <div>
+            <label for="lastname">Lastname</label>
+            <div><input type="text" name="lastmane" id="lastname"></div>
+        </div>
+        <div>
+            <label for="dateOfBirth">Birthday</label>
+            <div><input type="date" name="dateOfBirth" id="dateOfBirth"></div>
+        </div>
+        <div>
+            <label for="passportNumber">Passport Number</label>
+            <div><input type="text" name="passportNumber" id="passportNumber"></div>
+        </div>
+        <div>
+            <label for="passportData">Passport Data</label>
+            <div><input type="text" name="passportData" id="passportData"></div>
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <div><input type="text" name="address" id="address"></div>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <div><input type="text" name="email" id="email"></div>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <div><input type="text" name="password" id="password"></div>
+        </div><br>
+        <div><input type="submit" name="submit" value="Add new customer"></div>
+    </form>
 </div>
 </body>
 </html>
