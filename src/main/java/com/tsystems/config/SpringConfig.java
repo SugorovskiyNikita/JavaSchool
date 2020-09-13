@@ -50,8 +50,8 @@ public class SpringConfig {
 
     @Bean
     public ModelMapper modelMapper() {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper;
+        ModelMapper mapper = new ModelMapper();
+        return mapper;
 
     }
 

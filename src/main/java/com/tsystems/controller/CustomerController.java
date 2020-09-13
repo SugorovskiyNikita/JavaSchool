@@ -6,13 +6,14 @@ import com.tsystems.service.CustomerService;
 import com.tsystems.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by nikita on 07.09.20.
  */
-@RequestMapping(value = "/")
-@RestController
+@RequestMapping("/")
+@Controller
 public class CustomerController {
 
     @Autowired
@@ -31,7 +32,7 @@ public class CustomerController {
 
     @GetMapping("/customer/{id}")
     public String getById(@RequestParam int id) {
-        ResponseEntity.ok(customerService.getById(id));
+        customerService.getById(id);
         return "showCustomer";
     }
 

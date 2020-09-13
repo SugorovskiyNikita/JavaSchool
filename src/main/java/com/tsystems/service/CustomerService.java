@@ -14,7 +14,7 @@ public interface CustomerService {
 
     void addCustomer(CustomerDto customerDto);
 
-    CustomerDto getById(int id);
+    Customer getById(int id);
 
     void update(CustomerDto customerDto);
 

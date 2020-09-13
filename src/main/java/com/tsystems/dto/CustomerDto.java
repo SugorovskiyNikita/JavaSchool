@@ -1,7 +1,6 @@
 package com.tsystems.dto;
 import lombok.Data;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +28,5 @@ public class CustomerDto implements Serializable {
     private String email;
 
     private int isBlocked;
-
 
 }

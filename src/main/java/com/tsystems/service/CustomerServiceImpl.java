@@ -1,9 +1,9 @@
 package com.tsystems.service;
 
 import com.tsystems.dao.CustomerDao;
-import com.tsystems.dao.CustomerDaoImpl;
 import com.tsystems.dto.CustomerDto;
-import com.tsystems.mapper.CustomerMapper;
+import com.tsystems.entities.Customer;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,35 +17,34 @@ import javax.transaction.Transactional;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerMapper mapper;
+    private final ModelMapper mapper;
     private final CustomerDao customerDao;
 
     @Autowired
-    public CustomerServiceImpl(CustomerMapper mapper, CustomerDao customerDao) {
+    public CustomerServiceImpl(ModelMapper mapper, CustomerDao customerDao) {
         this.mapper = mapper;
         this.customerDao = customerDao;
 
     }
 
-
     @Override
     public void addCustomer(CustomerDto customerDto) {
-        customerDao.add(mapper.convertToEntity(customerDto));
+        customerDao.add(mapper.map(customerDto, Customer.class));
     }
 
     @Override
-    public CustomerDto getById(int id) {
-        return mapper.convertToDto(customerDao.getById(id));
+    public Customer getById(int id) {
+        return customerDao.getById(id);
     }
 
     @Override
     public void update(CustomerDto customerDto) {
-        customerDao.update(mapper.convertToEntity(customerDto));
+        customerDao.update(mapper.map(customerDto, Customer.class));
     }
 
     @Override
     public void delete(CustomerDto customerDto) {
-        customerDao.delete(mapper.convertToEntity(customerDto));
+        customerDao.delete(mapper.map(customerDto, Customer.class));
 
     }
 }
