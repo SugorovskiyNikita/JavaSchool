@@ -1,24 +1,20 @@
 package com.tsystems.controller;
 
 import com.tsystems.dto.CustomerDto;
-import com.tsystems.entities.Customer;
-import com.tsystems.mapper.CustomerMapper;
+
 import com.tsystems.service.CustomerService;
+import com.tsystems.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by nikita on 07.09.20.
  */
+@RequestMapping(value = "/")
 @RestController
-@RequestMapping("/")
 public class CustomerController {
 
-    @Autowired
-    private CustomerMapper mapper;
     @Autowired
     public CustomerService customerService;
 
@@ -34,8 +30,8 @@ public class CustomerController {
     }
 
     @GetMapping("/customer/{id}")
-    public String getById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("customer", customerService.getById(id));
+    public String getById(@RequestParam int id) {
+        ResponseEntity.ok(customerService.getById(id));
         return "showCustomer";
     }
 

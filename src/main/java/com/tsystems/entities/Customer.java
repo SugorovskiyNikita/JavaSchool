@@ -47,11 +47,7 @@ public class Customer implements Serializable {
     private String password;
 
     @Column(name = "is_blocked")
-    private Integer isBlocked = 0;
-
-    public Customer() {
-    }
-
+    private Integer isBlocked;
 
 }
 
