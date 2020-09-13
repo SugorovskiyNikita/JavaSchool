@@ -35,6 +35,4 @@ public class WebConfig implements WebMvcConfigurer {
         bean.setBasename("views");
         return bean;
     }
-
-
 }

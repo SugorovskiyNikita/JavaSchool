@@ -1,8 +1,9 @@
-package com.tsystems.service;
+package com.tsystems.services.implementations;
 
-import com.tsystems.dao.TariffDao;
-import com.tsystems.dao.TariffDaoImpl;
+import com.tsystems.dao.interfaces.TariffDao;
+import com.tsystems.dao.implementations.TariffDaoImpl;
 import com.tsystems.entities.Tariff;
+import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

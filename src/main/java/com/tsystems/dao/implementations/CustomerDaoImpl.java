@@ -1,14 +1,14 @@
-package com.tsystems.dao;
+package com.tsystems.dao.implementations;
 
+import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.entities.Customer;
 import org.springframework.stereotype.Repository;
-
 
 /**
  * Created by nikita on 07.09.2020.
  */
 @Repository
-public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao  {
+public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao {
 
     @Override
     public void add(Customer customer) {

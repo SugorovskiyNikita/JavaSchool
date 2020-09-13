@@ -1,4 +1,4 @@
-package com.tsystems.dao;
+package com.tsystems.dao.interfaces;
 
 import com.tsystems.entities.Tariff;
 import org.springframework.stereotype.Repository;

@@ -1,9 +1,10 @@
-package com.tsystems.dao;
+package com.tsystems.dao.implementations;
+
+import com.tsystems.dao.interfaces.GenericDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 
 /**
  * Created by nikita on 11.09.2020.

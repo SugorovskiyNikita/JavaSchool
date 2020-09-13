@@ -1,7 +1,6 @@
 package com.tsystems.entities;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -25,6 +24,5 @@ public class Tariff {
 
     @Column(name = "description")
     private String description;
-
 
 }

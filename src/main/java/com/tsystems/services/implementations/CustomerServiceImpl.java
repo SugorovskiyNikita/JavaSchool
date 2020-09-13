@@ -1,8 +1,9 @@
-package com.tsystems.service;
+package com.tsystems.services.implementations;
 
-import com.tsystems.dao.CustomerDao;
-import com.tsystems.dao.CustomerDaoImpl;
+import com.tsystems.dao.interfaces.CustomerDao;
+import com.tsystems.dao.implementations.CustomerDaoImpl;
 import com.tsystems.entities.Customer;
+import com.tsystems.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,5 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Customer customer) {
         customerDao.delete(customer);
-
     }
 }

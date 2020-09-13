@@ -27,7 +27,4 @@ public class Contract {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    public Contract() {
-        //Basic constructor
-    }
 }

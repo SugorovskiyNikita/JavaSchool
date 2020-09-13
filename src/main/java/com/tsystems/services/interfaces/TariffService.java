@@ -1,4 +1,4 @@
-package com.tsystems.service;
+package com.tsystems.services.interfaces;
 
 import com.tsystems.entities.Tariff;
 import org.springframework.stereotype.Service;

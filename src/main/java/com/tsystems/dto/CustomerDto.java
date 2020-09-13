@@ -4,7 +4,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
  * Created by nikita on 12.09.2020.
  */

@@ -1,7 +1,7 @@
 package com.tsystems.controller;
 
 import com.tsystems.entities.Tariff;
-import com.tsystems.service.TariffService;
+import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

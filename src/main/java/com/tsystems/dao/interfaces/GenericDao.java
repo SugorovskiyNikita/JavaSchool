@@ -1,12 +1,9 @@
-package com.tsystems.dao;
+package com.tsystems.dao.interfaces;
 
-
-import java.util.List;
 
 /**
  * Created by nikita on 11.09.2020.
  */
-
 public interface GenericDao<T> {
 
     void add(T entity);
@@ -16,5 +13,4 @@ public interface GenericDao<T> {
     void update(T entity);
 
     void delete(T entity);
-
 }

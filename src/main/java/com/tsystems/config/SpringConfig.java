@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * Created by nikita on 07.09.20.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tsystems.service", "com.tsystems.dao"})
+@ComponentScan(basePackages = {"com.tsystems.services", "com.tsystems.dao"})
 @EnableTransactionManagement
 public class SpringConfig {
 
@@ -46,6 +46,4 @@ public class SpringConfig {
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
-
-
 }
