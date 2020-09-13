@@ -5,6 +5,7 @@
   <title>Welcome</title>
 </head>
 <body>
-<a href="/hello"> Go Start</a>
+<jsp:include page="/WEB-INF/views/createCustomer.jsp"/>
+<jsp:include page="/WEB-INF/views/createTariff.jsp"/>
 </body>
 </html>

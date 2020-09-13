@@ -1,9 +1,8 @@
 package com.tsystems.service;
 
 import com.tsystems.dao.CustomerDao;
-import com.tsystems.dto.CustomerDto;
+import com.tsystems.dao.CustomerDaoImpl;
 import com.tsystems.entities.Customer;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +16,12 @@ import javax.transaction.Transactional;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    private final ModelMapper mapper;
-    private final CustomerDao customerDao;
-
     @Autowired
-    public CustomerServiceImpl(ModelMapper mapper, CustomerDao customerDao) {
-        this.mapper = mapper;
-        this.customerDao = customerDao;
-
-    }
+    private CustomerDao customerDao = new CustomerDaoImpl();
 
     @Override
-    public void addCustomer(CustomerDto customerDto) {
-        customerDao.add(mapper.map(customerDto, Customer.class));
+    public void addCustomer(Customer customer) {
+        customerDao.add(customer);
     }
 
     @Override
@@ -38,13 +30,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void update(CustomerDto customerDto) {
-        customerDao.update(mapper.map(customerDto, Customer.class));
+    public void update(Customer customer) {
+        customerDao.update(customer);
     }
 
     @Override
-    public void delete(CustomerDto customerDto) {
-        customerDao.delete(mapper.map(customerDto, Customer.class));
+    public void delete(Customer customer) {
+        customerDao.delete(customer);
 
     }
 }

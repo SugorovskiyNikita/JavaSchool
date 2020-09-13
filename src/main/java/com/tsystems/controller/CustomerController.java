@@ -1,19 +1,17 @@
 package com.tsystems.controller;
 
-import com.tsystems.dto.CustomerDto;
-
+import com.tsystems.entities.Customer;
 import com.tsystems.service.CustomerService;
-import com.tsystems.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by nikita on 07.09.20.
  */
-@RequestMapping("/")
 @Controller
+@RequestMapping("/")
 public class CustomerController {
 
     @Autowired
@@ -23,16 +21,14 @@ public class CustomerController {
     public String index() {
         return "index";
     }
-
     @GetMapping("/hello")
-    @ResponseBody
     public String hello() {
         return "hello";
     }
 
     @GetMapping("/customer/{id}")
-    public String getById(@RequestParam int id) {
-        customerService.getById(id);
+    public String getById(@PathVariable("id") int id, Model model) {
+        model.addAttribute("customer", customerService.getById(id));
         return "showCustomer";
     }
 
@@ -42,26 +38,26 @@ public class CustomerController {
     }
 
     @PostMapping("/addCustomer")
-    public String addCustomer(@RequestBody CustomerDto customerDto) {
-        customerService.addCustomer(customerDto);
+    public String addCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.addCustomer(customer);
         return "redirect:/customers";
     }
 
     @PostMapping("/updateCustomer")
-    public String updateCustomer(@RequestBody CustomerDto customerDto) {
-        customerService.update(customerDto);
+    public String updateCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.update(customer);
         return "redirect:/customers";
     }
 
     @GetMapping("update/{id}")
-    public String update(@RequestParam int id) {
-        ResponseEntity.ok(customerService.getById(id));
+    public String update(@PathVariable("id") int id, Model model) {
+        model.addAttribute("customer", customerService.getById(id));
         return "editCustomer";
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@RequestBody CustomerDto customerDto) {
-        customerService.delete(customerDto);
+    public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
+        customerService.delete(customer);
         return "redirect:/customers";
     }
 }

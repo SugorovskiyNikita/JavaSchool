@@ -5,7 +5,6 @@ package com.tsystems.entities;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,7 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name = "customers", schema = "tmobile")
 @Data
-public class Customer implements Serializable {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -47,7 +46,11 @@ public class Customer implements Serializable {
     private String password;
 
     @Column(name = "is_blocked")
-    private Integer isBlocked;
+    private Integer isBlocked = 0;
+
+    public Customer() {
+    }
+
 
 }
 

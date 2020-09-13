@@ -23,7 +23,6 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public void add(T entity) {
         em.merge(entity);
-
     }
 
     @Override
