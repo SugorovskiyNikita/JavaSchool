@@ -24,7 +24,7 @@ public class TariffController {
 
     @PostMapping("/addTariff")
     public String addTariff(@ModelAttribute("tariff") Tariff tariff) {
-        tariffService.addTariff(tariff);
+        tariffService.add(tariff);
         return "redirect:/tariffs";
     }
 }

@@ -4,7 +4,7 @@ package com.tsystems.dao.interfaces;
 /**
  * Created by nikita on 11.09.2020.
  */
-public interface GenericDao<T> {
+public interface GenericDao<T, Integer> {
 
     void add(T entity);
 

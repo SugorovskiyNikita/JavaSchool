@@ -39,7 +39,7 @@ public class CustomerController {
 
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.addCustomer(customer);
+        customerService.add(customer);
         return "redirect:/customers";
     }
 

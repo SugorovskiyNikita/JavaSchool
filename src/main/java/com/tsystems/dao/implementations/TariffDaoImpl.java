@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by nikita on 13.09.2020.
  */
 @Repository
-public class TariffDaoImpl extends GenericDaoImpl<Tariff> implements TariffDao {
+public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements TariffDao {
 }

@@ -20,7 +20,7 @@ public class TariffServiceImpl implements TariffService {
     private TariffDao tariffDao = new TariffDaoImpl();
 
     @Override
-    public void addTariff(Tariff tariff) {
+    public void add(Tariff tariff) {
         tariffDao.add(tariff);
     }
 }
