@@ -19,7 +19,7 @@
                         required pattern=[A-Z][a-z]+></div>
         </div>
         <div>
-            <label for="surname">Lastname</label>
+            <label for="surname">Surname</label>
             <div><input type="text" name="surname" placeholder="Your surname" id="surname"
                         required pattern=[A-Z][a-z]+></div>
         </div>

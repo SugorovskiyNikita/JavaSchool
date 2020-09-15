@@ -46,12 +46,13 @@ public class Customer {
     private String password;
 
     @Column(name = "is_blocked")
-    private Integer isBlocked = 0;
+    private Integer isBlocked;
 
     public Customer() {
     }
 
-    public Customer(String name, String surname, String email, Integer isBlocked) {
+    public Customer(Integer id, String name, String surname, String email, Integer isBlocked) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;

@@ -34,6 +34,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
 
     @Override
     public List<Customer> getAll() {
-        return em.createQuery("SELECT NEW Customer(c.name, c.lastname, c.email, c.isBlocked) FROM Customer c", Customer.class).getResultList();
+        return em.createQuery("SELECT NEW Customer(c.id, c.name, c.surname, c.email, c.isBlocked) FROM Customer c", Customer.class)
+                .getResultList();
     }
 }

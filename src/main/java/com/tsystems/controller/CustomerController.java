@@ -3,9 +3,13 @@ package com.tsystems.controller;
 import com.tsystems.entities.Customer;
 import com.tsystems.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by nikita on 07.09.20.
@@ -41,6 +45,12 @@ public class CustomerController {
     public String addCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.add(customer);
         return "redirect:/customers";
+    }
+
+    @GetMapping("/customers")
+    public String getAllCustomers(Model model) {
+        model.addAttribute("customers", customerService.loadAll());
+        return "customersList";
     }
 
     @PostMapping("/updateCustomer")
