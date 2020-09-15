@@ -12,7 +12,7 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Lastname</th>
+            <th>Surname</th>
             <th>Day Of Birth</th>
             <th>Passport Number</th>
             <th>Passport Data</th>
@@ -25,7 +25,7 @@
     <tr>
         <td><a href="/customer/${customer.id}">${customer.id}</a></td>
         <td>${customer.name}</td>
-        <td>${customer.lastname}</td>
+        <td>${customer.surname}</td>
         <td>${customer.dateOfBirth}</td>
         <td>${customer.passportNumber}</td>
         <td>${customer.passportData}</td>

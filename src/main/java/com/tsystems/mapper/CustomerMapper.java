@@ -21,7 +21,7 @@ public class CustomerMapper implements RowMapper<Customer> {
         customer.setEmail(resultSet.getString("email"));
         customer.setIsBlocked(0);
         customer.setName(resultSet.getString("name"));
-        customer.setLastname(resultSet.getString("lastname"));
+        customer.setSurname(resultSet.getString("surname"));
         customer.setPassportData(resultSet.getString("passport_data"));
         customer.setPassword(resultSet.getString("password"));
         return customer;

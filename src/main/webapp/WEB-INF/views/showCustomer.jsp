@@ -18,7 +18,7 @@
     </tr>
     <tr>
         <td>Lastname</td>
-        <td>${customer.lastname}</td>
+        <td>${customer.surname}</td>
     </tr>
     <tr>
         <td>day of birth</td>

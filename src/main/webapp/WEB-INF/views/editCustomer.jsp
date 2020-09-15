@@ -9,7 +9,7 @@
 <form name="customer" action="/updateCustomer" method="post">
     Id: <input type="text" name="id" value="${customer.id}"/><br>
     Name: <input type="text" name="name" value="${customer.name}"/><br>
-    Lastname: <input type="text" name="lastname" value="${customer.lastname}"/><br>
+    Lastname: <input type="text" name="surname" value="${customer.surname}"/><br>
     Birthday: <input type="date" name="dateOfBirth" value="${customer.dateOfBirth}"/><br>
     Passport number: <input type="text" name="passportNumber" value="${customer.passportNumber}"/><br>
     Passport data: <input type="text" name="passportData" value="${customer.passportData}"/><br>

@@ -23,8 +23,8 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "date_of_birth")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -51,9 +51,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String lastname, String email, Integer isBlocked) {
+    public Customer(String name, String surname, String email, Integer isBlocked) {
         this.name = name;
-        this.lastname = lastname;
+        this.surname = surname;
         this.email = email;
         this.isBlocked = isBlocked;
     }

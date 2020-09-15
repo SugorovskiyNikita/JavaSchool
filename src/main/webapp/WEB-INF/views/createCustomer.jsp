@@ -19,8 +19,8 @@
                         required pattern=[A-Z][a-z]+></div>
         </div>
         <div>
-            <label for="lastname">Lastname</label>
-            <div><input type="text" name="lastname" placeholder="Your lastname" id="lastname"
+            <label for="surname">Lastname</label>
+            <div><input type="text" name="surname" placeholder="Your surname" id="surname"
                         required pattern=[A-Z][a-z]+></div>
         </div>
         <div>
