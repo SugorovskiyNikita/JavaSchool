@@ -22,8 +22,7 @@
     <form name="tariff" action="/addTariff" method="post">
         <div>
             <label for="name">Name</label>
-            <div><input type="text" name="name" placeholder="" id="name"
-                        required pattern=[A-Z][a-z]+></div>
+            <div><input type="text" name="name" placeholder="" id="name"></div>
         </div>
         <div>
             <label for="cost">Cost</label>
