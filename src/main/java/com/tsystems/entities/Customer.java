@@ -51,6 +51,11 @@ public class Customer {
     public Customer() {
     }
 
-
+    public Customer(String name, String lastname, String email, Integer isBlocked) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.isBlocked = isBlocked;
+    }
 }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by nikita on 13.09.2020.
@@ -22,5 +23,15 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public void add(Tariff tariff) {
         tariffDao.add(tariff);
+    }
+
+    @Override
+    public List<Tariff> loadAll() {
+        return tariffDao.getAll();
+    }
+
+    @Override
+    public Tariff loadByKey(Integer key) {
+        return tariffDao.getById(key);
     }
 }

@@ -27,4 +27,23 @@ public class Contract {
     @Column(name = "balance")
     private BigDecimal balance;
 
+    @ManyToOne
+    @JoinColumn(name = "customer")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "tariff")
+    private Tariff tariff;
+
+    public Contract() {
+    }
+
+    public Contract(Integer id, String number, Integer isBlocked, BigDecimal balance, Customer customer, Tariff tariff) {
+        this.id = id;
+        this.number = number;
+        this.isBlocked = isBlocked;
+        this.balance = balance;
+        this.customer = customer;
+        this.tariff = tariff;
+    }
 }

@@ -25,4 +25,13 @@ public class Tariff {
     @Column(name = "description")
     private String description;
 
+    public Tariff() {
+    }
+
+    public Tariff(Integer id, String name, BigDecimal cost, String description) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.description = description;
+    }
 }

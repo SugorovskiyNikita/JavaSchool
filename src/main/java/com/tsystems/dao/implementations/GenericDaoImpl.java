@@ -5,6 +5,7 @@ import com.tsystems.dao.interfaces.GenericDao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * Created by nikita on 11.09.2020.
@@ -41,4 +42,5 @@ public abstract class GenericDaoImpl<T, Integer> implements GenericDao<T, Intege
     public void delete(T entity) {
         em.remove(entity);
     }
+
 }

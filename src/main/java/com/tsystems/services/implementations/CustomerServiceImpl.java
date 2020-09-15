@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 /**
@@ -38,5 +39,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Customer customer) {
         customerDao.delete(customer);
+    }
+
+    @Override
+    public List<Customer> loadAll() {
+        return customerDao.getAll();
+    }
+
+    @Override
+    public Customer loadByKey(Integer key) {
+        return customerDao.getById(key);
     }
 }
