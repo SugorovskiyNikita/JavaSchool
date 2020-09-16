@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
  * Created by nikita on 13.09.2020.
  */
 @Service
-public interface TariffService extends GenericService<Tariff> {
+public interface TariffService extends GenericService<Tariff, Integer> {
 
 }

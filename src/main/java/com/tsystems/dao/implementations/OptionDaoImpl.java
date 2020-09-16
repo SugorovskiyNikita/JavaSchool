@@ -2,6 +2,7 @@ package com.tsystems.dao.implementations;
 
 import com.tsystems.dao.interfaces.OptionDao;
 import com.tsystems.entities.Option;
+import com.tsystems.entities.Tariff;
 
 import java.util.List;
 
@@ -12,6 +13,11 @@ public class OptionDaoImpl extends GenericDaoImpl<Option, Integer> implements Op
 
     @Override
     public List<Option> getAll() {
-        return null;
+        return em.createQuery("SELECT c FROM Option c", Option.class).getResultList();
+    }
+
+    @Override
+    public void add(Option option) {
+        em.merge(option);
     }
 }

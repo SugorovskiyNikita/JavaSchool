@@ -36,7 +36,7 @@ public class Contract {
     @JoinColumn(name = "tariff")
     private Tariff tariff;
 
-    @ManyToMany(mappedBy = "contractsThoseUseOption")
+    @ManyToMany()
     private Set<Option> usedOptions;
 
     public Contract() {

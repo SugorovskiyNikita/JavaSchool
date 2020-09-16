@@ -18,17 +18,17 @@ import java.util.List;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
+
+    private final CustomerDao customerDao;
+
     @Autowired
-    private CustomerDao customerDao = new CustomerDaoImpl();
+    public CustomerServiceImpl(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
 
     @Override
     public void add(Customer customer) {
         customerDao.add(customer);
-    }
-
-    @Override
-    public Customer getById(int id) {
-        return customerDao.getById(id);
     }
 
     @Override

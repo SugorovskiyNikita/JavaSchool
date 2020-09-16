@@ -17,8 +17,12 @@ import java.util.List;
 @Transactional
 public class TariffServiceImpl implements TariffService {
 
+    private final TariffDao tariffDao;
+
     @Autowired
-    private TariffDao tariffDao = new TariffDaoImpl();
+    public TariffServiceImpl(TariffDao tariffDao) {
+        this.tariffDao = tariffDao;
+    }
 
     @Override
     public void add(Tariff tariff) {

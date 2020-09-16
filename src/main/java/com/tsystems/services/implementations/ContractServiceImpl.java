@@ -2,6 +2,7 @@ package com.tsystems.services.implementations;
 
 import com.tsystems.dao.implementations.ContractDaoImpl;
 import com.tsystems.dao.interfaces.ContractDao;
+import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.entities.Contract;
 import com.tsystems.services.interfaces.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,12 @@ import java.util.List;
  */
 public class ContractServiceImpl implements ContractService {
 
+    private final ContractDao contractDao;
+
     @Autowired
-    private ContractDao contractDao = new ContractDaoImpl();
+    public ContractServiceImpl(ContractDao contractDao) {
+        this.contractDao = contractDao;
+    }
 
     @Override
     public void add(Contract contract) {

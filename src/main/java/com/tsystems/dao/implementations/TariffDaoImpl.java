@@ -14,6 +14,6 @@ import java.util.List;
 public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements TariffDao {
     @Override
     public List<Tariff> getAll() {
-        return em.createQuery("SELECT NEW Tariff(c.id, c.name, c.cost, c.description) FROM Tariff c", Tariff.class).getResultList();
+        return em.createQuery("SELECT  NEW Tariff(c.id, c.name, c.cost, c.description) FROM Tariff c", Tariff.class).getResultList();
     }
 }

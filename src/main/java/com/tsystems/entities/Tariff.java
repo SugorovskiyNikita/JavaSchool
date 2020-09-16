@@ -29,7 +29,7 @@ public class Tariff {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "possibleTariffsOfOption")
+    @ManyToMany()
     private Set<Option> possibleOptions;
 
     public Tariff() {

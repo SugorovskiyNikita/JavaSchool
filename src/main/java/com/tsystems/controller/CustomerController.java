@@ -32,7 +32,7 @@ public class CustomerController {
 
     @GetMapping("/customer/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("customer", customerService.getById(id));
+        model.addAttribute("customer", customerService.loadByKey(id));
         return "showCustomer";
     }
 
@@ -61,7 +61,7 @@ public class CustomerController {
 
     @GetMapping("update/{id}")
     public String update(@PathVariable("id") int id, Model model) {
-        model.addAttribute("customer", customerService.getById(id));
+        model.addAttribute("customer", customerService.loadByKey(id));
         return "editCustomer";
     }
 
