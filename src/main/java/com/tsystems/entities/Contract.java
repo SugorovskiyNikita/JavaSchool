@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * Created by nikita on 04.09.20.
@@ -34,6 +35,9 @@ public class Contract {
     @ManyToOne
     @JoinColumn(name = "tariff")
     private Tariff tariff;
+
+    @ManyToMany(mappedBy = "contractsThoseUseOption")
+    private Set<Option> usedOptions;
 
     public Contract() {
     }
