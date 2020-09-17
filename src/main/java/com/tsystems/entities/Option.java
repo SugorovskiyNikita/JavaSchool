@@ -38,29 +38,31 @@ public class Option {
     @JoinTable(name = "Required_option_relationships", joinColumns = {
             @JoinColumn(name = "id_first", referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "id_second", referencedColumnName = "id")})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Option> required;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "required")
+    private Set<Option> requiredMe = new HashSet<>();
 
     @JoinTable(name = "Forbidden_option_relationships", joinColumns = {
             @JoinColumn(name = "id_first", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "id_second", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Option> forbidden;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Option> forbidden = new HashSet<>();
 
     @JoinTable(name = "Possible_options_of_tariffs", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "tariff_id", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Tariff> possibleTariffsOption;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Tariff> possibleTariffsOption = new HashSet<>();
 
     @JoinTable(name = "Used_options_of_tariff", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "contract_id", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Contract> contractsThoseUseOption;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Contract> contractsThoseUseOption = new HashSet<>();
 
     public Option() {
         required = new HashSet<>();
