@@ -11,5 +11,4 @@ public interface CustomerService extends GenericService<Customer, Integer>{
 
     void update(Customer customer);
 
-    void delete(Customer customer);
 }

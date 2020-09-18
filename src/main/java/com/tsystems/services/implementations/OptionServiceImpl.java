@@ -4,12 +4,16 @@ import com.tsystems.dao.interfaces.OptionDao;
 import com.tsystems.entities.Option;
 import com.tsystems.services.interfaces.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by nikita on 16.09.2020.
  */
+@Service
+@Transactional
 public class OptionServiceImpl implements OptionService {
 
     private final OptionDao optionDao;

@@ -75,4 +75,12 @@ public class Option {
         this.getRequired().add(option);
         option.getRequired().add(this);
     }
+
+    public Option(Integer id, String name, BigDecimal cost, BigDecimal connectCost, String description) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.connectCost = connectCost;
+        this.description = description;
+    }
 }

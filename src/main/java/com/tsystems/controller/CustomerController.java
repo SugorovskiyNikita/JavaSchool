@@ -67,7 +67,7 @@ public class CustomerController {
 
     @GetMapping("delete/{id}")
     public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.delete(customer);
+        customerService.remove(customer);
         return "redirect:/customers";
     }
 }

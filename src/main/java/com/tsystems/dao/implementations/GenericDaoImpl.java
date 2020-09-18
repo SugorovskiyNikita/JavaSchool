@@ -28,10 +28,9 @@ public abstract class GenericDaoImpl<T, Integer> implements GenericDao<T, Intege
     }
 
     @Override
-    public T getById(int id) {
-        return (T) em.find(entityClass, id);
+    public T loadByKey(Integer key) {
+        return (T) em.find(entityClass, key);
     }
-
 
     @Override
     public void update(T entity) {
@@ -39,7 +38,7 @@ public abstract class GenericDaoImpl<T, Integer> implements GenericDao<T, Intege
     }
 
     @Override
-    public void delete(T entity) {
+    public void remove(T entity) {
         em.remove(entity);
     }
 
