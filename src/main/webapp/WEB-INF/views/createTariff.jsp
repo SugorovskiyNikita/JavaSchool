@@ -10,7 +10,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add customer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add tariff</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <style>
@@ -20,20 +21,22 @@
 <body>
 <div class="container-fluid">
     <form name="tariff" action="/addTariff" method="post">
-        <div>
+        <fieldset class="form-group">
             <label for="name">Name</label>
-            <div><input type="text" name="name" placeholder="" id="name"></div>
-        </div>
-        <div>
+            <input type="text" class="form-control" name="name" placeholder="Name tariff" id="name"
+                   required pattern=[A-Z][a-z]+>
+        </fieldset>
+        <fieldset class="form-group">
             <label for="cost">Cost</label>
-            <div><input type="text" name="cost" placeholder="" id="cost"
-                        required pattern=\d+(\.\d{2})?></div>
-        </div>
-        <div>
+            <input type="text" class="form-control" name="cost" placeholder="Cost tariff" id="cost"
+                   required pattern=\d+(\.\d{2})?>
+        </fieldset>
+        <fieldset class="form-group">
             <label for="description">Description</label>
-            <div><input type="text" name="description" placeholder="" id="description"></div>
-        </div><br>
-        <div><input type="submit" name="submit" value="Add tariff" class="btn btn-success"></div>
+            <input type="text" class="form-control" name="Description" placeholder="Description" id="description">
+        </fieldset>
+        <br>
+        <input type="submit" name="submit" value="Add tariff" class="btn btn-success">
     </form>
 </div>
 </body>

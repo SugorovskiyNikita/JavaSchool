@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add customer</title>
+    <title>Add option</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <style>
@@ -20,25 +20,25 @@
 <body>
 <div class="container-fluid">
     <form name="option" action="/addOption" method="post">
-        <div>
-            <label for="name">Name</label>
-            <div><input type="text" name="name" placeholder="" id="name"></div>
-        </div>
-        <div>
-            <label for="cost">Cost</label>
-            <div><input type="text" name="cost" placeholder="" id="cost"
-                        required pattern=\d+(\.\d{2})?></div>
-        </div>
-        <div>
-            <label for="costConnection">Cost connection</label>
-            <div><input type="text" name="costConnection" placeholder="" id="costConnection"
-                        required pattern=\d+(\.\d{2})?></div>
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <div><input type="text" name="description" placeholder="" id="description"></div>
-        </div><br>
-        <div><input type="submit" name="submit" value="Add option" class="btn btn-success"></div>
+            <fieldset class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Name option" id="name">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="cost">Cost</label>
+                <input type="text" class="form-control" name="cost" placeholder="Cost option" id="cost"
+                       required pattern=\d+(\.\d{2})?>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="connectCost">Cost connection</label>
+                <input type="text" class="form-control" name="connectCost" placeholder="Cost connection for option" id="connectCost"
+                       required pattern=\d+(\.\d{2})?>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" name="Description" placeholder="Description" id="description">
+            </fieldset><br>
+        <input type="submit" name="submit" value="Add option" class="btn btn-success">
     </form>
 </div>
 </body>

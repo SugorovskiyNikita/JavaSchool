@@ -46,7 +46,7 @@ public class Customer {
     private String password;
 
     @Column(name = "is_blocked")
-    private Integer isBlocked;
+    private Integer isBlocked = 0;
 
     public Customer() {
     }

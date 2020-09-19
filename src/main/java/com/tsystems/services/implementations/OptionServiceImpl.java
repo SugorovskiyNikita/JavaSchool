@@ -22,6 +22,7 @@ public class OptionServiceImpl implements OptionService {
     public OptionServiceImpl(OptionDao optionDao) {
         this.optionDao = optionDao;
     }
+
     @Override
     public void add(Option option) {
         optionDao.add(option);
