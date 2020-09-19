@@ -38,16 +38,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void remove(Customer customer) {
-        customerDao.delete(customer);
+        customerDao.remove(customer);
     }
 
     @Override
     public List<Customer> loadAll() {
-        return customerDao.getAll();
+        return customerDao.loadAll();
     }
 
     @Override
     public Customer loadByKey(Integer key) {
-        return customerDao.getById(key);
+        return customerDao.loadByKey(key);
     }
 }

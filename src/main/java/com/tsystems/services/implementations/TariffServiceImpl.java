@@ -31,11 +31,21 @@ public class TariffServiceImpl implements TariffService {
 
     @Override
     public List<Tariff> loadAll() {
-        return tariffDao.getAll();
+        return tariffDao.loadAll();
     }
 
     @Override
     public Tariff loadByKey(Integer key) {
-        return tariffDao.getById(key);
+        return tariffDao.loadByKey(key);
+    }
+
+    @Override
+    public void remove(Tariff tariff) {
+        tariffDao.remove(tariff);
+    }
+
+    @Override
+    public void update(Tariff tariff) {
+        tariffDao.update(tariff);
     }
 }

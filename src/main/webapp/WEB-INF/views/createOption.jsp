@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Печалька
-  Date: 13.09.2020
-  Time: 20:21
+  Date: 19.09.2020
+  Time: 16:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,7 +19,7 @@
     </style>
 <body>
 <div class="container-fluid">
-    <form name="tariff" action="/addTariff" method="post">
+    <form name="option" action="/addOption" method="post">
         <div>
             <label for="name">Name</label>
             <div><input type="text" name="name" placeholder="" id="name"></div>
@@ -30,12 +30,16 @@
                         required pattern=\d+(\.\d{2})?></div>
         </div>
         <div>
+            <label for="costConnection">Cost connection</label>
+            <div><input type="text" name="costConnection" placeholder="" id="costConnection"
+                        required pattern=\d+(\.\d{2})?></div>
+        </div>
+        <div>
             <label for="description">Description</label>
             <div><input type="text" name="description" placeholder="" id="description"></div>
         </div><br>
-        <div><input type="submit" name="submit" value="Add tariff" class="btn btn-success"></div>
+        <div><input type="submit" name="submit" value="Add option" class="btn btn-success"></div>
     </form>
 </div>
 </body>
 </html>
-

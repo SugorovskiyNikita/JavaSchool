@@ -32,11 +32,21 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public List<Contract> loadAll() {
-        return contractDao.getAll();
+        return contractDao.loadAll();
+    }
+
+    @Override
+    public void remove(Contract contract) {
+        contractDao.remove(contract);
+    }
+
+    @Override
+    public void update(Contract contract) {
+        contractDao.update(contract);
     }
 
     @Override
     public Contract loadByKey(Integer key) {
-        return contractDao.getById(key);
+        return contractDao.loadByKey(key);
     }
 }

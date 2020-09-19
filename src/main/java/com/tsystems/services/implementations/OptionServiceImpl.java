@@ -29,11 +29,21 @@ public class OptionServiceImpl implements OptionService {
 
     @Override
     public List<Option> loadAll() {
-        return optionDao.getAll();
+        return optionDao.loadAll();
+    }
+
+    @Override
+    public void remove(Option option) {
+        optionDao.remove(option);
+    }
+
+    @Override
+    public void update(Option option) {
+        optionDao.update(option);
     }
 
     @Override
     public Option loadByKey(Integer key) {
-        return optionDao.getById(key);
+        return optionDao.loadByKey(key);
     }
 }
