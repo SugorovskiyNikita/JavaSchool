@@ -29,7 +29,11 @@ public class Tariff {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany()
+    @JoinTable(name = "Possible_options_of_tariffs", joinColumns = {
+            @JoinColumn(name = "tariff_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)
+    })
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Option> possibleOptions;
 
     public Tariff() {

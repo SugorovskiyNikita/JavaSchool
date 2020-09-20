@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by nikita on 04.09.20.
@@ -46,7 +47,10 @@ public class Customer {
     private String password;
 
     @Column(name = "is_blocked")
-    private Integer isBlocked = 0;
+    private Integer isBlocked;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    private Set<Contract> contracts;
 
     public Customer() {
     }

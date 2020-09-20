@@ -33,7 +33,7 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Birthday: </strong></span> ${customer.dateOfBirth}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport data: </strong></span>${customer.passportData}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport number: </strong></span>${customer.passportNumber}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Adress: </strong></span>${customer.address}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address: </strong></span>${customer.address}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span>${customer.email}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id blocked: </strong></span>${customer.isBlocked}</li>
 

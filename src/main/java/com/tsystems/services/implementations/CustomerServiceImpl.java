@@ -4,6 +4,7 @@ import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.dao.implementations.CustomerDaoImpl;
 import com.tsystems.entities.Customer;
 import com.tsystems.services.interfaces.CustomerService;
+import com.tsystems.util.PassGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void add(Customer customer) {
+        /*The password will be generated automatically
+        and sent to the user's email.
+         */
+        String password = new PassGen().randomPass();
+        customer.setIsBlocked(0);
+        customer.setPassword(password);
         customerDao.add(customer);
     }
 
