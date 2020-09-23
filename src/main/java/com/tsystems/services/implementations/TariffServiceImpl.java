@@ -48,4 +48,5 @@ public class TariffServiceImpl implements TariffService {
     public void update(Tariff tariff) {
         tariffDao.update(tariff);
     }
+
 }

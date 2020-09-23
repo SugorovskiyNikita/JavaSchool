@@ -35,4 +35,5 @@ public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements Ta
     public void update(Tariff tariff) {
         em.merge(tariff);
     }
+
 }

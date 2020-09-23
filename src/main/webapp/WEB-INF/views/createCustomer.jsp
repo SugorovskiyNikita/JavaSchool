@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +17,7 @@
         input:valid:not(:placeholder-shown) {border: 3px solid #000000;}
     </style>
 <body>
-<div class="cotainer">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -77,6 +79,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+
+                                <label class="control-label" ng-model="Choose..." for="tariff">Choose tariff</label>
+                                <select id="tariff" class="form-control">
+                                    <c:forEach var="tariff" items="${tariff}">
+                                        <option value="${tariff.id}"  name="tariff">${tariff.id}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="number">Number</label>
+                                <div class="controls input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+                                    <input type="text" id="number" name="number" placeholder="" class="form-control input-xlarge bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                                </div>
+                            </div>
+
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Add customer
@@ -84,13 +104,11 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
+            </div>
         </div>
     </div>
 </div>
-</div>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

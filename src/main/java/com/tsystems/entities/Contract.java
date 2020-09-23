@@ -28,7 +28,7 @@ public class Contract {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "customer")
     private Customer customer;
 
