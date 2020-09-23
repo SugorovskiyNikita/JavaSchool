@@ -79,24 +79,35 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group row">
+                                <label for="number" class="col-md-4 col-form-label text-md-right">Number</label>
+                                <div class="col-md-6">
+                                    <input type="number" id="number" class="form-control" name="number"
+                                           placeholder="Phone number">
+                                </div>
+                            </div>
 
-                                <label class="control-label" ng-model="Choose..." for="tariff">Choose tariff</label>
-                                <select id="tariff" class="form-control">
+                                <label class="control-label" for="tariff">Choose tariff</label>
+                            <div class="controls">
+                                <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
                                     <c:forEach var="tariff" items="${tariff}">
-                                        <option value="${tariff.id}"  name="tariff">${tariff.id}</option>
+                                        <option value="${tariff.id}">${tariff.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label" for="number">Number</label>
-                                <div class="controls input-group">
-                                    <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
-                                    <input type="text" id="number" name="number" placeholder="" class="form-control input-xlarge bfh-phone" data-format="+7 (ddd) ddd-dddd">
+                            <label class="control-label" for="option">Choose option</label>
+                            <div class="multiselect">
+                                <div class="selectBox">
+                                <select required multiple size="5" type="checkbox" id="option" name="option" class="form-control" onchange="this.value">
+                                    <c:forEach var="option" items="${option}">
+                                        <option value="${option.id}">${option.name}</option>
+                                    </c:forEach>
+                                </select>
                                 </div>
                             </div>
 
+                            <br>
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Add customer

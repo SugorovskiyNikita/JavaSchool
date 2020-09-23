@@ -5,7 +5,6 @@ package com.tsystems.entities;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,19 +12,10 @@ import java.util.Set;
  * Created by nikita on 04.09.20.
  */
 @Entity
-@Table(name = "customers", schema = "tmobile")
+@Table(name = "customers")
 @Data
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+public class Customer extends User {
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
 
     @Column(name = "date_of_birth")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -40,12 +30,6 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
-    private String password;
-
     @Column(name = "is_blocked")
     private Integer isBlocked;
 
@@ -56,10 +40,10 @@ public class Customer {
     }
 
     public Customer(Integer id, String name, String surname, String email, Integer isBlocked) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
+        this.setId(id);
+        this.setName(name);
+        this.setSurname(surname);
+        this.setEmail(email);
         this.isBlocked = isBlocked;
     }
 }

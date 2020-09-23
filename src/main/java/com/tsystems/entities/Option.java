@@ -77,6 +77,14 @@ public class Option {
         contractsThoseUseOption = new HashSet<>();
     }
 
+    public Option(Integer id, String name, BigDecimal cost, BigDecimal connectCost, String description) {
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.connectCost = connectCost;
+        this.description = description;
+    }
+
     public void addRequiredFromOptions(Option option) {
         this.getRequired().add(option);
     }

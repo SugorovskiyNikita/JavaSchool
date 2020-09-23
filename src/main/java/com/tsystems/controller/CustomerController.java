@@ -27,16 +27,10 @@ public class CustomerController {
     @Autowired
     public CustomerService customerService;
 
-    @Autowired
-    public TariffService tariffService;
-
-    @Autowired
-    public ContractService contractService;
-
     @GetMapping("/")
     public String index() {
-        return "index";
-    }
+        return "createCustomer";
+    } //временно для удобства
 
     @GetMapping("/login")
     public String login() { return "login"; }
@@ -45,29 +39,6 @@ public class CustomerController {
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         return "showCustomer";
-    }
-
-    @GetMapping("/addCustomer")
-    public String creatCustomerPage( Model model) {
-        model.addAttribute("tariff", tariffService.loadAll());
-        return "createCustomer";
-    }
-
-    @PostMapping("/addCustomer")
-    public String addCustomer(@ModelAttribute("customer") Customer customer, HttpServletRequest request) {
-        Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
-        Tariff tariff = tariffService.loadByKey(tariffId);
-        String number = request.getParameter("number");
-        Contract contract = new Contract();
-        contract.setNumber(number);
-        contract.setTariff(tariff);
-        contract.setIsBlocked(0);
-        contract.setBalance(new BigDecimal(100));
-        customerService.add(customer);
-        contract.setCustomer(customer);
-        contractService.add(contract);
-
-        return "redirect:/customers";
     }
 
     @GetMapping("/customers")

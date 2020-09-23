@@ -3,7 +3,6 @@ package com.tsystems.controller;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
 import com.tsystems.entities.Tariff;
-import com.tsystems.services.implementations.TariffServiceImpl;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.OptionService;
@@ -39,25 +38,30 @@ public class ContractController {
     @Autowired
     public OptionService optionService;
 
+    @GetMapping("/addCustomer")
+    public String creatCustomerPage( Model model) {
+        model.addAttribute("tariff", tariffService.loadAll());
+        model.addAttribute("option", optionService.loadAll());
+        return "createCustomer";
+    }
     @GetMapping("/addContract")
     public String createContract() { return "createContract"; }
 
-    @PostMapping("/addContract")
-    public String addContract(Model model, HttpServletRequest req) {
-        Integer customerId = Integer.valueOf(req.getParameter("customer_id"));
-        String number = req.getParameter("number");
-        Integer tariffId = Integer.parseInt(req.getParameter("tariff"));
-        Contract contract = new Contract();
+    @PostMapping("/addCustomer")
+    public String addCustomer(@ModelAttribute("contract") Customer customer, HttpServletRequest request) {
+        Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
         Tariff tariff = tariffService.loadByKey(tariffId);
-        Customer customer = customerService.loadByKey(customerId);
-        contract.setCustomer(customer);
+        String number = request.getParameter("number");
+        Contract contract = new Contract();
+        contract.setNumber(number);
         contract.setTariff(tariff);
         contract.setIsBlocked(0);
         contract.setBalance(new BigDecimal(100));
+        customerService.add(customer);
+        contract.setCustomer(customer);
         contractService.add(contract);
 
-
-        return "redirect:/contractList";
+        return "redirect:/customers";
     }
 
 

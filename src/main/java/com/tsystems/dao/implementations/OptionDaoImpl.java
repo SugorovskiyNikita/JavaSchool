@@ -19,7 +19,7 @@ public class OptionDaoImpl extends GenericDaoImpl<Option, Integer> implements Op
 
     @Override
     public List<Option> loadAll() {
-        return em.createQuery("SELECT NEW Option (c.id, c.name, c.cost, c.connectCost, c.description) FROM Option c", Option.class)
+        return em.createQuery("SELECT NEW Option(c.id, c.name, c.cost, c.connectCost, c.description) FROM Option c", Option.class)
                 .getResultList();
     }
 
