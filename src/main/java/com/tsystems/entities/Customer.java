@@ -33,7 +33,7 @@ public class Customer extends User {
     @Column(name = "is_blocked")
     private Integer isBlocked;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
     public Customer() {
