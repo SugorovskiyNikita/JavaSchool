@@ -13,6 +13,10 @@ import java.util.List;
 public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implements CustomerDao {
 
     @Override
+    public Customer findByEmail(String email) {
+        return em.find(Customer.class, email);
+    }
+    @Override
     public void add(Customer customer) {
         em.merge(customer);
     }

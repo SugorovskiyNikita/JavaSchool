@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.ResourceBundleViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.tsystems.controller", "com.tsystems.config"})
+@ComponentScan("com.tsystems.controller")
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

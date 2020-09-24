@@ -8,6 +8,7 @@ import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.OptionService;
 import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class ContractController {
     @GetMapping("/addContract")
     public String createContract() { return "createContract"; }
 
+    @Secured("ADMIN")
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute("contract") Customer customer, HttpServletRequest request) {
         Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
