@@ -14,7 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<ContractDto> loadAll() {
         return contractDao
                 .loadAll()
@@ -104,14 +104,14 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public ContractDto findByNumber(String number) {
         return new ContractDto(contractDao.findByNumber(number));
     }
 
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public ContractDto loadByKey(Integer key) {
         Contract contract = contractDao.loadByKey(key);
         // Return contract DTO object with dependencies

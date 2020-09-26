@@ -6,8 +6,8 @@ import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +32,7 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<TariffDto> loadAll() {
         return tariffDao
                 .loadAll()
@@ -42,7 +42,7 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public TariffDto loadByKey(Integer key) {
         Tariff tariff = tariffDao.loadByKey(key);
         return new TariffDto(tariff).addDependencies(tariff);

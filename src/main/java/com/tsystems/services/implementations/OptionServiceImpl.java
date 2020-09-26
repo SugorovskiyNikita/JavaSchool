@@ -8,7 +8,7 @@ import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,7 +68,7 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<OptionDto> loadAll() {
         return optionDao
                 .loadAll()
@@ -83,7 +83,7 @@ public class OptionServiceImpl implements OptionService {
 
 
     @Override
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public OptionDto loadByKey(Integer key) {
         Option option = optionDao.loadByKey(key);
         return new OptionDto(option).addDependencies(option);
