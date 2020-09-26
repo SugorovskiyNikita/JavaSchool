@@ -1,7 +1,9 @@
 package com.tsystems.controller;
 
+import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.TariffService;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,7 @@ public class TariffController {
     public String createTariff() {return "createTariff";}
 
     @PostMapping("/addTariff")
-    public String addTariff(@ModelAttribute("tariff") Tariff tariff) {
+    public String addTariff(@ModelAttribute("tariff") TariffDto tariff) throws WrongOptionConfigurationException {
         tariffService.add(tariff);
         return "redirect:/tariffs";
     }

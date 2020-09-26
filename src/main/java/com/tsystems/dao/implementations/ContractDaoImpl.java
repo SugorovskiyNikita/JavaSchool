@@ -2,6 +2,7 @@ package com.tsystems.dao.implementations;
 
 import com.tsystems.dao.interfaces.ContractDao;
 import com.tsystems.entities.Contract;
+import com.tsystems.entities.Tariff;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,8 +15,8 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
 
 
     @Override
-    public void add(Contract contract) {
-        em.merge(contract);
+    public Contract add(Contract contract) {
+        return em.merge(contract);
     }
 
     @Override
@@ -29,12 +30,15 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
     }
 
     @Override
-    public void remove(Contract contract) { em.remove(contract);}
+    public void remove(Integer contract) { em.remove(contract);}
 
     @Override
     public void update(Contract contract) {
         em.merge(contract);
     }
 
-
+    @Override
+    public Contract findByNumber(String number) {
+        return em.find(Contract.class, number);
+    }
 }

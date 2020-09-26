@@ -13,8 +13,8 @@ import java.util.List;
 public class OptionDaoImpl extends GenericDaoImpl<Option, Integer> implements OptionDao {
 
     @Override
-    public void add(Option option) {
-        em.merge(option);
+    public Option add(Option option) {
+        return em.merge(option);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class OptionDaoImpl extends GenericDaoImpl<Option, Integer> implements Op
     }
 
     @Override
-    public void remove(Option option) {
+    public void remove(Integer option) {
         em.remove(option);
     }
 

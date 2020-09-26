@@ -1,7 +1,6 @@
 package com.tsystems.services.interfaces;
 
 import com.tsystems.dto.CustomerDto;
-import com.tsystems.entities.Customer;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,7 +8,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface CustomerService extends GenericService<CustomerDto, Integer>{
-
-    void update(CustomerDto customerdto);
 
 }

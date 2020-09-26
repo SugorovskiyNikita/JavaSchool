@@ -8,13 +8,13 @@ import java.util.List;
  */
 public interface GenericDao<T, PK> {
 
-    void add(T entity);
+    T add(T entity);
 
     List<T> loadAll();
 
     T loadByKey(PK key);
 
-    void remove(T entity);
+    void remove(Integer entity);
 
     void update(T Entity);
 

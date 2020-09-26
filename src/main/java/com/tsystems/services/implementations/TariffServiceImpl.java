@@ -1,7 +1,7 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.TariffDao;
-import com.tsystems.dao.implementations.TariffDaoImpl;
+import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by nikita on 13.09.2020.
@@ -25,28 +26,32 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    public void add(Tariff tariff) {
-        tariffDao.add(tariff);
+    public TariffDto add(TariffDto tariffDto) {
+        Tariff tariff = tariffDto.convertToEntity();
+        return new TariffDto(tariffDao.add(tariff));
     }
 
     @Override
-    public List<Tariff> loadAll() {
-        return tariffDao.loadAll();
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<TariffDto> loadAll() {
+        return tariffDao
+                .loadAll()
+                .stream()
+                .map(e -> new TariffDto(e).addDependencies(e))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Tariff loadByKey(Integer key) {
-        return tariffDao.loadByKey(key);
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public TariffDto loadByKey(Integer key) {
+        Tariff tariff = tariffDao.loadByKey(key);
+        return new TariffDto(tariff).addDependencies(tariff);
     }
 
     @Override
-    public void remove(Tariff tariff) {
-        tariffDao.remove(tariff);
+    public void remove(Integer key) {
+        tariffDao.remove(key);
     }
 
-    @Override
-    public void update(Tariff tariff) {
-        tariffDao.update(tariff);
-    }
 
 }

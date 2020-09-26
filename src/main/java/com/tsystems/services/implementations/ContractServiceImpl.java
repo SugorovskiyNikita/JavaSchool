@@ -1,16 +1,25 @@
 package com.tsystems.services.implementations;
 
-import com.tsystems.dao.implementations.ContractDaoImpl;
 import com.tsystems.dao.interfaces.ContractDao;
-import com.tsystems.dao.interfaces.CustomerDao;
+import com.tsystems.dao.interfaces.TariffDao;
+import com.tsystems.dto.ContractDto;
+import com.tsystems.dto.CustomerDto;
+import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Contract;
+import com.tsystems.entities.Customer;
+import com.tsystems.entities.Option;
+import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by nikita on 15.09.2020.
@@ -19,35 +28,93 @@ import java.util.List;
 @Transactional
 public class ContractServiceImpl implements ContractService {
 
-    private final ContractDao contractDao;
-
     @Autowired
-    public ContractServiceImpl(ContractDao contractDao) {
-        this.contractDao = contractDao;
+    private ContractDao contractDao;
+    @Autowired
+    private TariffDao tariffDao;
+
+
+    @Override
+    public ContractDto add(ContractDto contractDto) {
+        //contract.setTariff(tariffDao.loadByKey(1));
+        //contract.setNumber("123456789");
+        return new ContractDto(contractDao.add(contractDto.convertToEntity()));
+
     }
 
     @Override
-    public void add(Contract contract) {
-        contractDao.add(contract);
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<ContractDto> loadAll() {
+        return contractDao
+                .loadAll()
+                .stream()
+                .map(e -> new ContractDto(e).addDependencies(e))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Contract> loadAll() {
-        return contractDao.loadAll();
+    public void remove(Integer key) {
+        contractDao.remove(key);
     }
 
     @Override
-    public void remove(Contract contract) {
-        contractDao.remove(contract);
+    public ContractDto setBlock(Integer id, Integer blockLevel) {
+        return null;
     }
 
     @Override
-    public void update(Contract contract) {
-        contractDao.update(contract);
+    public ContractDto updateContract(Integer contractId, Integer tariffId, List<Integer> optionIds) {
+        Contract contract = contractDao.loadByKey(contractId);
+        // Check is contract exists
+        if (contract == null) {
+            return new ContractDto();
+        }
+
+        contract.getUsedOptions().size();
+        Set<Option> oldOptions = contract.getUsedOptions();
+
+        //Create new tariff
+        Tariff tariff = new Tariff();
+        tariff.setId(tariffId);
+        contract.setTariff(tariff);
+
+        //Set options for new tariff
+        Set<Option> options = new HashSet<>();
+        if (optionIds != null) {
+            for (Integer id : optionIds) {
+                Option opt = new Option();
+                opt.setId(id);
+                options.add(opt);
+            }
+        }
+        contract.setUsedOptions(options);
+
+        //Save new contract
+        contract = contractDao.add(contract);
+
+        //Update new contract balance
+        Set<Option> newOptions = contract.getUsedOptions();
+        BigDecimal summ = newOptions.stream()
+                .filter(e -> !optionIds.contains(e))
+                .map(Option::getConnectCost)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        contract.setBalance(contract.getBalance().subtract(summ));
+
+        return new ContractDto(contract).addDependencies(contract);
     }
 
     @Override
-    public Contract loadByKey(Integer key) {
-        return contractDao.loadByKey(key);
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public ContractDto findByNumber(String number) {
+        return new ContractDto(contractDao.findByNumber(number));
+    }
+
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public ContractDto loadByKey(Integer key) {
+        Contract contract = contractDao.loadByKey(key);
+        // Return contract DTO object with dependencies
+        return new ContractDto(contract).addDependencies(contract);
     }
 }

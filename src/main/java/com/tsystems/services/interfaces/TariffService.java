@@ -1,5 +1,6 @@
 package com.tsystems.services.interfaces;
 
+import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Tariff;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +8,6 @@ import org.springframework.stereotype.Service;
  * Created by nikita on 13.09.2020.
  */
 @Service
-public interface TariffService extends GenericService<Tariff, Integer> {
+public interface TariffService extends GenericService<TariffDto, Integer> {
 
 }

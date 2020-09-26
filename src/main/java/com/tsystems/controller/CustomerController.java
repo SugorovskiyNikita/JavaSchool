@@ -48,11 +48,6 @@ public class CustomerController {
         return "customersList";
     }
 
-    @PostMapping("/updateCustomer")
-    public String updateCustomer(@ModelAttribute("customer") CustomerDto customer) {
-        customerService.update(customer);
-        return "redirect:/customers";
-    }
 
     @GetMapping("update/{id}")
     public String update(@PathVariable("id") int id, Model model) {
@@ -61,8 +56,8 @@ public class CustomerController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@ModelAttribute("customer") CustomerDto customer) {
-        customerService.remove(customer);
+    public String deleteCustomer(@PathVariable("id") int key, Model model) {
+        model.addAttribute("customer", customerService.loadByKey(key));
         return "redirect:/customers";
     }
 }

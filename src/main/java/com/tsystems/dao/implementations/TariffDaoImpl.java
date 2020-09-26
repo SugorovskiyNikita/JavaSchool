@@ -18,13 +18,13 @@ public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements Ta
     }
 
     @Override
-    public void remove(Tariff tariff) {
+    public void remove(Integer tariff) {
         em.remove(tariff);
     }
 
     @Override
-    public void add(Tariff tariff) {
-        em.merge(tariff);
+    public Tariff add(Tariff tariff) {
+        return em.merge(tariff);
     }
 
     @Override

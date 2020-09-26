@@ -2,6 +2,7 @@ package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.dto.CustomerDto;
+import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.util.PassGen;
@@ -11,7 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -22,48 +26,37 @@ import java.util.stream.Collectors;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    public final ModelMapper mapper;
-
-    private final CustomerDao customerDao;
-
     @Autowired
-    public CustomerServiceImpl(CustomerDao customerDao, ModelMapper mapper) {
-        this.customerDao = customerDao;
-        this.mapper = mapper;
-    }
+    private  CustomerDao customerDao;
+
 
     @Override
-    public void add(CustomerDto customerDto) {
+    public CustomerDto add(CustomerDto customerDto) {
         /*The password will be generated automatically
-        and sent to the user's email.
          */
-        String password = new PassGen().randomPass();
-        //passwordEncoder.encode(password);
-        customerDto.setIsBlocked(0);
-        customerDto.setPassword(password);
-        customerDao.add(mapper.map(customerDto, Customer.class));
+        Customer customer = customerDto.convertToEntity();
+        customer.setIsBlocked(0);
+        customer.setPassword("password");
+        return new CustomerDto(customerDao.add(customer));
     }
 
     @Override
-    public void update(CustomerDto customerDto) {
-        customerDao.update(mapper.map(customerDto, Customer.class));
+    public void remove(Integer key) {
+        customerDao.remove(key);
     }
 
     @Override
-    public void remove(CustomerDto customerDto) {
-        customerDao.remove(mapper.map(customerDto, Customer.class));
-    }
-
-    @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<CustomerDto> loadAll() {
         return customerDao.loadAll().stream()
-                .map(c -> new CustomerDto((c.getId()), c.getName(), c.getSurname(), c.getEmail(), c.getIsBlocked()))
+                .map(e -> new CustomerDto(e).addDependencies(e))
                 .collect(Collectors.toList());
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public CustomerDto loadByKey(Integer key) {
         Customer customer = customerDao.loadByKey(key);
-        return mapper.map(customer, CustomerDto.class);
+        return new CustomerDto(customer).addDependencies(customer);
     }
 }

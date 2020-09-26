@@ -1,6 +1,7 @@
 package com.tsystems.services.interfaces;
 
 import com.tsystems.entities.Contract;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,14 +11,12 @@ import java.util.List;
  */
 public interface GenericService<T, PK extends Serializable> {
 
-    void add(T entityDto);
+    T add(T entityDto) throws WrongOptionConfigurationException;
 
     List<T> loadAll();
 
     T loadByKey(PK key);
 
-    void remove(T entity);
-
-    void update(T entity);
+    void remove(Integer PK);
 
 }

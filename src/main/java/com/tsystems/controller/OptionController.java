@@ -1,8 +1,10 @@
 package com.tsystems.controller;
 
 
+import com.tsystems.dto.OptionDto;
 import com.tsystems.entities.Option;
 import com.tsystems.services.interfaces.OptionService;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class OptionController {
     public String createOption() {return "createOption";}
 
     @PostMapping("/addOption")
-    public String addOption(@ModelAttribute("option") Option option) {
+    public String addOption(@ModelAttribute("option") OptionDto option) throws WrongOptionConfigurationException {
         optionService.add(option);
         return "redirect:/options";
     }
