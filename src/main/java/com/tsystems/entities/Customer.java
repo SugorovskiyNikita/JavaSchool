@@ -57,11 +57,11 @@ public class Customer {
     private Set<Contract> contracts;
 
 
-    @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(
-            name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    //@ManyToMany
+    //@JoinTable(name = "users_roles", joinColumns = @JoinColumn(
+            //name = "user_id", referencedColumnName = "id"),
+            //inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    //private Set<Role> roles;
 
     public Customer() {
     }
@@ -74,9 +74,9 @@ public class Customer {
         this.isBlocked = isBlocked;
     }
 
-    public Set<SimpleGrantedAuthority> getAuthorities(){
-        return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-    }
+    //public Set<SimpleGrantedAuthority> getAuthorities(){
+        //return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
+    //}
 
 }
 

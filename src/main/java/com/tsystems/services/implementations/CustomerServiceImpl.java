@@ -1,15 +1,18 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.CustomerDao;
-import com.tsystems.dao.implementations.CustomerDaoImpl;
+import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Customer;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.util.PassGen;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -19,42 +22,48 @@ import java.util.List;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
+    public final ModelMapper mapper;
 
     private final CustomerDao customerDao;
 
     @Autowired
-    public CustomerServiceImpl(CustomerDao customerDao) {
+    public CustomerServiceImpl(CustomerDao customerDao, ModelMapper mapper) {
         this.customerDao = customerDao;
+        this.mapper = mapper;
     }
 
     @Override
-    public void add(Customer customer) {
+    public void add(CustomerDto customerDto) {
         /*The password will be generated automatically
         and sent to the user's email.
          */
         String password = new PassGen().randomPass();
-        customer.setIsBlocked(0);
-        customer.setPassword(password);
-        customerDao.add(customer);
+        //passwordEncoder.encode(password);
+        customerDto.setIsBlocked(0);
+        customerDto.setPassword(password);
+        customerDao.add(mapper.map(customerDto, Customer.class));
     }
 
     @Override
-    public void update(Customer customer) {
-        customerDao.update(customer);
+    public void update(CustomerDto customerDto) {
+        customerDao.update(mapper.map(customerDto, Customer.class));
     }
 
     @Override
-    public void remove(Customer customer) {
-        customerDao.remove(customer);
+    public void remove(CustomerDto customerDto) {
+        customerDao.remove(mapper.map(customerDto, Customer.class));
     }
 
     @Override
-    public List<Customer> loadAll() {
-        return customerDao.loadAll();
+    public List<CustomerDto> loadAll() {
+        return customerDao.loadAll().stream()
+                .map(c -> new CustomerDto((c.getId()), c.getName(), c.getSurname(), c.getEmail(), c.getIsBlocked()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Customer loadByKey(Integer key) {
-        return customerDao.loadByKey(key);
+    public CustomerDto loadByKey(Integer key) {
+        Customer customer = customerDao.loadByKey(key);
+        return mapper.map(customer, CustomerDto.class);
     }
 }

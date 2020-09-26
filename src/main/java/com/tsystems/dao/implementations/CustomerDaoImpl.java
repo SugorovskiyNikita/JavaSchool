@@ -4,6 +4,7 @@ import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.entities.Customer;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
     public Customer findByEmail(String email) {
         return em.find(Customer.class, email);
     }
+
     @Override
     public void add(Customer customer) {
         em.merge(customer);
@@ -28,7 +30,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
 
     @Override
     public void remove(Customer customer) {
-         em.remove(customer);
+        em.remove(customer);
     }
 
     @Override

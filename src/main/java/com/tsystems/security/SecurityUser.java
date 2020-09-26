@@ -55,10 +55,10 @@ public class SecurityUser implements UserDetails {
         return true;
     }
 
-    public static UserDetails fromCustomer(Customer customer){
-        return new User(
-                customer.getEmail(), customer.getPassword(),
-                customer.getAuthorities()
-        );
-    }
+    //public static UserDetails fromCustomer(Customer customer){
+        //return new User(
+                //customer.getEmail(), customer.getPassword(),
+                //customer.getAuthorities()
+        //);
+    //}
 }

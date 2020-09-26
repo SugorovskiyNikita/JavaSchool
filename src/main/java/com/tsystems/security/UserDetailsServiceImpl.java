@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 /**
  * Created by nikita on 24.09.2020.
  */
-@Service("userDetailsServiceImpl")
-public class UserDetailsServiceImpl implements UserDetailsService {
+//@Service("userDetailsServiceImpl")
+//public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private CustomerDao customerDao;
+    //@Autowired
+    //private CustomerDao customerDao;
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Customer customer = customerDao.findByEmail(email);
-        return SecurityUser.fromCustomer(customer);
-    }
-}
+    //@Override
+    //public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        //Customer customer = customerDao.findByEmail(email);
+        //return SecurityUser.fromCustomer(customer);
+    //}
+//}

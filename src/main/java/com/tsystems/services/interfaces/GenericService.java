@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface GenericService<T, PK extends Serializable> {
 
-    void add(T entity);
+    void add(T entityDto);
 
     List<T> loadAll();
 

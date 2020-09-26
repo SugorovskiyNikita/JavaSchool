@@ -23,7 +23,7 @@ public class Role {
     @Column(name = "user_role")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<Customer> customers;
+    //@ManyToMany(mappedBy = "roles")
+    //private Set<Customer> customers;
 
 }

@@ -1,5 +1,6 @@
 package com.tsystems.controller;
 
+import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
 import com.tsystems.entities.Tariff;
@@ -48,7 +49,7 @@ public class CustomerController {
     }
 
     @PostMapping("/updateCustomer")
-    public String updateCustomer(@ModelAttribute("customer") Customer customer) {
+    public String updateCustomer(@ModelAttribute("customer") CustomerDto customer) {
         customerService.update(customer);
         return "redirect:/customers";
     }
@@ -60,7 +61,7 @@ public class CustomerController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
+    public String deleteCustomer(@ModelAttribute("customer") CustomerDto customer) {
         customerService.remove(customer);
         return "redirect:/customers";
     }

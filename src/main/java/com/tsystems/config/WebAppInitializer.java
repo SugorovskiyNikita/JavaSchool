@@ -19,9 +19,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
 
     @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{SpringConfig.class};
-    }
+    protected Class<?>[] getServletConfigClasses() { return null; }
 
     @Override
     protected String[] getServletMappings() {
