@@ -1,20 +1,15 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.ContractDao;
-import com.tsystems.dao.interfaces.TariffDao;
 import com.tsystems.dto.ContractDto;
-import com.tsystems.dto.CustomerDto;
-import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Contract;
-import com.tsystems.entities.Customer;
 import com.tsystems.entities.Option;
 import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
@@ -30,15 +25,14 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private ContractDao contractDao;
-    @Autowired
-    private TariffDao tariffDao;
-
 
     @Override
     public ContractDto add(ContractDto contractDto) {
-        //contract.setTariff(tariffDao.loadByKey(1));
-        //contract.setNumber("123456789");
-        return new ContractDto(contractDao.add(contractDto.convertToEntity()));
+        // Create new contract. Default balance on new contract == 100 and non blocked
+        Contract contract = contractDto.convertToEntity();
+        contract.setBalance(new BigDecimal("100.00"));
+        contract.setIsBlocked(0);
+        return new ContractDto(contractDao.add(contract));
 
     }
 

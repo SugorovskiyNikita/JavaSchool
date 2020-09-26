@@ -7,9 +7,11 @@ import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.TariffService;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,19 @@ public class CustomerController {
     public String getAllCustomers(Model model) {
         model.addAttribute("customers", customerService.loadAll());
         return "customersList";
+    }
+
+    @Secured("ADMIN")
+    @PostMapping("/addCustomer")
+    public String addCustomer(@ModelAttribute CustomerDto customer) throws WrongOptionConfigurationException {
+        customerService.add(customer);
+
+        //String[] optionsIdStr = request.getParameterValues("options");
+        //List<Integer> options;
+        //options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
+        //contract.setUsedOptions(optionService.loadByKey(options.stream().iterator().next().));
+
+        return "redirect:/customers";
     }
 
 

@@ -36,8 +36,6 @@ import java.util.stream.Collectors;
 public class ContractController {
 
     @Autowired
-    public ModelMapper mapper;
-    @Autowired
     public ContractService contractService;
 
     @Autowired
@@ -62,18 +60,8 @@ public class ContractController {
     }
 
     @Secured("ADMIN")
-    @PostMapping("/addCustomer")
-    public String addCustomer(@ModelAttribute CustomerDto customer, HttpServletRequest request) throws WrongOptionConfigurationException {
-        Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
-        TariffDto tariff = tariffService.loadByKey(tariffId);
-        String number = request.getParameter("number");
-        ContractDto contract = new ContractDto();
-        contract.setNumber(number);
-        contract.setBalance(new BigDecimal(100));
-        contract.setIsBlocked(0);
-        contract.setTariff(tariff);
-        customerService.add(customer);
-        contract.setCustomer(customer);
+    @PostMapping("/addContract")
+    public String addCustomer(@ModelAttribute ContractDto contract) throws WrongOptionConfigurationException {
         contractService.add(contract);
 
     //String[] optionsIdStr = request.getParameterValues("options");

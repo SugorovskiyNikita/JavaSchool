@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,41 @@ public class Customer {
     //public Set<SimpleGrantedAuthority> getAuthorities(){
         //return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
     //}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        if (!super.equals(o))
+            return false;
 
+        Customer customer = (Customer) o;
+
+        if (!Objects.equals(isBlocked, customer.isBlocked))
+            return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(customer.dateOfBirth) : customer.dateOfBirth != null)
+            return false;
+        if (passportNumber != null ? !passportNumber.equals(customer.passportNumber) : customer.passportNumber != null)
+            return false;
+        if (passportData != null ? !passportData.equals(customer.passportData) : customer.passportData != null)
+            return false;
+        if (address != null ? !address.equals(customer.address) : customer.address != null)
+            return false;
+        return contracts != null ? contracts.equals(customer.contracts) : customer.contracts == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
+        result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
+        result = 31 * result + (passportData != null ? passportData.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + isBlocked;
+        result = 31 * result + (contracts != null ? contracts.hashCode() : 0);
+        return result;
+    }
 }
 
