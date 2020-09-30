@@ -49,13 +49,11 @@ public class Contract {
         //Empty constructor
     }
 
-    public Contract(Integer id, String number, Integer isBlocked, BigDecimal balance, Customer customer, Tariff tariff) {
+    public Contract(Integer id, String number, BigDecimal balance, Integer isBlocked) {
         this.id = id;
         this.number = number;
-        this.isBlocked = isBlocked;
         this.balance = balance;
-        this.customer = customer;
-        this.tariff = tariff;
+        this.isBlocked = isBlocked;
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
  */
 @Data
 public class TariffDto implements DtoMapper<Tariff>, Comparable<TariffDto> {
+
     private Integer id;
 
     private String name;

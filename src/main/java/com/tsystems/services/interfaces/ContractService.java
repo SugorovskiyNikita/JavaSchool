@@ -15,7 +15,7 @@ public interface ContractService extends GenericService<ContractDto, Integer> {
 
     ContractDto setBlock(Integer id, Integer blockLevel);
 
-    ContractDto updateContract(Integer contractId, Integer tariffId, List<Integer> optionIds) throws JSException;
+    ContractDto updateContract(Integer contractId, Integer tariffId, List<Integer> optionIds, String number) throws JSException;
 
     ContractDto findByNumber(String number);
 

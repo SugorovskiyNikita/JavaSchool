@@ -12,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -43,20 +46,22 @@ public class ContractController {
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         model.addAttribute("tariff", tariffService.loadAll());
-        //model.addAttribute("contract", contractService.loadAll());
         model.addAttribute("option", optionService.loadAll());
 
         return "showCustomer";
     }
 
-    /*@PostMapping("/updateContract")
+    @PostMapping("/updateContract")
     public String updateContract(@ModelAttribute ContractDto contract, HttpServletRequest request) throws WrongOptionConfigurationException {
         Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
         String number = request.getParameter("number");
-        contract = contractService.loadByKey()
-        contractService.updateContract();
+        Integer contractId = Integer.parseInt(request.getParameter("contract"));
+        String[] optionsIdStr = request.getParameterValues("option");
+        List<Integer> options;
+        options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
+        contractService.updateContract(contractId, tariffId, options, number);
         return "redirect:/contracts";
-    }*/
+    }
 
     @GetMapping("/addContract")
     public String createContract() {
@@ -67,13 +72,13 @@ public class ContractController {
     @PostMapping("/addContract")
     public String addCustomer(@ModelAttribute ContractDto contract) throws WrongOptionConfigurationException {
         contractService.add(contract);
-
-        //String[] optionsIdStr = request.getParameterValues("options");
-        //List<Integer> options;
-        //options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
-        //contract.setUsedOptions(optionService.loadByKey(options.stream().iterator().next().));
-
         return "redirect:/customers";
+    }
+
+    @GetMapping("/contracts")
+    public String getAllContracts(Model model) {
+        model.addAttribute("contracts", contractService.loadAll());
+        return "contractsList";
     }
 
 }

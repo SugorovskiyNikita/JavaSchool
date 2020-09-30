@@ -89,7 +89,7 @@
 
                                 <label class="control-label" for="tariff">Choose tariff</label>
                             <div class="controls">
-                                <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
+                                <select id="tariff" name="tariff" class="form-control" onchange="this.value">
                                     <c:forEach var="tariff" items="${tariff}">
                                         <option value="${tariff.id}">${tariff.name}</option>
                                     </c:forEach>
@@ -99,7 +99,7 @@
                             <label class="control-label" for="option">Choose option</label>
                             <div class="multiselect">
                                 <div class="selectBox">
-                                    <select required multiple size="5" type="checkbox" id="option" name="option[]" class="form-control" onchange="this.value">
+                                    <select multiple size="5" type="checkbox" id="option" name="option[]" class="form-control" onchange="this.value">
                                         <c:forEach var="option" items="${option}">
                                             <option value="${option.id}">${option.name}</option>
                                         </c:forEach>

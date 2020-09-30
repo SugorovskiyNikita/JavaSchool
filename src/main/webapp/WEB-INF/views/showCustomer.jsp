@@ -46,36 +46,51 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span>${customer.email}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id blocked: </strong></span>${customer.isBlocked}</li>
                 <c:forEach var="contracts" items="${customer.contracts}">
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Contracts: </strong></span>${contracts.id}</li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="" name="contract">Contracts: </strong></span>${contracts.id}</li>
                 </c:forEach>
             </ul>
         </div>
         <div class="row">
             <form name="customer" action="/updateContract" method="post">
-                <label for="number" class="col-md-4 col-form-label text-md-right">Number</label>
-                <div class="col-sm-8">
-                    <input type="number" id="number" class="form-control" name="number" placeholder="Phone number">
-                </div>
-                <label for="tariff" class="col-md-4 col-form-label text-md-right">Tariff</label>
-                <div class="col-sm-8">
-                    <div class="controls">
-                        <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
-                            <c:forEach var="tariff" items="${tariff}">
-                                <option value="${tariff.id}">${tariff.name}</option>
-                            </c:forEach>
-                        </select>
+
+                <label for="contract" class="col-sm">Contract</label>
+                    <div class="col-sm">
+                        <div class="controls">
+                            <select required id="contract" name="contract" class="form-control" onchange="this.value">
+                                <c:forEach var="contracts" items="${customer.contracts}">
+                                    <option value="${contracts.id}">${contracts.id}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <label for="option" class="col-md-4 col-form-label text-md-right">Options</label>
-                <div class="col-sm-8">
-                    <div class="controls">
-                        <select required id="option" name="option[]" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
-                            <c:forEach var="option" items="${option}">
-                                <option value="${option.id}">${option.name}</option>
-                            </c:forEach>
-                        </select>
+                <label for="number" class="col-sm">Number</label>
+                    <div class="col-sm">
+                        <input type="number" id="number" class="form-control" name="number" placeholder="Phone number">
                     </div>
-                </div>
+                <label for="tariff" class="col-sm">Tariff</label>
+                    <div class="col-sm">
+                        <div class="controls">
+                            <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
+                                <c:forEach var="tariff" items="${tariff}">
+                                    <option value="${tariff.id}">${tariff.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                <label for="option" class="col-sm">Options</label>
+                    <div class="col-sm">
+                        <div class="controls">
+                            <select required id="option" style="width: 100%" name="option[]" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
+                                <c:forEach var="option" items="${option}">
+                                    <option value="${option.id}">${option.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    <br>
+                            <button type="submit" class="btn btn-primary">
+                                Update contract
+                            </button>
+                    </div>
             </form>
         </div>
 

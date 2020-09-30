@@ -2,6 +2,7 @@ package com.tsystems.dao.implementations;
 
 import com.tsystems.dao.interfaces.ContractDao;
 import com.tsystems.entities.Contract;
+import com.tsystems.entities.Customer;
 import com.tsystems.entities.Tariff;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,8 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
 
     @Override
     public List<Contract> loadAll() {
-        return em.createQuery("SELECT NEW Contract (c.id, c.number, c.isBlocked, c.balance, c.customer,  c.tariff) FROM Contract c", Contract.class).getResultList();
+        return em.createQuery("SELECT NEW Contract (c.id, c.number, c.balance, c.isBlocked) FROM Contract c", Contract.class)
+                .getResultList();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.ContractDao;
+import com.tsystems.dao.interfaces.TariffDao;
 import com.tsystems.dto.ContractDto;
+import com.tsystems.dto.TariffDto;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Option;
 import com.tsystems.entities.Tariff;
@@ -25,6 +27,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private ContractDao contractDao;
+
+    @Autowired
+    private TariffDao tariffDao;
 
     @Override
     public ContractDto add(ContractDto contractDto) {
@@ -57,7 +62,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public ContractDto updateContract(Integer contractId, Integer tariffId, List<Integer> optionIds) {
+    public ContractDto updateContract(Integer contractId, Integer tariffId, List<Integer> optionIds, String number) {
         Contract contract = contractDao.loadByKey(contractId);
         // Check is contract exists
         if (contract == null) {
@@ -68,8 +73,7 @@ public class ContractServiceImpl implements ContractService {
         Set<Option> oldOptions = contract.getUsedOptions();
 
         //Create new tariff
-        Tariff tariff = new Tariff();
-        tariff.setId(tariffId);
+        Tariff tariff = tariffDao.loadByKey(tariffId);
         contract.setTariff(tariff);
 
         //Set options for new tariff
@@ -82,6 +86,9 @@ public class ContractServiceImpl implements ContractService {
             }
         }
         contract.setUsedOptions(options);
+
+        //Add number
+        contract.setNumber(number);
 
         //Save new contract
         contract = contractDao.add(contract);

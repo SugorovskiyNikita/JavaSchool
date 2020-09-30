@@ -13,33 +13,30 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/resources/js/search_line.js"></script>
     <link rel="stylesheet" href="/resources/css/forlist.css">
-    <title>Customers List</title>
+    <title>Contracts List</title>
 </head>
 <body>
 <div class="container target">
-<h1>Customer list</h1>
+<h1>Contract list</h1>
 <input id='myInput' onkeyup='searchTable()' type='text'>
 <table id = "myTable" class="table table-striped">
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">Email</th>
+        <th scope="col">Number</th>
+        <th scope="col">Balance</th>
         <th scope="col">Is Blocked</th>
     </tr>
-    <c:forEach items="${customers}" var="customer">
+    <c:forEach items="${contracts}" var="contract">
         <tr>
-            <td><a href="/customer/${customer.id}">${customer.id}</a></td>
-            <td>${customer.name}</td>
-            <td>${customer.surname}</td>
-            <td>${customer.email}</td>
-            <td>${customer.isBlocked}</td>
-            <td><button type="button" class="btn btn-dark"><a id="link1" href="/delete/${customer.id}">Delete</a></button></td>
-            <td><button type="button" class="btn btn-dark"><a id="link2" href="/update/${customer.id}">Edit</a></button></td>
+            <td>${contract.id}</td>
+            <td>${contract.number}</td>
+            <td>${contract.balance}</td>
+            <td>${contract.isBlocked}</td>
+            <td><button type="button" class="btn btn-dark"><a id="link1" href="/delete/${contract.id}">Delete</a></button></td>
+            <td><button type="button" class="btn btn-dark"><a id="link2" href="/update/${contract.id}">Edit</a></button></td>
         </tr>
     </c:forEach>
 </table>
-
 <button type="button" class="btn btn-success" ><a id="link" href="/addCustomer">Add new Customer</a></button>
 </div>
 </body>

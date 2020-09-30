@@ -39,7 +39,7 @@ public class Customer {
     private String email;
 
     @Column(name = "date_of_birth")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @Column(name = "passport_number")
@@ -68,10 +68,10 @@ public class Customer {
     }
 
     public Customer(Integer id, String name, String surname, String email, Integer isBlocked) {
-        this.setId(id);
-        this.setName(name);
-        this.setSurname(surname);
-        this.setEmail(email);
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
         this.isBlocked = isBlocked;
     }
 
