@@ -1,31 +1,18 @@
 package com.tsystems.controller;
 
 import com.tsystems.dto.ContractDto;
-import com.tsystems.dto.CustomerDto;
-import com.tsystems.dto.TariffDto;
-import com.tsystems.entities.Contract;
-import com.tsystems.entities.Customer;
-import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.OptionService;
 import com.tsystems.services.interfaces.TariffService;
-import com.tsystems.util.exceptions.WrongOptionConfigurationException;
-import netscape.javascript.JSException;
-import org.modelmapper.ModelMapper;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 /**
@@ -48,28 +35,45 @@ public class ContractController {
     public OptionService optionService;
 
     @GetMapping("/addCustomer")
-    public String creatCustomerPage(Model model) {
-        model.addAttribute("tariff", tariffService.loadAll());
-        model.addAttribute("option", optionService.loadAll());
+    public String creatCustomerPage() {
         return "createCustomer";
     }
+    @Secured("ADMIN")
+    @GetMapping("/customer/{id}")
+    public String getById(@PathVariable("id") int id, Model model) {
+        model.addAttribute("customer", customerService.loadByKey(id));
+        model.addAttribute("tariff", tariffService.loadAll());
+        //model.addAttribute("contract", contractService.loadAll());
+        model.addAttribute("option", optionService.loadAll());
+
+        return "showCustomer";
+    }
+
+    /*@PostMapping("/updateContract")
+    public String updateContract(@ModelAttribute ContractDto contract, HttpServletRequest request) throws WrongOptionConfigurationException {
+        Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
+        String number = request.getParameter("number");
+        contract = contractService.loadByKey()
+        contractService.updateContract();
+        return "redirect:/contracts";
+    }*/
 
     @GetMapping("/addContract")
     public String createContract() {
         return "createContract";
     }
 
-    @Secured("ADMIN")
+
     @PostMapping("/addContract")
     public String addCustomer(@ModelAttribute ContractDto contract) throws WrongOptionConfigurationException {
         contractService.add(contract);
 
-    //String[] optionsIdStr = request.getParameterValues("options");
-    //List<Integer> options;
-    //options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
-    //contract.setUsedOptions(optionService.loadByKey(options.stream().iterator().next().));
+        //String[] optionsIdStr = request.getParameterValues("options");
+        //List<Integer> options;
+        //options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
+        //contract.setUsedOptions(optionService.loadByKey(options.stream().iterator().next().));
 
-    return "redirect:/customers";
-}
+        return "redirect:/customers";
+    }
 
 }

@@ -4,12 +4,21 @@
 <html lang="java">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="/resources/js/showC.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/forlist.css"/>" >
+
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+
+
     <title>Customer Info</title>
 </head>
 <body>
@@ -19,12 +28,12 @@
             <h1 class="">Customer information</h1>
             <button type="button" class="btn btn-warning"> <a id="link" href="/customers">Return to all customers</a></button>
         </div>
-        <div class="col-sm-2"><img title="profile image" class="img-circle img-responsive" src="https://cooltv.info/img/user.png">
+        <div class="col-sm-2"><img title="profile image" class="img-circle img-responsive" src="https://searchusers.xyz/img/user.png">
         </div>
     </div>
     <br>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <!--left col-->
             <ul class="list-group">
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id: </strong></span> ${customer.id}</li>
@@ -36,13 +45,43 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address: </strong></span>${customer.address}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span>${customer.email}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id blocked: </strong></span>${customer.isBlocked}</li>
-
+                <c:forEach var="contracts" items="${customer.contracts}">
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Contracts: </strong></span>${contracts.id}</li>
+                </c:forEach>
             </ul>
-
         </div>
-    </div>
+        <div class="row">
+            <form name="customer" action="/updateContract" method="post">
+                <label for="number" class="col-md-4 col-form-label text-md-right">Number</label>
+                <div class="col-sm-8">
+                    <input type="number" id="number" class="form-control" name="number" placeholder="Phone number">
+                </div>
+                <label for="tariff" class="col-md-4 col-form-label text-md-right">Tariff</label>
+                <div class="col-sm-8">
+                    <div class="controls">
+                        <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
+                            <c:forEach var="tariff" items="${tariff}">
+                                <option value="${tariff.id}">${tariff.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <label for="option" class="col-md-4 col-form-label text-md-right">Options</label>
+                <div class="col-sm-8">
+                    <div class="controls">
+                        <select required id="option" name="option[]" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
+                            <c:forEach var="option" items="${option}">
+                                <option value="${option.id}">${option.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-<br>
+
+    </div>
+    <br>
 </div>
 </body>
 </html>

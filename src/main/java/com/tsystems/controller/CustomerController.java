@@ -30,6 +30,12 @@ public class CustomerController {
     @Autowired
     public CustomerService customerService;
 
+    @Autowired
+    public TariffService tariffService;
+
+    @Autowired
+    public ContractService contractService;
+
     @GetMapping("/")
     public String index() {
         return "createCustomer";
@@ -37,12 +43,6 @@ public class CustomerController {
 
     @GetMapping("/login")
     public String login() { return "login"; }
-
-    @GetMapping("/customer/{id}")
-    public String getById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(id));
-        return "showCustomer";
-    }
 
     @GetMapping("/customers")
     public String getAllCustomers(Model model) {
