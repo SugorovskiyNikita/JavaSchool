@@ -1,6 +1,7 @@
 package com.tsystems.controller;
 
 import com.tsystems.dto.ContractDto;
+import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.OptionService;
@@ -52,8 +53,17 @@ public class ContractController {
     }
 
     @PostMapping("/updateContract")
-    public String updateContract(@ModelAttribute ContractDto contract, HttpServletRequest request) throws WrongOptionConfigurationException {
-        Integer tariffId = Integer.parseInt(request.getParameter("tariff"));
+    public String updateContract(@RequestParam("tariff") Integer tariffId,
+                              @RequestParam(value = "usedOptions", required = false) List<Integer> options,
+                              @RequestParam("contract") Integer id, @RequestParam("number") String number){
+        ContractDto entity = contractService.updateContract(id, tariffId, options, number);
+
+        return "redirect:/contracts";
+    }
+
+    /*public String updateContract(@ModelAttribute ContractDto contract, HttpServletRequest request) throws WrongOptionConfigurationException {
+        String tariffSt = request.getParameter("tariff");
+        Integer tariffId = Integer.parseInt(tariffSt);
         String number = request.getParameter("number");
         Integer contractId = Integer.parseInt(request.getParameter("contract"));
         String[] optionsIdStr = request.getParameterValues("option");
@@ -61,7 +71,7 @@ public class ContractController {
         options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
         contractService.updateContract(contractId, tariffId, options, number);
         return "redirect:/contracts";
-    }
+    }*/
 
     @GetMapping("/addContract")
     public String createContract() {

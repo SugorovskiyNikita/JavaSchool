@@ -8,6 +8,7 @@ import com.tsystems.entities.Contract;
 import com.tsystems.entities.Option;
 import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
+import com.tsystems.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +74,8 @@ public class ContractServiceImpl implements ContractService {
         Set<Option> oldOptions = contract.getUsedOptions();
 
         //Create new tariff
-        Tariff tariff = tariffDao.loadByKey(tariffId);
+        Tariff tariff = new Tariff();
+        tariff.setId(tariffId);
         contract.setTariff(tariff);
 
         //Set options for new tariff

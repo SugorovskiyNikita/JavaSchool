@@ -24,8 +24,18 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"com.tsystems.services", "com.tsystems.dao"})
 @EnableTransactionManagement
+@PropertySource(value = "classpath:db.properties")
 public class SpringConfig {
 
+    @Autowired
+    private Environment environment;
+
+    private Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        return properties;
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -41,10 +51,10 @@ public class SpringConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/tmobile?serverTimezone=UTC");
-        dataSource.setUsername("root");
-        dataSource.setPassword("76459");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
         return dataSource;
     }
 
