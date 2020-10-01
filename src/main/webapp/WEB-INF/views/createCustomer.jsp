@@ -70,40 +70,11 @@
                                            placeholder="Address">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
                                 <div class="col-md-6">
                                     <input type="email" id="email" class="form-control" name="email"
                                            placeholder="Your email">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="number" class="col-md-4 col-form-label text-md-right">Number</label>
-                                <div class="col-md-6">
-                                    <input type="number" id="number" class="form-control" name="number"
-                                           placeholder="Phone number">
-                                </div>
-                            </div>
-
-                                <label class="control-label" for="tariff">Choose tariff</label>
-                            <div class="controls">
-                                <select id="tariff" name="tariff" class="form-control" onchange="this.value">
-                                    <c:forEach var="tariff" items="${tariff}">
-                                        <option value="${tariff.id}">${tariff.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <label class="control-label" for="option">Choose option</label>
-                            <div class="multiselect">
-                                <div class="selectBox">
-                                    <select multiple size="5" type="checkbox" id="option" name="option[]" class="form-control" onchange="this.value">
-                                        <c:forEach var="option" items="${option}">
-                                            <option value="${option.id}">${option.name}</option>
-                                        </c:forEach>
-                                    </select>
                                 </div>
                             </div>
 

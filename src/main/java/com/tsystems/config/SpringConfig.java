@@ -45,6 +45,7 @@ public class SpringConfig {
         entityManagerFactory.setPackagesToScan("com.tsystems.entities");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactory.setJpaProperties(hibernateProperties());
         return entityManagerFactory;
     }
 

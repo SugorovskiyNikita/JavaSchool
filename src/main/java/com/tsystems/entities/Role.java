@@ -17,13 +17,13 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "role_id")
     private Integer id;
 
     @Column(name = "user_role")
     private String name;
 
-    //@ManyToMany(mappedBy = "roles")
-    //private Set<Customer> customers;
+    @Override
+    public String toString() { return name; }
 
 }

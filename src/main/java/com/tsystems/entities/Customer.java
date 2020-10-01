@@ -57,6 +57,9 @@ public class Customer {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
 
     //@ManyToMany
     //@JoinTable(name = "users_roles", joinColumns = @JoinColumn(

@@ -50,7 +50,6 @@ public class CustomerController {
         return "customersList";
     }
 
-    @Secured("ADMIN")
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute CustomerDto customer) throws WrongOptionConfigurationException {
         customerService.add(customer);

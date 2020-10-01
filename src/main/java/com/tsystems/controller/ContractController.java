@@ -42,7 +42,7 @@ public class ContractController {
     public String creatCustomerPage() {
         return "createCustomer";
     }
-    @Secured("ADMIN")
+
     @GetMapping("/customer/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
@@ -61,17 +61,6 @@ public class ContractController {
         return "redirect:/contracts";
     }
 
-    /*public String updateContract(@ModelAttribute ContractDto contract, HttpServletRequest request) throws WrongOptionConfigurationException {
-        String tariffSt = request.getParameter("tariff");
-        Integer tariffId = Integer.parseInt(tariffSt);
-        String number = request.getParameter("number");
-        Integer contractId = Integer.parseInt(request.getParameter("contract"));
-        String[] optionsIdStr = request.getParameterValues("option");
-        List<Integer> options;
-        options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
-        contractService.updateContract(contractId, tariffId, options, number);
-        return "redirect:/contracts";
-    }*/
 
     @GetMapping("/addContract")
     public String createContract() {

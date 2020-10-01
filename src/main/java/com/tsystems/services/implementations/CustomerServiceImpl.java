@@ -71,4 +71,10 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerDao.loadByKey(key);
         return new CustomerDto(customer).addDependencies(customer);
     }
+
+    @Override
+    public CustomerDto findByEmail(String email) {
+        Customer customer = customerDao.findByEmail(email);
+        return new CustomerDto(customer).addDependencies(customer);
+    }
 }

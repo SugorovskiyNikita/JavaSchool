@@ -63,10 +63,12 @@
                             </select>
                         </div>
                     </div>
-                <label for="number" class="col-sm">Number</label>
+                <br>
+                <label for="number" class="col-sm">Phone number</label>
                     <div class="col-sm">
-                        <input type="number" id="number" class="form-control" name="number" placeholder="Phone number">
+                        <input type="tel" value="+7"  maxlength="12" pattern="^\+7\d{3}\d{7}$" id="number" class="form-control" name="number" placeholder="Phone number">
                     </div>
+                <br>
                 <label for="tariff" class="col-sm">Tariff</label>
                     <div class="col-sm">
                         <div class="controls">
@@ -77,6 +79,7 @@
                             </select>
                         </div>
                     </div>
+                <br>
                 <label for="option" class="col-sm">Options</label>
                     <div class="col-sm">
                         <div class="controls">

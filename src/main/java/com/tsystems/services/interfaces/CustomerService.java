@@ -9,4 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CustomerService extends GenericService<CustomerDto, Integer>{
 
+    CustomerDto findByEmail(String email);
+
 }

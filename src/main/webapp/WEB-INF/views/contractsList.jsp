@@ -19,7 +19,7 @@
 <div class="container target">
 <h1>Contract list</h1>
 <input id='myInput' onkeyup='searchTable()' type='text'>
-<table id = "myTable" class="table table-striped">
+<table id="myTable" class="table table-striped">
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Number</th>
