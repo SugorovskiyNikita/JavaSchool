@@ -68,8 +68,8 @@
 <div class="login">
     <h1>Login</h1>
     <form method="post">
-        <input type="text" name="u" placeholder="Email" required="required" />
-        <input type="password" name="p" placeholder="Password" required="required" />
+        <input type="text" name="username" placeholder="Email" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
     </form>
 </div>

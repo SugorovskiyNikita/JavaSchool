@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalAuthentication
 @ComponentScan("com.tsystems")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -33,14 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/addCustomer").permitAll()
                 .antMatchers("/customers").hasRole("ADMIN")
+                .antMatchers("/tariffs").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/index")
+                .defaultSuccessUrl("/addCustomer")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login");
@@ -49,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        //provider.setPasswordEncoder(passwordEncoder());
+        provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService);
         return provider;
     }

@@ -3,6 +3,7 @@ package com.tsystems.controller;
 import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Role;
 import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
@@ -38,11 +39,19 @@ public class CustomerController {
 
     @GetMapping("/")
     public String index() {
+
         return "createCustomer";
     } //временно для удобства
 
     @GetMapping("/login")
-    public String login() { return "login"; }
+    public String login() {
+        Role role = new Role();
+        Role role1 = new Role();
+        role.setId(2);
+        role.setId(1);
+        System.out.println(role);
+        System.out.println(role1);
+        return "login"; }
 
     @GetMapping("/customers")
     public String getAllCustomers(Model model) {
@@ -74,4 +83,5 @@ public class CustomerController {
         model.addAttribute("customer", customerService.loadByKey(key));
         return "redirect:/customers";
     }
+
 }

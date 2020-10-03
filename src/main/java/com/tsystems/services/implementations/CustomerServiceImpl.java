@@ -1,10 +1,12 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.CustomerDao;
+import com.tsystems.dao.interfaces.RoleDao;
 import com.tsystems.dto.ContractDto;
 import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Role;
 import com.tsystems.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +31,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private  CustomerDao customerDao;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RoleDao roleDao;
+
 
     @Override
     public CustomerDto add(CustomerDto customerDto) {
@@ -47,7 +55,12 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setContracts(contracts);
 
         // NO PASSWORD. Password is created by user with first login
-        customer.setPassword("password");
+        //customer.setPassword("password");
+        customer.setPassword(passwordEncoder.encode("password"));
+
+        //Give role, default "USER"
+        Role role = roleDao.getRoleById(1);
+        customer.setRole(role);
 
         return new CustomerDto(customerDao.add(customer));
     }
@@ -73,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto findByEmail(String email) {
+    public CustomerDto findByEmail(String email) throws Exception {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
     }

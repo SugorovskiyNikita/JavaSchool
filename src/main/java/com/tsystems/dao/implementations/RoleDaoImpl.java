@@ -11,13 +11,14 @@ import javax.persistence.PersistenceContext;
 /**
  * Created by nikita on 01.10.2020.
  */
+@Repository
+public class RoleDaoImpl implements RoleDao {
 
-public class RoleDaoImpl /*implements RoleDao*/ {
+    @PersistenceContext
+    protected EntityManager em;
 
-
-
-    /*@Override
+    @Override
     public Role getRoleById(Integer id) {
         return em.find(Role.class, id);
-    } */
+    }
 }

@@ -13,9 +13,9 @@ import javax.servlet.*;
 /**
  * Created by nikita on 07.09.20.
  */
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer implements WebApplicationInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer /*implements WebApplicationInitializer*/ {
 
-    @Override
+    /*@Override
     public void onStartup(ServletContext servletContext) throws ServletException{
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(SpringConfig.class, WebConfig.class);
@@ -37,7 +37,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         fr.setInitParameter("forceEncoding", "true");
         fr.addMappingForUrlPatterns(null, true, "/*");
 
-    }
+    } */
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

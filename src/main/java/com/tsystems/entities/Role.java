@@ -1,11 +1,8 @@
 package com.tsystems.entities;
 
 import lombok.Data;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
 
 /**
  * Created by nikita on 24.09.2020.
@@ -17,13 +14,14 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "user_role")
-    private String name;
+    @Column(name = "role_name")
+    private String roleName;
 
     @Override
-    public String toString() { return name; }
-
+    public String toString() {
+        return roleName;
+    }
 }

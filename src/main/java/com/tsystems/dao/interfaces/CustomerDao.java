@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerDao extends GenericDao<Customer, Integer> {
 
-    public Customer findByEmail(String email);
+    Customer findByEmail(String email) throws Exception;
 
 }

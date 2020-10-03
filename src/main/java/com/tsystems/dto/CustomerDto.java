@@ -2,6 +2,7 @@ package com.tsystems.dto;
 
 
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Role;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.apache.commons.lang3.ObjectUtils;
@@ -40,6 +41,8 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
 
     private TreeSet<ContractDto> contracts = new TreeSet<>();
 
+    private RoleDto role;
+
     public CustomerDto(){
         /*getId();
         getEmail();
@@ -70,6 +73,7 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
         this.address = entity.getAddress();
         this.email = entity.getEmail();
         this.isBlocked = entity.getIsBlocked();
+        this.password = entity.getPassword();
     }
 
     @Override
@@ -84,6 +88,8 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
         customer.setPassportData(passportData);
         customer.setDateOfBirth(dateOfBirth);
         customer.setAddress(address);
+        customer.setPassword(password);
+        customer.setRole(role.convertToEntity());
         if (contracts != null)
             customer.setContracts(contracts.stream().map(ContractDto::convertToEntity).collect(Collectors.toSet()));
         return customer;

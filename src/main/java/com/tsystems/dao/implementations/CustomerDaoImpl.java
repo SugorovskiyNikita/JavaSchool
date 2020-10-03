@@ -2,8 +2,14 @@ package com.tsystems.dao.implementations;
 
 import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Customer_;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
@@ -13,8 +19,15 @@ import java.util.List;
 public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implements CustomerDao {
 
     @Override
-    public Customer findByEmail(String email) {
-        return em.find(Customer.class, email);
+    public Customer findByEmail(String email) throws Exception {
+
+        TypedQuery<Customer> selectByEmail = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
+                .setParameter("email", email);
+
+        Customer customer = selectByEmail.getSingleResult();
+        if (customer != null) {
+            return customer;
+        } else throw new Exception("No user found bu given login");
     }
 
     @Override

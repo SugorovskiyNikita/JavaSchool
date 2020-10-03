@@ -3,6 +3,7 @@ package com.tsystems.entities;
 
 
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -35,6 +36,7 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
+    @NaturalId
     @Column(name = "email")
     private String email;
 
@@ -61,11 +63,6 @@ public class Customer {
     @JoinColumn(name="role_id")
     private Role role;
 
-    //@ManyToMany
-    //@JoinTable(name = "users_roles", joinColumns = @JoinColumn(
-            //name = "user_id", referencedColumnName = "id"),
-            //inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    //private Set<Role> roles;
 
     public Customer() {
     }
@@ -78,9 +75,6 @@ public class Customer {
         this.isBlocked = isBlocked;
     }
 
-    //public Set<SimpleGrantedAuthority> getAuthorities(){
-        //return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
-    //}
     @Override
     public boolean equals(Object o) {
         if (this == o)

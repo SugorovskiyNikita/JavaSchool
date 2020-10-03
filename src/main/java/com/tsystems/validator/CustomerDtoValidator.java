@@ -3,6 +3,7 @@ package com.tsystems.validator;
 import com.tsystems.dto.CustomerDto;
 import com.tsystems.entities.Customer;
 import com.tsystems.services.interfaces.CustomerService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -23,6 +24,7 @@ public class CustomerDtoValidator implements Validator {
         return Customer.class.equals(aClass);
     }
 
+    @SneakyThrows
     @Override
     public void validate(Object o, Errors errors) {
         CustomerDto customerDto = (CustomerDto) o;
