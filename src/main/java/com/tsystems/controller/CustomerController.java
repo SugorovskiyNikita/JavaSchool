@@ -45,12 +45,6 @@ public class CustomerController {
 
     @GetMapping("/login")
     public String login() {
-        Role role = new Role();
-        Role role1 = new Role();
-        role.setId(2);
-        role.setId(1);
-        System.out.println(role);
-        System.out.println(role1);
         return "login"; }
 
     @GetMapping("/customers")
