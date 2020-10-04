@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="java">
 <head>
@@ -15,13 +16,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
-
-
     <title>Customer Info</title>
 </head>
 <body>
+    <jsp:include page="nevbar.jsp" />
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
@@ -96,10 +95,9 @@
                     </div>
             </form>
         </div>
-
-
     </div>
     <br>
 </div>
+
 </body>
 </html>

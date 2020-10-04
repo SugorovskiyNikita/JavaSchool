@@ -41,7 +41,7 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
 
     private TreeSet<ContractDto> contracts = new TreeSet<>();
 
-    private RoleDto role;
+    private TreeSet<RoleDto> roles = new TreeSet<>();
 
     public CustomerDto(){
         /*getId();
@@ -89,7 +89,8 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
         customer.setDateOfBirth(dateOfBirth);
         customer.setAddress(address);
         customer.setPassword(password);
-        customer.setRole(role.convertToEntity());
+        if (roles != null)
+            customer.setRoles(roles.stream().map(RoleDto::convertToEntity).collect(Collectors.toSet()));
         if (contracts != null)
             customer.setContracts(contracts.stream().map(ContractDto::convertToEntity).collect(Collectors.toSet()));
         return customer;

@@ -4,6 +4,7 @@ import com.tsystems.dao.interfaces.CustomerDao;
 import com.tsystems.dao.interfaces.RoleDao;
 import com.tsystems.dto.ContractDto;
 import com.tsystems.dto.CustomerDto;
+import com.tsystems.dto.RoleDto;
 import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
 import com.tsystems.entities.Role;
@@ -59,8 +60,13 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setPassword(passwordEncoder.encode("password"));
 
         //Give role, default "USER"
-        Role role = roleDao.getRoleById(1);
-        customer.setRole(role);
+        Role role = new RoleDto().convertToEntity();
+        role.setId(1);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        customer.setRoles(roles);
+
+
 
         return new CustomerDto(customerDao.add(customer));
     }

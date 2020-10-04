@@ -2,13 +2,16 @@ package com.tsystems.security;
 
 import com.tsystems.dao.interfaces.RoleDao;
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by nikita on 24.09.2020.
@@ -31,7 +34,11 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(customer.getRole().toString()));
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for (Role role : customer.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+        }
+        return authorities;
     }
 
     @Override

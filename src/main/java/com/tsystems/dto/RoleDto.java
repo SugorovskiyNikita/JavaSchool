@@ -11,12 +11,8 @@ import org.apache.commons.lang3.ObjectUtils;
 public class RoleDto implements DtoMapper<Role>, Comparable<RoleDto> {
 
     private int id;
-    private String roleName;
 
-    @Override
-    public String toString() {
-        return roleName;
-    }
+    private String roleName;
 
     @Override
     public Role convertToEntity() {

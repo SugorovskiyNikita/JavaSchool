@@ -19,15 +19,10 @@ import java.util.List;
 public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implements CustomerDao {
 
     @Override
-    public Customer findByEmail(String email) throws Exception {
-
-        TypedQuery<Customer> selectByEmail = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
-                .setParameter("email", email);
-
-        Customer customer = selectByEmail.getSingleResult();
-        if (customer != null) {
-            return customer;
-        } else throw new Exception("No user found bu given login");
+    public Customer findByEmail(String email) {
+        Customer customer = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
+                .setParameter("email", email).getSingleResult();
+        return customer;
     }
 
     @Override

@@ -59,10 +59,12 @@ public class Customer {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
-    @ManyToOne
-    @JoinColumn(name="role_id")
-    private Role role;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns =
+    @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    inverseJoinColumns =
+    @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 
     public Customer() {
     }
