@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,8 +55,9 @@ public class ContractController {
 
     @PostMapping("/updateContract")
     public String updateContract(@RequestParam("tariff") Integer tariffId,
-                              @RequestParam(value = "usedOptions", required = false) List<Integer> options,
+                              @RequestParam("option") List<Integer> options,
                               @RequestParam("contract") Integer id, @RequestParam("number") String number){
+
         ContractDto entity = contractService.updateContract(id, tariffId, options, number);
 
         return "redirect:/contracts";

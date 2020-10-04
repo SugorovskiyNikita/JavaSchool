@@ -1,6 +1,7 @@
 package com.tsystems.entities;
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -35,6 +36,7 @@ public class Option {
     @Column(name = "description")
     private String description;
 
+    @HashCodeExclude
     @JoinTable(name = "Required_option_relationships", joinColumns = {
             @JoinColumn(name = "id_first", referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "id_second", referencedColumnName = "id")
@@ -42,6 +44,7 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Option> required = new HashSet<>();
 
+    @HashCodeExclude
     @JoinTable(name = "Required_option_relationships", joinColumns = { // By using 'mappedby' there dependencies
             @JoinColumn(name = "id_second", referencedColumnName = "id")}, inverseJoinColumns = {  // will not persist
             @JoinColumn(name = "id_first", referencedColumnName = "id")
@@ -56,6 +59,7 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Option> forbidden = new HashSet<>();
 
+    @HashCodeExclude
     @JoinTable(name = "Possible_options_of_tariffs", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "tariff_id", referencedColumnName = "id", nullable = false)
@@ -63,6 +67,7 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Tariff> possibleTariffsOfOption = new HashSet<>();
 
+    @HashCodeExclude
     @JoinTable(name = "Used_options_of_tariff", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "contract_id", referencedColumnName = "id", nullable = false)

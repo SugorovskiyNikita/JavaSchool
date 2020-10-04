@@ -1,25 +1,33 @@
 package com.tsystems.controller;
 
 import com.tsystems.dto.CustomerDto;
-import com.tsystems.entities.Contract;
 import com.tsystems.entities.Customer;
-import com.tsystems.entities.Role;
-import com.tsystems.entities.Tariff;
+import com.tsystems.security.SecurityUser;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
+import com.tsystems.services.interfaces.IAuthenticationFacade;
 import com.tsystems.services.interfaces.TariffService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityGraph;
+import javax.persistence.Subgraph;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.*;
+
 
 /**
  * Created by nikita on 07.09.20.
@@ -36,6 +44,9 @@ public class CustomerController {
 
     @Autowired
     public ContractService contractService;
+
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
 
     @GetMapping("/")
     public String index() {
@@ -77,5 +88,23 @@ public class CustomerController {
         model.addAttribute("customer", customerService.loadByKey(key));
         return "redirect:/customers";
     }
+
+    @GetMapping("/customer")
+    public String loadCustomer( Model model, Authentication authentication) throws Exception {
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        model.addAttribute("customer", customer);
+
+        return "profile";
+    }
+
+    @GetMapping("/welcome")
+    public String welcome( Model model) throws Exception {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        model.addAttribute("customer", customer);
+
+        return "welcome";
+    }
+
 
 }

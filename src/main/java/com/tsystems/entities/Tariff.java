@@ -1,6 +1,8 @@
 package com.tsystems.entities;
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -29,6 +31,7 @@ public class Tariff {
     @Column(name = "description")
     private String description;
 
+    @HashCodeExclude
     @JoinTable(name = "Possible_options_of_tariffs", joinColumns = {
             @JoinColumn(name = "tariff_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)

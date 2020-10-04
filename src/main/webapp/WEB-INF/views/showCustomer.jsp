@@ -20,7 +20,7 @@
     <title>Customer Info</title>
 </head>
 <body>
-    <jsp:include page="nevbar.jsp" />
+    <jsp:include page="navbarCustomer.jsp" />
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
@@ -82,9 +82,9 @@
                 <label for="option" class="col-sm">Options</label>
                     <div class="col-sm">
                         <div class="controls">
-                            <select required id="option" style="width: 100%" name="option[]" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
+                            <select required id="option" style="width: 100%" name="option" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
                                 <c:forEach var="option" items="${option}">
-                                    <option value="${option.id}">${option.name}</option>
+                                    <option name="option" value="${option.id}">${option.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

@@ -2,6 +2,8 @@ package com.tsystems.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -30,14 +32,17 @@ public class Contract {
     @Column(name = "balance")
     private BigDecimal balance;
 
+    @ToStringExclude
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "customer")
     private Customer customer;
+
 
     @ManyToOne
     @JoinColumn(name = "tariff")
     private Tariff tariff;
 
+    @HashCodeExclude
     @JoinTable(name = "Used_options_of_tariff", joinColumns = {
             @JoinColumn(name = "contract_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)

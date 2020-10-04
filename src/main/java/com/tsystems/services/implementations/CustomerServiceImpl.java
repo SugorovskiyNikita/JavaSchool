@@ -92,7 +92,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto findByEmail(String email) throws Exception {
+    public CustomerDto findByEmail(String email) {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
     }

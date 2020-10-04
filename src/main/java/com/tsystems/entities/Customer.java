@@ -3,6 +3,8 @@ package com.tsystems.entities;
 
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.HashCodeExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,9 +58,12 @@ public class Customer {
     @Column(name = "is_blocked")
     private Integer isBlocked;
 
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
+
+    @HashCodeExclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns =
     @JoinColumn(name = "user_id", referencedColumnName = "id"),
