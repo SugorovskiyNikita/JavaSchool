@@ -44,13 +44,6 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Option> required = new HashSet<>();
 
-    @HashCodeExclude
-    @JoinTable(name = "Required_option_relationships", joinColumns = { // By using 'mappedby' there dependencies
-            @JoinColumn(name = "id_second", referencedColumnName = "id")}, inverseJoinColumns = {  // will not persist
-            @JoinColumn(name = "id_first", referencedColumnName = "id")
-    })
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    private Set<Option> requiredMe = new HashSet<>();
 
     @JoinTable(name = "Forbidden_option_relationships", joinColumns = {
             @JoinColumn(name = "id_first", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
@@ -90,32 +83,23 @@ public class Option {
         this.description = description;
     }
 
-    public void addRequiredFromOptions(Option option) {
-        this.getRequired().add(option);
+
+    public Set<Option> getRequired() {
+        return required;
     }
 
-    public void addRequiredMeOptions(Option option) {
-        this.getRequiredMe().add(option);
+    public void setRequired(Set<Option> required) {
+        this.required = required;
     }
 
-    public void addForbiddenWithOptions(Option option) {
-        this.getForbidden().add(option);
-        option.getForbidden().add(this);
+    public Set<Option> getForbidden() {
+        return forbidden;
     }
 
-    public void addRequiredFromOptions(Set<Option> options) {
-        this.getRequired().addAll(options);
+    public void setForbidden(Set<Option> forbidden) {
+        this.forbidden = forbidden;
     }
 
-    public void addRequiredMeOptions(Set<Option> options) {
-        this.getRequiredMe().addAll(options);
-    }
-
-    public void addForbiddenWithOptions(Set<Option> options) {
-        this.getForbidden().addAll(options);
-        for (Option opt : options)
-            opt.getForbidden().add(this);
-    }
 
     @Override
     public int hashCode() {

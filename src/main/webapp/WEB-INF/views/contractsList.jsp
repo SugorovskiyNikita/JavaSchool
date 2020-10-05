@@ -21,21 +21,26 @@
 <input id='myInput' onkeyup='searchTable()' type='text'>
 <table id="myTable" class="table table-striped">
     <tr>
-        <th scope="col">Id</th>
+        <th scope="col">Contract Id</th>
         <th scope="col">Number</th>
-        <th scope="col">Balance</th>
         <th scope="col">Is Blocked</th>
+        <!--<th scope="col">Customer id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>-->
+
+
     </tr>
     <c:forEach items="${contracts}" var="contract">
         <tr>
+
             <td>${contract.id}</td>
             <td>${contract.number}</td>
-            <td>${contract.balance}</td>
             <td>${contract.isBlocked}</td>
             <td><button type="button" class="btn btn-dark"><a id="link1" href="/delete/${contract.id}">Delete</a></button></td>
             <td><button type="button" class="btn btn-dark"><a id="link2" href="/update/${contract.id}">Edit</a></button></td>
         </tr>
     </c:forEach>
+
 </table>
 <button type="button" class="btn btn-success" ><a id="link" href="/addCustomer">Add new Customer</a></button>
 </div>

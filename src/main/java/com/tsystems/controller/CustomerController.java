@@ -1,12 +1,13 @@
 package com.tsystems.controller;
 
+import com.tsystems.dao.interfaces.OptionDao;
+import com.tsystems.dto.ContractDto;
 import com.tsystems.dto.CustomerDto;
+import com.tsystems.dto.OptionDto;
 import com.tsystems.entities.Customer;
+import com.tsystems.entities.Option;
 import com.tsystems.security.SecurityUser;
-import com.tsystems.services.interfaces.ContractService;
-import com.tsystems.services.interfaces.CustomerService;
-import com.tsystems.services.interfaces.IAuthenticationFacade;
-import com.tsystems.services.interfaces.TariffService;
+import com.tsystems.services.interfaces.*;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,12 @@ public class CustomerController {
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
+    @Autowired
+    private OptionService optionService;
+
+    @Autowired
+    private OptionDao optionDao;
+
     @GetMapping("/")
     public String index() {
 
@@ -58,8 +65,9 @@ public class CustomerController {
     public String login() {
         return "login"; }
 
-    @GetMapping("/customers")
-    public String getAllCustomers(Model model) {
+
+        @GetMapping("/admin/customers")
+        public String getAllCustomers(Model model) {
         model.addAttribute("customers", customerService.loadAll());
         return "customersList";
     }
@@ -93,7 +101,6 @@ public class CustomerController {
     public String loadCustomer( Model model, Authentication authentication) throws Exception {
         CustomerDto customer = customerService.findByEmail(authentication.getName());
         model.addAttribute("customer", customer);
-
         return "profile";
     }
 
@@ -102,8 +109,30 @@ public class CustomerController {
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
         model.addAttribute("customer", customer);
-
         return "welcome";
+    }
+
+    @GetMapping("/changeTariff")
+    public String changeTariff(Model model) throws Exception {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        ContractDto contract = customer.getContracts().first();
+        model.addAttribute("tariffs", tariffService.loadAll());
+        model.addAttribute("customer", customer);
+        model.addAttribute("contract", contract);
+        return "changeTariff";
+    }
+
+    @GetMapping("/changeOption")
+    public String changeOption(Model model) throws Exception {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        ContractDto contract = customer.getContracts().first();
+        model.addAttribute("tariffs", tariffService.loadAll());
+        model.addAttribute("customer", customer);
+        model.addAttribute("contract", contract);
+        model.addAttribute("option", optionService.loadAll());
+        return "changeOption";
     }
 
 

@@ -1,6 +1,7 @@
 package com.tsystems.services.interfaces;
 
 import com.tsystems.dto.OptionDto;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
  */
 @Service
 public interface OptionService extends GenericService<OptionDto, Integer> {
-
+   OptionDto addNew(OptionDto newOption, List<Integer> requiredFromId, List<Integer> forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException;
 }

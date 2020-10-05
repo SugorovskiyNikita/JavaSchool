@@ -18,12 +18,28 @@ import java.util.List;
 @Repository
 public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implements CustomerDao {
 
-    @Override
+    /*@Override
     public Customer findByEmail(String email) {
         Customer customer = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
                 .setParameter("email", email).getSingleResult();
         return customer;
-    }
+    }*/
+
+    @Override
+    public Customer findByEmail(String email) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+        Root<Customer> root = criteriaQuery.from(Customer.class);
+        criteriaQuery
+                .select(root)
+                .where(criteriaBuilder.equal(root.get(Customer_.email), email));
+        TypedQuery<Customer> selectByLogin = em.createQuery(criteriaQuery);
+
+        Customer customer = selectByLogin.getSingleResult();
+        return customer;
+
+
+}
 
     @Override
     public Customer add(Customer customer) {

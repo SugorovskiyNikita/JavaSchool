@@ -1,8 +1,10 @@
 package com.tsystems.services.implementations;
 
 import com.tsystems.dao.interfaces.OptionDao;
+import com.tsystems.dao.interfaces.TariffDao;
 import com.tsystems.dto.OptionDto;
 import com.tsystems.entities.Option;
+import com.tsystems.entities.Tariff;
 import com.tsystems.services.interfaces.OptionService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,50 +23,53 @@ import java.util.stream.Collectors;
 @Transactional
 public class OptionServiceImpl implements OptionService {
 
-    private final OptionDao optionDao;
+    @Autowired
+    private OptionDao optionDao;
 
     @Autowired
-    public OptionServiceImpl(OptionDao optionDao) {
-        this.optionDao = optionDao;
+    private TariffDao tariffDao;
+
+
+    @Override
+    public OptionDto addNew(OptionDto newOption, List<Integer> requiredFromId, List<Integer> forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException {
+
+        Option option = newOption.convertToEntity();
+
+        Set<Option> requireds = new HashSet<>();
+        if (requiredFromId != null) {
+            for (Integer id : requiredFromId) {
+                Option opt = optionDao.loadByKey(id);
+                requireds.add(opt);
+            }
+        }
+
+        Set<Option> forbiddens = new HashSet<>();
+        if (forbiddenWithId != null) {
+            for (Integer id : forbiddenWithId) {
+                Option opt = optionDao.loadByKey(id);
+                forbiddens.add(opt);
+            }
+        }
+
+        option.setRequired(requireds);
+        option.setForbidden(forbiddens);
+
+        Set<Tariff> tariffs = new HashSet<>();
+        if (forTariffsId != null) {
+            for (Integer id : forTariffsId) {
+                Tariff tar = tariffDao.loadByKey(id);
+                tariffs.add(tar);
+            }
+        }
+        option.setPossibleTariffsOfOption(tariffs);
+
+        Option saved = optionDao.add(option);
+        return new OptionDto(saved);
     }
 
     @Override
-    public OptionDto add(OptionDto entity) throws WrongOptionConfigurationException {
-
-        Option option = entity.convertToEntity();
-
-        Set<Option> requireds = option.getRequired().stream()
-                .map(e -> optionDao.loadByKey(e.getId())).collect(Collectors.toSet());
-        Set<Option> forbiddens = option.getForbidden().stream()
-                .map(e -> optionDao.loadByKey(e.getId())).collect(Collectors.toSet());
-
-        option.setRequired(new HashSet<>());
-        option.setForbidden(new HashSet<>());
-
-        for (Option req : requireds) {
-            option.addRequiredFromOptions(req);
-            option.addRequiredFromOptions(req.getForbidden());
-            option.addForbiddenWithOptions(req.getForbidden());
-
-            if (forbiddens.contains(req))
-                throw new WrongOptionConfigurationException(1);
-            if (req.getForbidden().stream().anyMatch(requireds::contains))
-                throw new WrongOptionConfigurationException(2);
-            if (req.getRequired().stream().anyMatch(forbiddens::contains))
-                throw new WrongOptionConfigurationException(3);
-        }
-
-        for (Option forb : forbiddens) {
-            option.addForbiddenWithOptions(forb);
-            option.addForbiddenWithOptions(forb.getRequiredMe());
-
-            // This case exists already in required for block, but let it be
-            if (forb.getRequiredMe().stream().anyMatch(requireds::contains))
-                throw new WrongOptionConfigurationException(3);
-        }
-
-        Option saved = optionDao.add(option);
-        return new OptionDto(saved).addDependencies(saved);
+    public OptionDto add(OptionDto entityDto) throws WrongOptionConfigurationException {
+        return null;
     }
 
     @Override

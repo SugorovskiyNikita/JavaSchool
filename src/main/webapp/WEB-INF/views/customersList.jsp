@@ -26,6 +26,7 @@
         <th scope="col">Surname</th>
         <th scope="col">Email</th>
         <th scope="col">Is Blocked</th>
+        <th scope="col">Contract Id</th>
     </tr>
     <c:forEach items="${customers}" var="customer">
         <tr>
@@ -34,6 +35,9 @@
             <td>${customer.surname}</td>
             <td>${customer.email}</td>
             <td>${customer.isBlocked}</td>
+            <c:forEach var="contract" items="${customer.contracts}">
+            <td>${contract.id}</td>
+            </c:forEach>
             <td><button type="button" class="btn btn-dark"><a id="link1" href="/delete/${customer.id}">Delete</a></button></td>
             <td><button type="button" class="btn btn-dark"><a id="link2" href="/update/${customer.id}">Edit</a></button></td>
         </tr>

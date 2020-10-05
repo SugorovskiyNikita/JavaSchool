@@ -44,13 +44,8 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
     public OptionDto addDependencies(Option option) {
         if (option == null)
             return this;
-
         if (option.getRequired() != null)
             requiredFrom = option.getRequired().stream()
-                    .map(OptionDto::new)
-                    .collect(Collectors.toCollection(TreeSet::new));
-        if (option.getRequiredMe() != null)
-            requiredMe = option.getRequiredMe().stream()
                     .map(OptionDto::new)
                     .collect(Collectors.toCollection(TreeSet::new));
         if (option.getForbidden() != null)
@@ -70,8 +65,6 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
         Option option = new Option(id, name, cost, connectCost, description);
         if (requiredFrom != null)
             option.setRequired(requiredFrom.stream().map(OptionDto::convertToEntity).collect(Collectors.toSet()));
-        if (requiredMe != null)
-            option.setRequiredMe(requiredMe.stream().map(OptionDto::convertToEntity).collect(Collectors.toSet()));
         if (forbiddenWith != null)
             option.setForbidden(forbiddenWith.stream().map(OptionDto::convertToEntity).collect(Collectors.toSet()));
         if (possibleTariffsOfOption != null)

@@ -29,9 +29,6 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private ContractDao contractDao;
 
-    @Autowired
-    private TariffDao tariffDao;
-
     @Override
     public ContractDto add(ContractDto contractDto) {
         // Create new contract. Default balance on new contract == 100 and non blocked
@@ -59,7 +56,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public ContractDto setBlock(Integer id, Integer blockLevel) {
-        return null;
+        Contract contract = contractDao.loadByKey(id);
+        contract.setIsBlocked(blockLevel);
+        return new ContractDto(contract);
     }
 
     @Override
@@ -120,4 +119,5 @@ public class ContractServiceImpl implements ContractService {
         // Return contract DTO object with dependencies
         return new ContractDto(contract).addDependencies(contract);
     }
+
 }

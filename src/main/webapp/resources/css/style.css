@@ -1,0 +1,97 @@
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input {
+    margin-top: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin button {
+    margin-top: 10px;
+}
+
+.form-signup {
+    max-width: 650px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+
+.has-error {
+    color: red
+}
+
+.outer-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 30px 40px 30px;
+    margin: 15px auto;
+}
+
+
+.inner-wrapper-error {
+    padding: 20px 30px;
+    background: rgba(255, 232, 232, 0.52);
+    box-shadow: inset 0 0 15px rgba(255,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top-color: rgba(255,255,255,0.4);
+    border-bottom-color: rgba(0,0,0,0.4);
+    color: #C90000;
+}
+
+.inner-wrapper-error:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.inner-wrapper-success {
+    padding: 20px 30px;
+    background: rgba(216, 255, 213, 0.38);
+    box-shadow: inset 0 0 15px rgba(0,255,0,0.4);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top-color: rgba(255,255,255,0.4);
+    border-bottom-color: rgba(0,0,0,0.4);
+    color: #008d47;
+}
+
+.inner-wrapper-success:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.header-background {
+    background: #e20074;
+}
+
+.footer-background {
+    background: #000000;
+}

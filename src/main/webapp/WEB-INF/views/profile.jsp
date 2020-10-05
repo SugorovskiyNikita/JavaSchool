@@ -76,8 +76,8 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="container text-center">
-                <button type="button" class="btn btn-success btn-lg">Tariffs</button>
-                <button type="button" class="btn btn-warning btn-lg">Options</button>
+                <button type="button" class="btn btn-success btn-lg"><a id="link" href="/changeTariff">Tariffs</a></button>
+                <button type="button" class="btn btn-warning btn-lg"><a id="link1" href="/changeOption">Options</a></button>
                 <button type="button" class="btn btn-danger btn-lg">Block</button>
                 <button type="button" class="btn btn-info btn-lg">Unblock</button>
             </div>
