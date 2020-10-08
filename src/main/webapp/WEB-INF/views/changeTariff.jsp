@@ -9,13 +9,14 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link href="/resources/css/bootstrap.css" rel="stylesheet">
+    <link href="/resources/css/style.css" type="text/css" rel="stylesheet">
     <title>Step 1. Choose tariff</title>
 </head>
 <body>
-
+<jsp:include page="navbarCustomer.jsp"/>
 <div class="outer-wrapper">
 
-    <jsp:include page="navbarCustomer.jsp"/>
 
     <div class="container">
 
@@ -47,7 +48,7 @@
                     Title
                 </th>
                 <th>
-                    Price
+                    Cost
                 </th>
             </tr>
             <c:forEach var="tariff" items="${tariffs}">

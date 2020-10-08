@@ -4,6 +4,7 @@ import com.tsystems.dao.interfaces.OptionDao;
 import com.tsystems.dto.ContractDto;
 import com.tsystems.dto.CustomerDto;
 import com.tsystems.dto.OptionDto;
+import com.tsystems.dto.RoleDto;
 import com.tsystems.entities.Customer;
 import com.tsystems.entities.Option;
 import com.tsystems.security.SecurityUser;
@@ -53,12 +54,15 @@ public class CustomerController {
     private OptionService optionService;
 
     @Autowired
+    private RoleService roleService;
+
+    @Autowired
     private OptionDao optionDao;
 
     @GetMapping("/")
     public String index() {
 
-        return "createCustomer";
+        return "index";
     } //временно для удобства
 
     @GetMapping("/login")

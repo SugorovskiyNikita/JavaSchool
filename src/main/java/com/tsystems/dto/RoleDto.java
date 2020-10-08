@@ -1,18 +1,25 @@
 package com.tsystems.dto;
 
+import com.tsystems.entities.Option;
 import com.tsystems.entities.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Created by nikita on 03.10.2020.
  */
 @Data
+@NoArgsConstructor
 public class RoleDto implements DtoMapper<Role>, Comparable<RoleDto> {
 
     private int id;
 
     private String roleName;
+
+    public RoleDto(Role role) {
+        convertToDto(role);
+    }
 
     @Override
     public Role convertToEntity() {

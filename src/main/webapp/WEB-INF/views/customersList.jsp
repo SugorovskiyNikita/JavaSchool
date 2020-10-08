@@ -30,7 +30,7 @@
     </tr>
     <c:forEach items="${customers}" var="customer">
         <tr>
-            <td><a href="/customer/${customer.id}">${customer.id}</a></td>
+            <td><a href="/customer">${customer.id}</a></td>
             <td>${customer.name}</td>
             <td>${customer.surname}</td>
             <td>${customer.email}</td>

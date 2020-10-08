@@ -1,7 +1,8 @@
 package com.tsystems.controller;
 
 import com.tsystems.dto.ContractDto;
-import com.tsystems.entities.Tariff;
+import com.tsystems.dto.CustomerDto;
+import com.tsystems.services.implementations.AuthenticationFacade;
 import com.tsystems.services.interfaces.ContractService;
 import com.tsystems.services.interfaces.CustomerService;
 import com.tsystems.services.interfaces.OptionService;
@@ -9,17 +10,14 @@ import com.tsystems.services.interfaces.TariffService;
 import com.tsystems.util.exceptions.ResourceNotFoundException;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 /**
@@ -40,6 +38,9 @@ public class ContractController {
 
     @Autowired
     public OptionService optionService;
+
+    @Autowired
+    public AuthenticationFacade authenticationFacade;
 
     @GetMapping("/addCustomer")
     public String creatCustomerPage() {
@@ -78,7 +79,6 @@ public class ContractController {
         return "redirect:/customers";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/contracts")
     public String getAllContracts(Model model) {
         model.addAttribute("contracts", contractService.loadAll());
@@ -86,9 +86,19 @@ public class ContractController {
         return "contractsList";
     }
 
-    @PostMapping("/{id}/block")
-    @Secured("ROLE_USER")
-    public void block(@PathVariable Integer id, HttpServletRequest request) throws ResourceNotFoundException {
+    @GetMapping("/contractsCustomer")
+    public String getAllContractsCustomer(Model model) throws Exception {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        model.addAttribute("customer", customer);
+        return "contracts";
+    }
+
+
+
+    @PostMapping("/block")
+    public String block( HttpServletRequest request) throws ResourceNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("contractId"));
         int blockLevel;
         if (request.isUserInRole("ROLE_ADMIN")) { // Check with block level must be set
             blockLevel = 2; // Blocked by T-mobile
@@ -99,6 +109,25 @@ public class ContractController {
         if (entity.getId() == null) {
             throw new ResourceNotFoundException("contract", id);
         }
+        return "redirect:/customer";
+    }
+
+    @PostMapping("/unblock")
+    public String unblock( HttpServletRequest request) throws ResourceNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("contractId"));
+        ContractDto contractDto = contractService.loadByKey(id);
+        if (contractDto == null) {
+            throw new ResourceNotFoundException("contract", id);
+        }
+
+        if (!request.isUserInRole("ROLE_ADMIN") && contractDto.getIsBlocked() == 2)
+            return "";
+
+        ContractDto entity = contractService.setBlock(id, 0);
+        if (entity.getId() == null) {
+            throw new ResourceNotFoundException("contract", id);
+        }
+        return "redirect:/customer";
     }
 
 }

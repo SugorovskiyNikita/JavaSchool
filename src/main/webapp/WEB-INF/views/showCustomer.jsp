@@ -63,9 +63,18 @@
                         </div>
                     </div>
                 <br>
-                <label for="number" class="col-sm">Phone number</label>
+                <label class="col-sm">Phone number</label>
                     <div class="col-sm">
-                        <input type="tel" value="+7"  maxlength="12" pattern="^\+7\d{3}\d{7}$" id="number" class="form-control" name="number" placeholder="Phone number">
+                        <input id="number" name="number">
+                        <script>
+                            function getRandomTel() {
+                                var m = "+7999";
+                                var x = m + (Math.floor(Math.random() * 10000000));
+                                return x;
+                            }
+                                document.getElementById('number').value = getRandomTel()
+
+                        </script>
                     </div>
                 <br>
                 <label for="tariff" class="col-sm">Tariff</label>
@@ -73,7 +82,7 @@
                         <div class="controls">
                             <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
                                 <c:forEach var="tariff" items="${tariff}">
-                                    <option value="${tariff.id}">${tariff.name}</option>
+                                    <option value="${tariff.id}">${tariff.name}
                                 </c:forEach>
                             </select>
                         </div>
@@ -83,8 +92,8 @@
                     <div class="col-sm">
                         <div class="controls">
                             <select required id="option" style="width: 100%" name="option" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
-                                <c:forEach var="option" items="${option}">
-                                    <option name="option" value="${option.id}">${option.name}</option>
+                                <c:forEach items="${option}" var="option">
+                                    <option value="${option.id}" >${option.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
