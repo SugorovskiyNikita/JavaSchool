@@ -97,7 +97,7 @@
 
                                 if($("#box${option.id}").is(":checked")) {
 
-                                    <c:if test="${option.dependentOptions.size() != 0}">
+                                    <c:if test="${option. != 0}">
 
                                     <c:forEach items="${option.dependentOptions}" var="dependentOption">
                                     $("#box${dependentOption.id}").attr("disabled", true);

@@ -113,14 +113,12 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${contract.isBlocked == 2  == true}">
+                                    <c:when test="${contract.isBlocked  >= 1  == true}">
                                         <form:form id="unblock${contract.id}" method="POST"
                                                    action="/unblock"
                                                    enctype="application/x-www-form-urlencoded">
                                             <input type="text" hidden name="contractId" value=${contract.id}>
-                                            <c:forEach var="role" items="${customer.roles}">
-                                                <input type="hidden" name="sessionRole" value="${role.roleName}">
-                                            </c:forEach>
+
                                     <button type="button" class="btn btn-success btn-sm"><a class="inline-link-unlock" title="Unblock contract" href="#"
                                                onclick="document.forms['unblock${contract.id}'].submit()">Unblock</a>
                                         </form:form>
@@ -131,9 +129,7 @@
                                                    action="/block"
                                                    enctype="application/x-www-form-urlencoded">
                                             <input type="text" hidden name="contractId" value=${contract.id}>
-                                    <c:forEach var="role" items="${customer.roles}">
-                                        <input type="hidden" name="sessionRole" value="${role.roleName}">
-                                    </c:forEach>
+
                                     <button type="button" class="btn btn-danger btn-sm"><a class="inline-link-lock" title="Block contract" href="#"
                                                onclick="document.forms['block${contract.id}'].submit()">Block</a>
                                         </form:form>

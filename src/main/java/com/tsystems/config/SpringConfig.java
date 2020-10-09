@@ -22,7 +22,7 @@ import java.util.Properties;
  * Created by nikita on 07.09.20.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tsystems.services", "com.tsystems.dao"})
+@ComponentScan(basePackages = {"com.tsystems.bussiness.services", "com.tsystems.db.dao"})
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
 public class SpringConfig {
@@ -42,7 +42,7 @@ public class SpringConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 
         entityManagerFactory.setDataSource(getDataSource());
-        entityManagerFactory.setPackagesToScan("com.tsystems.entities");
+        entityManagerFactory.setPackagesToScan("com.tsystems.db.entities");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setJpaProperties(hibernateProperties());

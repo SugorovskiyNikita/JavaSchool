@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
 
 /**
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.view.ResourceBundleViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.tsystems.controller")
+@ComponentScan("com.tsystems.bussiness.controller")
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

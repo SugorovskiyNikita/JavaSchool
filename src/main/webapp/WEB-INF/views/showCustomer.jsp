@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="/resources/js/showC.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -80,7 +81,7 @@
                 <label for="tariff" class="col-sm">Tariff</label>
                     <div class="col-sm">
                         <div class="controls">
-                            <select required id="tariff" name="tariff" class="form-control" onchange="this.value">
+                            <select required id="tariff" size="1" name="tariff" class="form-control" onchange="this.value">
                                 <c:forEach var="tariff" items="${tariff}">
                                     <option value="${tariff.id}">${tariff.name}
                                 </c:forEach>
@@ -88,20 +89,24 @@
                         </div>
                     </div>
                 <br>
+                <br>
                 <label for="option" class="col-sm">Options</label>
                     <div class="col-sm">
                         <div class="controls">
-                            <select required id="option" style="width: 100%" name="option" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
-                                <c:forEach items="${option}" var="option">
-                                    <option value="${option.id}" >${option.name}</option>
-                                </c:forEach>
-                            </select>
+                            <c:forEach items="${option}" var="options">
+                            <label class="custom-control custom-checkbox" id="option">
+                                <input type="checkbox" class="custom-control-input" value="${options.id}">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">${options.name}</span>
+                            </label>
+                            </c:forEach>
+                            </div>
                         </div>
                     <br>
                             <button type="submit" class="btn btn-primary">
                                 Update contract
                             </button>
-                    </div>
+
             </form>
         </div>
     </div>
