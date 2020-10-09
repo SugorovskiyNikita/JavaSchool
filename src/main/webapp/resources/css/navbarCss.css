@@ -1,11 +1,22 @@
 #nav {
-    background-color: #892276;
+    background-color: #e30074;
     color: #F4EEE8;
 }
 #navi {
-    background-color: #892276;
+    background-color: #e30074;
 
 }
-href {
-    color: #F4EEE8;
+a {
+      color: #ebebeb;
+}
+
+html, body {
+    ᅠᅠheight: 100%;
+}
+body {
+    ᅠᅠdisplay: flex;
+    ᅠᅠflex-direction: column;
+}
+.content {
+    ᅠᅠflex: 1 0 auto;
 }

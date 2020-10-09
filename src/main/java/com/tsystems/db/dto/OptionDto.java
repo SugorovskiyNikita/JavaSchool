@@ -5,6 +5,8 @@ import lombok.Data;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -24,10 +26,10 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
 
     private String description;
 
-    private TreeSet<OptionDto> requiredFrom = new TreeSet<>();
-    private TreeSet<OptionDto> requiredMe = new TreeSet<>();
-    private TreeSet<OptionDto> forbiddenWith = new TreeSet<>();
-    private TreeSet<TariffDto> possibleTariffsOfOption = new TreeSet<>();
+    private Set<OptionDto> requiredFrom = new HashSet<>();
+    private Set<OptionDto> requiredMe = new HashSet<>();
+    private Set<OptionDto> forbiddenWith = new HashSet<>();
+    private Set<TariffDto> possibleTariffsOfOption = new HashSet<>();
 
     public OptionDto() {
     }
@@ -47,15 +49,15 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
         if (option.getRequired() != null)
             requiredFrom = option.getRequired().stream()
                     .map(OptionDto::new)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
         if (option.getForbidden() != null)
             forbiddenWith = option.getForbidden().stream()
                     .map(OptionDto::new)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
         if (option.getPossibleTariffsOfOption() != null)
             possibleTariffsOfOption = option.getPossibleTariffsOfOption().stream()
                     .map(TariffDto::new)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
 
         return this;
     }

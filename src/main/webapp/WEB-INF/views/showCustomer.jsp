@@ -5,7 +5,7 @@
 <html lang="java">
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -14,14 +14,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
     <title>Customer Info</title>
 </head>
 <body>
-    <jsp:include page="navbarCustomer.jsp" />
+<jsp:include page="navbarCustomer.jsp" />
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
@@ -54,59 +52,72 @@
             <form name="customer" action="/updateContract" method="post">
 
                 <label for="contract" class="col-sm">Contract</label>
-                    <div class="col-sm">
-                        <div class="controls">
-                            <select required id="contract" name="contract" class="form-control" onchange="this.value">
-                                <c:forEach var="contracts" items="${customer.contracts}">
-                                    <option value="${contracts.id}">${contracts.id}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                <div class="col-sm">
+                    <div class="controls">
+                        <select required id="contract" size="1" name="contract" class="form-control" onchange="this.value">
+                            <c:forEach var="contracts" items="${customer.contracts}">
+                                <option value="${contracts.id}">${contracts.id}</option>
+                            </c:forEach>
+                        </select>
                     </div>
+                </div>
                 <br>
                 <label class="col-sm">Phone number</label>
-                    <div class="col-sm">
-                        <input id="number" name="number">
-                        <script>
-                            function getRandomTel() {
-                                var m = "+7999";
-                                var x = m + (Math.floor(Math.random() * 10000000));
-                                return x;
-                            }
-                                document.getElementById('number').value = getRandomTel()
-
-                        </script>
-                    </div>
+                <div class="col-sm">
+                    <input id="number" name="number">
+                    <script>
+                        function getRandomTel() {
+                            var m = "+7999";
+                            var x = m + (Math.floor(Math.random() * 10000000));
+                            return x;
+                        }
+                        document.getElementById('number').value = getRandomTel()
+                    </script>
+                </div>
                 <br>
                 <label for="tariff" class="col-sm">Tariff</label>
-                    <div class="col-sm">
-                        <div class="controls">
-                            <select required id="tariff" size="1" name="tariff" class="form-control" onchange="this.value">
-                                <c:forEach var="tariff" items="${tariff}">
-                                    <option value="${tariff.id}">${tariff.name}
+                <div class="col-sm">
+                    <div class="controls">
+                        <select required id="tariff" size="1" name="tariff" class="form-control" onchange="this.value">
+                            <c:forEach var="tariff" items="${tariff}">
+                            <option value="${tariff.id}">${tariff.name}
                                 </c:forEach>
-                            </select>
-                        </div>
+                        </select>
                     </div>
+                </div>
                 <br>
                 <br>
                 <label for="option" class="col-sm">Options</label>
-                    <div class="col-sm">
-                        <div class="controls">
-                            <c:forEach items="${option}" var="options">
+                <div class="col-sm">
+                    <div class="controls" id="options-area">
+                        <c:forEach items="${option}" var="options">
                             <label class="custom-control custom-checkbox" id="option">
-                                <input type="checkbox" class="custom-control-input" value="${options.id}">
+                                <input type="checkbox" name="option" class="custom-control-input" value="${options.id}" onclick="checkPossibleOptions(${options.id}, ${options.forbiddenWith})">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">${options.name}</span>
                             </label>
-                            </c:forEach>
-                            </div>
-                        </div>
-                    <br>
-                            <button type="submit" class="btn btn-primary">
-                                Update contract
-                            </button>
-
+                        </c:forEach>
+                    </div>
+                </div>
+                <script>
+                    function checkPossibleOptions(id, forbiddenOptions) {
+                        let optionsArea = document.getElementById('options-area');
+                        let optionsInputs = optionsArea.getElementsByTagName('input');
+                        let forbid = forbiddenOptions.indexOf(optionsInputs);
+                        console.log(optionsInputs);
+                        for (let i = 0; i < optionsInputs.length; i++) {
+                            if(forbid.indexOf(optionsInputs[i].value)) {
+                            optionsInputs[i].setAttribute("disabled", true);
+                            } else {
+                                optionsInputs[i].setAttribute("disabled", false);
+                            }
+                        }
+                    }
+                </script>
+                <br>
+                <button type="submit" class="btn btn-primary">
+                    Update contract
+                </button>
             </form>
         </div>
     </div>

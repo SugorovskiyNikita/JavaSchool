@@ -14,11 +14,12 @@
     <title>Login</title>
 </head>
 <body>
+</div>
 <div class="container-fluid h-100">
     <div class="row justify-content-center align-items-center h-100">
         <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
             <div  align="center">
-                <h1 id="first" class="alert">T-mobile</h1>
+                <h1 id="first" class="alert" style="color: #e30876">T-mobile</h1>
             </div>
             <form method="post">
                 <div class="form-group">

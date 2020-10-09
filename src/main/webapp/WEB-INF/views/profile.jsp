@@ -7,23 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <style>
-
-        .btn {
-            margin: 5px;
-        }
-
-        .btn-circle {
-            width: 72px;
-            height: 72px;
-            border-radius: 48px;
-            text-align: center;
-            padding-left: 0;
-            padding-right: 0;
-            font-size: 16px;
-            white-space: normal;
-        }
-    </style>
-    <style>
     .btn {
         margin: 0 5px;
     }
@@ -62,12 +45,7 @@
             </ul>
         </div>
         <div class="col-sm-4">
-            <!--left col-->
-            <ul class="list-group">
-                <button type="button" class="btn btn-info btn-lg"><a  href="/contractsCustomer">Contracts</a></button>
-                <button type="button" class="btn btn-success btn-lg"><a  href="/changeTariff">Tariffs</a></button>
-                <button type="button" class="btn btn-warning btn-lg"><a  href="/changeOption">Options</a></button>
-            </ul>
+            <img src="https://i.ytimg.com/vi/dMTWsWPPZ8w/maxresdefault.jpg" height="200">
         </div>
     </div>
     <br>
@@ -90,10 +68,10 @@
                             <td>${contract.id}</td>
                             <td>
                                 <form:form id="viewContractForm${contract.id}" method="POST"
-                                           action="${contextPath}/client/viewContract/"
+                                           action="/viewContract"
                                            enctype="application/x-www-form-urlencoded">
                                     <input type="hidden" name="contractId" value=${contract.id}>
-                                    <a href="#"
+                                    <a href="#" style="color: #e30876"
                                        onclick="document.forms['viewContractForm${contract.id}'].submit()">${contract.number}</a>
                                 </form:form>
                             </td>
@@ -143,16 +121,6 @@
 
         </div>
         </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="container text-center">
-                <!--<button type="button" class="btn btn-success btn-lg"><a id="link" href="/changeTariff">Tariffs</a></button>
-                <button type="button" class="btn btn-warning btn-lg"><a id="link1" href="/changeOption">Options</a></button>
-                <button type="button" class="btn btn-danger btn-lg">Block</button>
-                <button type="button" class="btn btn-info btn-lg">Unblock</button>-->
-            </div>
-            </div>
-    </div>
     </div>
 </div>
 </body>

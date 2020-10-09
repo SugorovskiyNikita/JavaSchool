@@ -1,3 +1,4 @@
+<head>
 <link rel="stylesheet" href="/resources/css/navbarCss.css" type="text/css">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -8,6 +9,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link href="/resources/css/navbarCss.css" rel="stylesheet">
+</head>
 <nav id="nav" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
     <div  class="navbar-header">
@@ -17,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">T-mobile</a>
+        <a style="color: #ebebeb" class="navbar-brand" href="/">T-mobile</a>
         <img title="profile image" class="img-circle img-responsive" src="https://cdn.tmobile.com/content/dam/t-mobile/ntm/branding/logos/corporate/tmo-logo-v3.svg">
 
 
@@ -47,15 +49,15 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/customer"><i class="fa fa-user fa-fw"></i> Me</a>
+                    <a href="/customer"><i  class="fa fa-user fa-fw"></i> Me</a>
                 </li>
 
                 <li>
-                    <a href="/tariffs"><i class="fa fa-cog fa-fw"></i> Tariffs</a>
+                    <a href="/tariffs" ><i class="fa fa-cog fa-fw"></i> Tariffs</a>
                 </li>
 
                 <li>
-                    <a href="/options"><i class="fa fa-cogs fa-fw"></i> Options</a>
+                    <a href="/options" "><i class="fa fa-cogs fa-fw"></i> Options</a>
                 </li>
             </ul>
         </div>

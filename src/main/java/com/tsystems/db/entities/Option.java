@@ -41,7 +41,7 @@ public class Option {
             @JoinColumn(name = "id_first", referencedColumnName = "id")}, inverseJoinColumns = {
             @JoinColumn(name = "id_second", referencedColumnName = "id")
     })
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Option> required = new HashSet<>();
 
 
@@ -49,7 +49,7 @@ public class Option {
             @JoinColumn(name = "id_first", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "id_second", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Option> forbidden = new HashSet<>();
 
     @HashCodeExclude
@@ -57,7 +57,7 @@ public class Option {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "tariff_id", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Tariff> possibleTariffsOfOption = new HashSet<>();
 
     @HashCodeExclude
@@ -65,7 +65,7 @@ public class Option {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "contract_id", referencedColumnName = "id", nullable = false)
     })
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Contract> contractsThoseUseOption = new HashSet<>();
 
     public Option() {

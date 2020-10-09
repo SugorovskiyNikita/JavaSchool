@@ -91,24 +91,24 @@
                         </td>
                     </tr>
 
-                    <SCRIPT language="JavaScript">
+                    <SCRIPT lang="JavaScript">
                         $(function(){
                             $("#box${option.id}").click(function(){
 
                                 if($("#box${option.id}").is(":checked")) {
 
-                                    <c:if test="${option. != 0}">
+                                    <c:if test="${option.requiredFrom != 0}">
 
-                                    <c:forEach items="${option.dependentOptions}" var="dependentOption">
-                                    $("#box${dependentOption.id}").attr("disabled", true);
-                                    $("#dep${dependentOption.id}").attr("style", "width: 200; background: rgba(216, 255, 213, 0.38); font-size: 12px; color: #008d47");
+                                    <c:forEach items="${option.requiredFrom}" var="req">
+                                    $("#box${req.id}").attr("disabled", true);
+                                    $("#dep${req.id}").attr("style", "width: 200; background: rgba(216, 255, 213, 0.38); font-size: 12px; color: #008d47");
                                     </c:forEach>
 
                                     </c:if>
 
-                                    <c:if test="${option.incompatibleOptions.size() != 0}">
+                                    <c:if test="${option.forbiddenWith.size() != 0}">
 
-                                    <c:forEach items="${option.incompatibleOptions}" var="incompatibleOption">
+                                    <c:forEach items="${option.forbiddenWith}" var="incompatibleOption">
                                     $("#box${incompatibleOption.id}").attr("disabled", true);
                                     $("#inc${incompatibleOption.id}").attr("style", "width: 200; background: rgba(255, 232, 232, 0.52); font-size: 12px; color: #C90000");
                                     </c:forEach>
@@ -117,18 +117,18 @@
 
                                 } else {
 
-                                    <c:if test="${option.dependentOptions.size() != 0}">
+                                    <c:if test="${option.requiredFrom.size() != 0}">
 
-                                    <c:forEach items="${option.dependentOptions}" var="dependentOption">
+                                    <c:forEach items="${option.requiredFrom}" var="dependentOption">
                                     $("#box${dependentOption.id}").removeAttr("disabled");
                                     $("#dep${dependentOption.id}").attr("style", "display: none;");
                                     </c:forEach>
 
                                     </c:if>
 
-                                    <c:if test="${option.incompatibleOptions.size() != 0}">
+                                    <c:if test="${option.forbiddenWith.size() != 0}">
 
-                                    <c:forEach items="${option.incompatibleOptions}" var="incompatibleOption">
+                                    <c:forEach items="${option.forbiddenWith}" var="incompatibleOption">
                                     $("#box${incompatibleOption.id}").removeAttr("disabled");
                                     $("#inc${incompatibleOption.id}").attr("style", "display: none;");
                                     </c:forEach>

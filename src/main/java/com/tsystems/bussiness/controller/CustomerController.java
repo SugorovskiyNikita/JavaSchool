@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Created by nikita on 07.09.20.
@@ -42,7 +44,6 @@ public class CustomerController {
 
     @GetMapping("/")
     public String index() {
-
         return "index";
     } //временно для удобства
 
@@ -60,12 +61,6 @@ public class CustomerController {
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute CustomerDto customer) throws WrongOptionConfigurationException {
         customerService.add(customer);
-
-        //String[] optionsIdStr = request.getParameterValues("options");
-        //List<Integer> options;
-        //options = Arrays.stream(optionsIdStr).map(Integer::parseInt).collect(Collectors.toList());
-        //contract.setUsedOptions(optionService.loadByKey(options.stream().iterator().next().));
-
         return "redirect:/customers";
     }
 
@@ -98,10 +93,16 @@ public class CustomerController {
     }
 
     @GetMapping("/changeTariff")
-    public String changeTariff(Model model) throws Exception {
+    public String changeTariff() {
+        return "changeTariff";
+    }
+
+    @PostMapping("/changeTariff")
+    public String changeTariff(Model model, HttpServletRequest request) throws Exception {
+        Integer contractId = Integer.parseInt(request.getParameter("contractId"));
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
-        ContractDto contract = customer.getContracts().first();
+        ContractDto contract = contractService.loadByKey(contractId);
         model.addAttribute("tariffs", tariffService.loadAll());
         model.addAttribute("customer", customer);
         model.addAttribute("contract", contract);
@@ -109,6 +110,11 @@ public class CustomerController {
     }
 
     @GetMapping("/changeOption")
+    public String changeOption(){
+        return "changeOption";
+    }
+
+    @PostMapping("/changeOption")
     public String changeOption(Model model) throws Exception {
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
@@ -117,7 +123,7 @@ public class CustomerController {
         model.addAttribute("customer", customer);
         model.addAttribute("contract", contract);
         model.addAttribute("option", optionService.loadAll());
-        return "changeOption";
+        return "/customer";
     }
 
 

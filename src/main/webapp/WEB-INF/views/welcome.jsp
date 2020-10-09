@@ -16,7 +16,18 @@
 <jsp:include page="navbarCustomer.jsp"/>
 <body>
 <div id="wel" align="center">
-<h1 id="first" class="alert">Welcome, ${customer.name}!</h1>
+<h1 id="first" class="alert">Welcome, <c:out value="${customer.name}" default="guest"/> !</h1>
+</div>
+<div class="container" >
+    <div class="row" style="display: flex; background-size: contain; flex-wrap: wrap;" >
+        <div class="col-sm-6">
+            <img src="https://i.ytimg.com/vi/a84UlLe6zDg/maxresdefault.jpg" width="480" height="320">
+        </div>
+        <div class="col-sm-6">
+            <img src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/large/public/article_images/2020/09/t-mobile-project-10million.jpg" width="480" height="320">
+        </div>
+    </div>
+
 </div>
 
 </body>

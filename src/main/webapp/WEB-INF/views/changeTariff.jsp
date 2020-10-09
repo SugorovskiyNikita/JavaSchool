@@ -56,7 +56,7 @@
                     <td>
                         <form:form id="chooseTariffForm${tariff.id}"
                                    method="POST"
-                                   action="changeTariff"
+                                   action="/changeTariff"
                                    enctype="application/x-www-form-urlencoded">
                             <input type="hidden" name="contractId" value=${contract.id}>
                             <input type="hidden" name="tariffId" value=${tariff.id}>

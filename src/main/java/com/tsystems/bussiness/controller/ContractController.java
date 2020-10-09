@@ -7,6 +7,7 @@ import com.tsystems.bussiness.services.interfaces.ContractService;
 import com.tsystems.bussiness.services.interfaces.CustomerService;
 import com.tsystems.bussiness.services.interfaces.OptionService;
 import com.tsystems.bussiness.services.interfaces.TariffService;
+import com.tsystems.db.dto.OptionDto;
 import com.tsystems.util.exceptions.ResourceNotFoundException;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+import java.util.Set;
 
 
 /**
@@ -42,12 +43,12 @@ public class ContractController {
     @Autowired
     public AuthenticationFacade authenticationFacade;
 
-    @GetMapping("/addCustomer")
+    @GetMapping("/admin/addCustomer")
     public String creatCustomerPage() {
         return "createCustomer";
     }
 
-    @GetMapping("/customer/{id}")
+    @GetMapping("admin/customer/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         model.addAttribute("tariff", tariffService.loadAll());
@@ -56,43 +57,43 @@ public class ContractController {
         return "showCustomer";
     }
 
-    @PostMapping("/updateContract")
+    @PostMapping("/admin/updateContract")
     public String updateContract(@RequestParam("tariff") Integer tariffId,
                               @RequestParam("option") List<Integer> options,
                               @RequestParam("contract") Integer id, @RequestParam("number") String number){
 
         ContractDto entity = contractService.updateContract(id, tariffId, options, number);
 
-        return "redirect:/contracts";
+        return "customerContracts";
     }
 
 
-    @GetMapping("/addContract")
+    @GetMapping("/admin/addContract")
     public String createContract() {
         return "createContract";
     }
 
 
-    @PostMapping("/addContract")
+    @PostMapping("/admin/addContract")
     public String addCustomer(@ModelAttribute ContractDto contract) throws WrongOptionConfigurationException {
         contractService.add(contract);
         return "redirect:/customers";
     }
 
-    @GetMapping("/contracts")
+    @GetMapping("/admin/contracts")
     public String getAllContracts(Model model) {
         model.addAttribute("contracts", contractService.loadAll());
         model.addAttribute("customer", customerService.loadAll());
         return "contractsList";
     }
 
-    @GetMapping("/contractsCustomer")
+    /*@GetMapping("/contractsCustomer")
     public String getAllContractsCustomer(Model model) throws Exception {
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
         model.addAttribute("customer", customer);
-        return "contracts";
-    }
+        return "customerContracts";
+    }*/
 
 
 
@@ -129,5 +130,36 @@ public class ContractController {
         }
         return "redirect:/customer";
     }
+
+    @PostMapping("/viewContract")
+    public String viewContractByCustomer(Model model, HttpServletRequest request) {
+        Integer contractId = Integer.parseInt(request.getParameter("contractId"));
+        ContractDto contract = contractService.loadByKey(contractId);
+        model.addAttribute("contract", contract);
+        Set<OptionDto> optionsList = contract.getUsedOptions();
+        model.addAttribute("optionsList", optionsList);
+
+        return "customerContracts";
+    }
+
+    @GetMapping("/viewContract")
+    public String viewContractByCustomer() {
+        return "customerContracts";
+    }
+
+
+
+    /*@PostMapping("/viewContracts")
+    public String getAllContractsCustomer(Model model, HttpServletRequest request) throws Exception {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        CustomerDto customer = customerService.findByEmail(authentication.getName());
+        model.addAttribute("customer", customer);
+        Integer contractId = Integer.parseInt(request.getParameter("contractId"));
+        ContractDto contract = contractService.loadByKey(contractId);
+        model.addAttribute("contract", contract);
+        Set<OptionDto> optionsList = contract.getUsedOptions();
+        model.addAttribute("optionsList", optionsList);
+        return "customerContracts";
+    }*/
 
 }
