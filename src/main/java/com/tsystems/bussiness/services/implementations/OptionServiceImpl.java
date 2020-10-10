@@ -64,7 +64,7 @@ public class OptionServiceImpl implements OptionService {
         option.setPossibleTariffsOfOption(tariffs);
 
         Option saved = optionDao.add(option);
-        return new OptionDto(saved);
+        return new OptionDto(saved).addDependencies(saved);
     }
 
     @Override
