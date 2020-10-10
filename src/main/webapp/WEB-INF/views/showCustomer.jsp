@@ -54,7 +54,7 @@
                 <label for="contract" class="col-sm">Contract</label>
                 <div class="col-sm">
                     <div class="controls">
-                        <select required id="contract" size="1" name="contract" class="form-control" onchange="this.value">
+                        <select required id="contractId" size="1" name="contractId" class="form-control" onchange="this.value">
                             <c:forEach var="contracts" items="${customer.contracts}">
                                 <option value="${contracts.id}">${contracts.id}</option>
                             </c:forEach>
@@ -78,7 +78,7 @@
                 <label for="tariff" class="col-sm">Tariff</label>
                 <div class="col-sm">
                     <div class="controls">
-                        <select required id="tariff" size="1" name="tariff" class="form-control" onchange="this.value">
+                        <select required id="tariff" size="1" name="tariffId" class="form-control" onchange="this.value">
                             <c:forEach var="tariff" items="${tariff}">
                             <option value="${tariff.id}">${tariff.name}
                                 </c:forEach>
@@ -92,28 +92,14 @@
                     <div class="controls" id="options-area">
                         <c:forEach items="${option}" var="options">
                             <label class="custom-control custom-checkbox" id="option">
-                                <input type="checkbox" name="option" class="custom-control-input" value="${options.id}" onclick="checkPossibleOptions(${options.id}, ${options.forbiddenWith})">
+                                <input type="checkbox" name="options" class="custom-control-input" value="${options.id}" onclick="checkPossibleOptions(${options.id}, ${options.forbiddenWith})">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">${options.name}</span>
                             </label>
                         </c:forEach>
                     </div>
                 </div>
-                <script>
-                    function checkPossibleOptions(id, forbiddenOptions) {
-                        let optionsArea = document.getElementById('options-area');
-                        let optionsInputs = optionsArea.getElementsByTagName('input');
-                        let forbid = forbiddenOptions.indexOf(optionsInputs);
-                        console.log(optionsInputs);
-                        for (let i = 0; i < optionsInputs.length; i++) {
-                            if(forbid.indexOf(optionsInputs[i].value)) {
-                            optionsInputs[i].setAttribute("disabled", true);
-                            } else {
-                                optionsInputs[i].setAttribute("disabled", false);
-                            }
-                        }
-                    }
-                </script>
+
                 <br>
                 <button type="submit" class="btn btn-primary">
                     Update contract

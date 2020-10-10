@@ -71,8 +71,7 @@
                                            action="/viewContract"
                                            enctype="application/x-www-form-urlencoded">
                                     <input type="hidden" name="contractId" value=${contract.id}>
-                                    <a href="#" style="color: #e30876"
-                                       onclick="document.forms['viewContractForm${contract.id}'].submit()">${contract.number}</a>
+                                    <a href="#" onclick="document.forms['viewContractForm${contract.id}'].submit()">${contract.number}</a>
                                 </form:form>
                             </td>
                             <td> ${contract.balance}</td>

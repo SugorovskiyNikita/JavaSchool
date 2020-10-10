@@ -4,6 +4,10 @@ import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.dto.ContractDto;
 import com.tsystems.db.dto.CustomerDto;
 import com.tsystems.bussiness.services.interfaces.*;
+import com.tsystems.db.dto.OptionDto;
+import com.tsystems.db.dto.TariffDto;
+import com.tsystems.db.entities.Option;
+import com.tsystems.db.entities.Tariff;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -44,7 +49,7 @@ public class CustomerController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "redirect:/login";
     } //временно для удобства
 
     @GetMapping("/login")
@@ -92,10 +97,10 @@ public class CustomerController {
         return "welcome";
     }
 
-    @GetMapping("/changeTariff")
+    /*@GetMapping("/changeTariff")
     public String changeTariff() {
         return "changeTariff";
-    }
+    }*/
 
     @PostMapping("/changeTariff")
     public String changeTariff(Model model, HttpServletRequest request) throws Exception {
@@ -109,21 +114,31 @@ public class CustomerController {
         return "changeTariff";
     }
 
-    @GetMapping("/changeOption")
-    public String changeOption(){
+    /*@GetMapping("/changeOption")
+    public String changeOptionG(Model model) throws Exception {
+            Authentication authentication = authenticationFacade.getAuthentication();
+            CustomerDto customer = customerService.findByEmail(authentication.getName());
+            ContractDto contract = customer.getContracts().first();
+            model.addAttribute("tariffs", tariffService.loadAll());
+            model.addAttribute("customer", customer);
+            model.addAttribute("contract", contract);
+            model.addAttribute("option", optionService.loadAll());
         return "changeOption";
-    }
+    }*/
 
     @PostMapping("/changeOption")
-    public String changeOption(Model model) throws Exception {
-        Authentication authentication = authenticationFacade.getAuthentication();
-        CustomerDto customer = customerService.findByEmail(authentication.getName());
-        ContractDto contract = customer.getContracts().first();
-        model.addAttribute("tariffs", tariffService.loadAll());
-        model.addAttribute("customer", customer);
+
+    public String changeOption(Model model, HttpServletRequest request) throws Exception {
+
+        Integer contractId = Integer.parseInt(request.getParameter("contractId"));
+        Integer tariffId = Integer.parseInt(request.getParameter("tariffId"));
+        ContractDto contract = contractService.loadByKey(contractId);
+        TariffDto tariff = tariffService.loadByKey(tariffId);
+        List<OptionDto> options = optionService.getOptionsOfTariffs(tariffId);
+        model.addAttribute("tariff", tariff);
         model.addAttribute("contract", contract);
-        model.addAttribute("option", optionService.loadAll());
-        return "/customer";
+        model.addAttribute("options", options);
+        return "changeOption";
     }
 
 

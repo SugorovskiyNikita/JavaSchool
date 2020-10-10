@@ -93,4 +93,11 @@ public class OptionServiceImpl implements OptionService {
         Option option = optionDao.loadByKey(key);
         return new OptionDto(option).addDependencies(option);
     }
+
+    @Override
+    public List<OptionDto> getOptionsOfTariffs(Integer tariffs) {
+        List<Option> options = optionDao.getOptionsForTariff(tariffs);
+        return options.stream().map(e -> new OptionDto(e).addDependencies(e))
+                .collect(Collectors.toList());
+    }
 }

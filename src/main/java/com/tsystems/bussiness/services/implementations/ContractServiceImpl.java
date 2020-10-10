@@ -86,7 +86,9 @@ public class ContractServiceImpl implements ContractService {
         contract.setUsedOptions(options);
 
         //Add number
-        contract.setNumber(number);
+        if (contract.getNumber() == null) {
+            contract.setNumber(number);
+        }
 
         //Save new contract
         contract = contractDao.add(contract);

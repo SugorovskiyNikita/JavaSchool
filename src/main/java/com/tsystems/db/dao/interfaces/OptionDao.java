@@ -2,6 +2,9 @@ package com.tsystems.db.dao.interfaces;
 
 import com.tsystems.db.entities.Option;
 import org.springframework.stereotype.Repository;
+import sun.awt.SunToolkit;
+
+import java.util.List;
 
 
 /**
@@ -9,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OptionDao extends GenericDao<Option, Integer> {
+
+    List<Option> getOptionsForTariff(Integer tariffs);
 }

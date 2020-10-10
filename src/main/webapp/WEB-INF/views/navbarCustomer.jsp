@@ -49,15 +49,15 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/customer"><i  class="fa fa-user fa-fw"></i> Me</a>
+                    <a href="/customer" style="color: #ebebeb"><i  class="fa fa-user fa-fw"></i> Me</a>
                 </li>
 
                 <li>
-                    <a href="/tariffs" ><i class="fa fa-cog fa-fw"></i> Tariffs</a>
+                    <a href="/tariffs" style="color: #ebebeb"><i class="fa fa-cog fa-fw"></i> Tariffs</a>
                 </li>
 
                 <li>
-                    <a href="/options" "><i class="fa fa-cogs fa-fw"></i> Options</a>
+                    <a href="/options" style="color: #ebebeb"><i class="fa fa-cogs fa-fw"></i> Options</a>
                 </li>
             </ul>
         </div>

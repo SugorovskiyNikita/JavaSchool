@@ -20,7 +20,7 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
 
     @Override
     public List<Contract> loadAll() {
-        return em.createQuery("SELECT NEW Contract (c.id, c.number, c.balance, c.isBlocked) FROM Contract c", Contract.class)
+        return em.createQuery("SELECT t FROM Contract t", Contract.class)
                 .getResultList();
     }
 

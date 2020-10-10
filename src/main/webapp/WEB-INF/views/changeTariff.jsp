@@ -50,21 +50,33 @@
                 <th>
                     Cost
                 </th>
+                <th>
+                    Description
+                </th>
             </tr>
             <c:forEach var="tariff" items="${tariffs}">
                 <tr>
                     <td>
                         <form:form id="chooseTariffForm${tariff.id}"
                                    method="POST"
-                                   action="/changeTariff"
+                                   action="/changeOption"
                                    enctype="application/x-www-form-urlencoded">
                             <input type="hidden" name="contractId" value=${contract.id}>
                             <input type="hidden" name="tariffId" value=${tariff.id}>
-                            <a href="#" onclick="document.forms['chooseTariffForm${tariff.id}'].submit()">${tariff.name}</a>
+                            <a href="#" id="chosenTariff" onclick="document.forms['chooseTariffForm${tariff.id}'].submit()">${tariff.name}</a>
+                            <script>
+                                document.getElementById('chosenTariff').addEventListener('change', function (e) {
+                                    let value = document.getElementById('chosenTariff').value // записываем значение в переменную
+                                    localStorage.setItem('inputValue', value) // записываем значение в localStorage
+                                })
+                            </script>
                         </form:form>
                     </td>
                     <td>
                             ${tariff.cost}
+                    </td>
+                    <td>
+                            ${tariff.description}
                     </td>
                 </tr>
             </c:forEach>

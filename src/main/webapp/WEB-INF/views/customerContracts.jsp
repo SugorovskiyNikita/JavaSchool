@@ -23,7 +23,7 @@
     <c:choose>
         <c:when test="${optionsList.size() != 0}">
             <c:if test="${contract.isBlocked != 1 && contract.isBlocked != 2 && contract.balance > 0}">
-                <a title="Change tariff or options" href="" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Change option</button></a>
+                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Change option</button></a>
             </c:if>
             </p>
             <br>
@@ -57,7 +57,7 @@
         <c:otherwise>
             <h2>No connected option</h2>
             <c:if test="${contract.isBlocked != 1 && contract.isBlocked != 2 && contract.balance > 0}">
-                <a title="Change tariff or options" href="" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Connect options</button></a>
+               <button type="button" class="btn btn-lg btn-info"> <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()">Connect options</a></button>
             </c:if>
             </p>
         </c:otherwise>

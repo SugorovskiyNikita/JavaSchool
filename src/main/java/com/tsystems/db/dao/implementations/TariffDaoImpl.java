@@ -13,7 +13,7 @@ import java.util.List;
 public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements TariffDao {
     @Override
     public List<Tariff> loadAll() {
-        return em.createQuery("SELECT NEW Tariff(c.id, c.name, c.cost, c.description) FROM Tariff c", Tariff.class)
+        return em.createQuery("SELECT t FROM Tariff t", Tariff.class)
                 .getResultList();
     }
 

@@ -54,17 +54,28 @@ public class ContractController {
         model.addAttribute("tariff", tariffService.loadAll());
         model.addAttribute("option", optionService.loadAll());
 
+
         return "showCustomer";
     }
 
     @PostMapping("/admin/updateContract")
-    public String updateContract(@RequestParam("tariff") Integer tariffId,
+    public String updateContract(@RequestParam("tariffId") Integer tariffId,
                               @RequestParam("option") List<Integer> options,
-                              @RequestParam("contract") Integer id, @RequestParam("number") String number){
+                              @RequestParam("contractId") Integer id, @RequestParam("number") String number){
 
         ContractDto entity = contractService.updateContract(id, tariffId, options, number);
 
         return "customerContracts";
+    }
+
+    @PostMapping("/updateContractCustomer")
+    public String updateContractCustomer(@RequestParam("tariffId") Integer tariffId,
+                                 @RequestParam("options") List<Integer> options,
+                                 @RequestParam("contractId") Integer id, @RequestParam("number") String number){
+
+        ContractDto entity = contractService.updateContract(id, tariffId, options, number);
+
+        return "redirect:/customer";
     }
 
 

@@ -62,7 +62,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
 
     @Override
     public List<Customer> loadAll() {
-        return em.createQuery("SELECT NEW Customer(c.id, c.name, c.surname, c.email, c.isBlocked) FROM Customer c", Customer.class)
+        return em.createQuery("SELECT t FROM Customer t", Customer.class)
                 .getResultList();
     }
 }
