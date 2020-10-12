@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a style="color: #ebebeb" class="navbar-brand" href="/">T-mobile</a>
+        <a style="color: #ebebeb" class="navbar-brand" href="/welcome">T-mobile</a>
         <img title="profile image" class="img-circle img-responsive" src="https://cdn.tmobile.com/content/dam/t-mobile/ntm/branding/logos/corporate/tmo-logo-v3.svg">
 
 

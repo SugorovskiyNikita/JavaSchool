@@ -1,6 +1,7 @@
 package com.tsystems.db.dao.implementations;
 
 import com.tsystems.db.dao.interfaces.TariffDao;
+import com.tsystems.db.dto.TariffDto;
 import com.tsystems.db.entities.Tariff;
 import org.springframework.stereotype.Repository;
 

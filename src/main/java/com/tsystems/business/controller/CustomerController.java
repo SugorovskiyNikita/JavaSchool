@@ -22,13 +22,13 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    public CustomerService customerService;
+    private CustomerService customerService;
 
     @Autowired
-    public TariffService tariffService;
+    private TariffService tariffService;
 
     @Autowired
-    public ContractService contractService;
+    private ContractService contractService;
 
     @Autowired
     private IAuthenticationFacade authenticationFacade;

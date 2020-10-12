@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Печалька
-  Date: 19.09.2020
-  Time: 21:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -29,21 +22,20 @@
         <th scope="col">Cost</th>
         <th scope="col">Cost connection</th>
         <th scope="col">Description</th>
+        <th scope="col"><button class="btn-success btn"><a style="color: #ebebeb" href="/admin/addOption">Add new Option</a></button>
+        </th>
     </tr>
     <c:forEach items="${options}" var="option">
         <tr>
-            <td><a href="/option/${option.id}">${option.id}</a></td>
+            <td>${option.id}</td>
             <td>${option.name}</td>
             <td>${option.cost}</td>
             <td>${option.connectCost}</td>
             <td>${option.description}</td>
-            <td><a href="/delete/${option.id}">Delete</a></td>
-            <td><a href="/update/${option.id}">Edit</a></td>
+            <td><button class="btn btn-danger"><a style="color: #ebebeb" href="/admin/deleteOption/${option.id}">Delete</a></button></td>
         </tr>
     </c:forEach>
 </table>
-<br>
-<a href="/addOption">Add new Option</a>
 </div>
 </body>
 </html>

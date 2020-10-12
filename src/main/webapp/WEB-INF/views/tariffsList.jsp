@@ -35,7 +35,7 @@
             <td>${tariff.name}</td>
             <td>${tariff.cost}</td>
             <td>${tariff.description}</td>
-            <td><button class="btn btn-primary"> <a style="color: #ebebeb" href="/update/${tariff.id}">Edit</a></button></td>
+            <td><button class="btn btn-primary"> <a style="color: #ebebeb" href="/admin/editTariff/${tariff.id}">Edit</a></button></td>
             <td><button class="btn btn-danger"><a style="color: #ebebeb" href="/deleteTariff/${tariff.id}">Delete</a></button></td>
 
         </tr>

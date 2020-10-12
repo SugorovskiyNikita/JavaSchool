@@ -7,17 +7,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Add option</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <style>
         input:invalid:not(:placeholder-shown) {border-color: #ff0000;}
         input:valid:not(:placeholder-shown) {border: 2px solid #000000;}
     </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#forTariffs').multiselect();
+        });
+    </script>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
 <div class="container-fluid">
-    <form name="option" action="/addOption" method="post">
+    <form name="option" action="/admin/addOption" method="post">
             <fieldset class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Name option" id="name">
@@ -41,7 +49,7 @@
                 <div class="panel-heading">Available for there tariffs</div>
                 <div class="panel-body boxes">
                     <div class="controls">
-                        <select required id="forTariffs" style="width: 100%" name="forTariffs" class="js-example-basic-multiple" multiple="multiple" onchange="this.value">
+                        <select required id="forTariffs" style="width: 100%" name="forTariffs" multiple="multiple" onchange="this.value">
                             <c:forEach var="tariff" items="${tariff}">
                                 <option name="forTariffs" value="${tariff.id}">${tariff.name}</option>
                             </c:forEach>

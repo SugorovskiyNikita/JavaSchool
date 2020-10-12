@@ -18,7 +18,7 @@ import java.util.List;
  * Created by nikita on 16.09.2020.
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/")
 public class OptionController {
 
     @Autowired
@@ -27,13 +27,13 @@ public class OptionController {
     @Autowired
     public TariffService tariffService;
 
-    @GetMapping("/addOption")
+    @GetMapping("/admin/addOption")
     public String createOption(Model model) {
         model.addAttribute("tariff", tariffService.loadAll());
         model.addAttribute("option", optionService.loadAll());
         return "createOption";}
 
-    @PostMapping("/addOption")
+    @PostMapping("/admin/addOption")
     public String addOption(@RequestParam("requiredFrom") List<Integer> requiredFromId,
                             @RequestParam("forbiddenWith") List<Integer> forbiddenWithId,
                             @RequestParam("forTariffs") List<Integer> forTariffsId, HttpServletRequest request) throws WrongOptionConfigurationException {
@@ -59,10 +59,16 @@ public class OptionController {
         return "redirect:/admin/options";
     }
 
-    @GetMapping("/options")
+    @GetMapping("/admin/options")
     public String getAllOptions(Model model){
         model.addAttribute("options", optionService.loadAll());
         return "optionsList";
+    }
+
+    @GetMapping("/admin/deleteOption/{id}")
+    public String deleteOption(@PathVariable("id") int key) {
+        optionService.remove(key);
+        return "redirect:/admin/options";
     }
 
 }

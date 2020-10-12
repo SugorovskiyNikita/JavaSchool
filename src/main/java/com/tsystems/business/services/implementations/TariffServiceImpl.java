@@ -1,14 +1,19 @@
 package com.tsystems.business.services.implementations;
 
+import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.dao.interfaces.TariffDao;
 import com.tsystems.db.dto.TariffDto;
+import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.TariffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -18,12 +23,11 @@ import java.util.stream.Collectors;
 @Transactional
 public class TariffServiceImpl implements TariffService {
 
-    private final TariffDao tariffDao;
+    @Autowired
+    private TariffDao tariffDao;
 
     @Autowired
-    public TariffServiceImpl(TariffDao tariffDao) {
-        this.tariffDao = tariffDao;
-    }
+    private OptionDao optionDao;
 
     @Override
     public TariffDto add(TariffDto tariffDto) {
@@ -53,5 +57,36 @@ public class TariffServiceImpl implements TariffService {
         tariffDao.remove(key);
     }
 
+    @Override
+    public TariffDto update(TariffDto tariffDto, List<Integer> newOptions, String name, Integer cost, String description) {
+        Tariff tariff = tariffDto.convertToEntity();
+        tariff.setName(name);
+        tariff.setCost(new BigDecimal(cost));
+        tariff.setDescription(description);
+        Set<Option> options = new HashSet<>();
+        if (newOptions != null) {
+            for (Integer id : newOptions) {
+                Option opt = optionDao.loadByKey(id);
+                opt.setId(id);
+                options.add(opt);
+            }
+        }
+        tariff.setPossibleOptions(options);
+        return new TariffDto(tariff).addDependencies(tariff);
+    }
 
+    @Override
+    public TariffDto addNew(TariffDto tariff, List<Integer> newOptions) {
+        Tariff tar = tariff.convertToEntity();
+        Set<Option> options = new HashSet<>();
+        if (newOptions != null) {
+            for (Integer id : newOptions) {
+                Option opt = optionDao.loadByKey(id);
+                opt.setId(id);
+                options.add(opt);
+            }
+        }
+        tar.setPossibleOptions(options);
+        return new TariffDto(tariffDao.add(tar)).addDependencies(tar);
+    }
 }

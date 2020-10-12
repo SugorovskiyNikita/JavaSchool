@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Печалька
-  Date: 13.09.2020
-  Time: 20:21
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +15,7 @@
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
 <div class="container-fluid">
-    <form name="tariff" action="/addTariff" method="post">
+    <form name="tariff" action="/admin/addNewTariff" method="post">
         <fieldset class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" placeholder="Name tariff" id="name"
@@ -37,7 +31,22 @@
             <input type="text" class="form-control" name="Description" placeholder="Description" id="description">
         </fieldset>
         <br>
-        <input type="submit" name="submit" value="Add tariff" class="btn btn-success">
+
+
+<label for="option" class="col-sm">Options</label>
+<div class="col-sm">
+<div class="controls" id="options-area">
+<c:forEach items="${options}" var="option">
+    <label class="custom-control custom-checkbox" id="option">
+    <input type="checkbox" id="box${option.id}" name="options" value="${option.id}">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">${option.name}</span>
+
+    </label>
+</c:forEach>
+    <input type="submit" name="submit" value="Add tariff" class="btn btn-success">
+</div>
+</div>
     </form>
 </div>
 </body>
