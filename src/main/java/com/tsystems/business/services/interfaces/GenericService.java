@@ -1,4 +1,4 @@
-package com.tsystems.bussiness.services.interfaces;
+package com.tsystems.business.services.interfaces;
 
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 

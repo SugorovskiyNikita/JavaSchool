@@ -2,9 +2,15 @@ package com.tsystems.db.dto;
 
 import com.tsystems.db.entities.Tariff;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -12,20 +18,24 @@ import java.util.stream.Collectors;
  * Created by nikita on 24.09.2020.
  */
 @Data
+@NoArgsConstructor
 public class TariffDto implements DtoMapper<Tariff>, Comparable<TariffDto> {
 
     private Integer id;
 
+    @Size(min = 2, max = 45)
+    @NotNull
     private String name;
 
+    @Digits(integer = 8, fraction = 2)
+    @NotNull
     private BigDecimal cost;
 
+    @Size(max = 255)
     private String description;
 
-    private TreeSet<OptionDto> possibleOptions = new TreeSet<>();
+    private Set<OptionDto> possibleOptions = new HashSet<>();
 
-    public TariffDto() {
-    }
 
     /**
      * Create dto object from entity
@@ -40,7 +50,7 @@ public class TariffDto implements DtoMapper<Tariff>, Comparable<TariffDto> {
         if (tariff != null && tariff.getPossibleOptions() != null)
             this.possibleOptions = tariff.getPossibleOptions().stream()
                     .map(OptionDto::new)
-                    .collect(Collectors.toCollection(TreeSet::new));
+                    .collect(Collectors.toCollection(HashSet::new));
         return this;
     }
 

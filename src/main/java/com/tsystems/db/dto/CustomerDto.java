@@ -3,11 +3,16 @@ package com.tsystems.db.dto;
 
 import com.tsystems.db.entities.Customer;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.apache.commons.lang3.ObjectUtils;
 
 
+import javax.persistence.StoredProcedureParameter;
+import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -15,41 +20,46 @@ import java.util.stream.Collectors;
  * Created by nikita on 24.09.2020.
  */
 @Data
+@NoArgsConstructor
 public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto> {
 
     private Integer id;
 
+    @Size(min = 2, max = 45)
+    @NotNull
     private String name;
 
+    @Size(min = 2, max = 45)
+    @NotNull
     private String surname;
 
+    @Past
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateOfBirth;
 
+    @Size(min = 2, max = 45)
+    @NotNull
     private String passportNumber;
 
+    @Size(max = 255)
     private String passportData;
 
+    @Size(max = 255)
     private String address;
 
+    @Size(max = 255)
     private String password;
 
+    @Email
     private String email;
 
+    @Min(0)
+    @Max(2)
     private Integer isBlocked;
 
     private TreeSet<ContractDto> contracts = new TreeSet<>();
 
-    private TreeSet<RoleDto> roles = new TreeSet<>();
-
-    public CustomerDto(){
-        /*getId();
-        getEmail();
-        getName();
-        getSurname();
-        getIsBlocked(); */
-
-    }
+    private Set<RoleDto> roles = new HashSet<>();
 
     /**
      * Create dto object from entity

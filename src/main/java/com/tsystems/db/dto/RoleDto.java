@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
+import javax.validation.constraints.Size;
+
 /**
  * Created by nikita on 03.10.2020.
  */
@@ -14,6 +16,7 @@ public class RoleDto implements DtoMapper<Role>, Comparable<RoleDto> {
 
     private int id;
 
+    @Size(min = 6, max = 45)
     private String roleName;
 
     public RoleDto(Role role) {

@@ -51,8 +51,8 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
     }
 
     @Override
-    public void remove(Integer customer) {
-        em.remove(customer);
+    public void remove(Integer id) {
+        em.remove(id);
     }
 
     @Override

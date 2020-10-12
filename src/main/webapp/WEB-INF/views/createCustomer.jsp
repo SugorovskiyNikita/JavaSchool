@@ -16,7 +16,10 @@
         input:invalid:not(:placeholder-shown) {border-color: #ff0000;}
         input:valid:not(:placeholder-shown) {border: 3px solid #000000;}
     </style>
+    <title>New customer</title>
+</head>
 <body>
+<jsp:include page="navbarAdmin.jsp"/>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -51,7 +54,7 @@
                                 <label for="passportNumber" class="col-md-4 col-form-label text-md-right">Passport number</label>
                                 <div class="col-md-6">
                                     <input type="text" id="passportNumber" class="form-control" name="passportNumber"
-                                           placeholder="Passport Number">
+                                           placeholder="Passport Number" required maxlength="11" minlength="11" pattern="[0-9]+">
                                 </div>
                             </div>
 
@@ -59,7 +62,7 @@
                                 <label for="passportData" class="col-md-4 col-form-label text-md-right">Passport data</label>
                                 <div class="col-md-6">
                                     <input type="text" id="passportData" class="form-control" name="passportData"
-                                           placeholder="Passport Data">
+                                           placeholder="Passport Data" required minlength="15">
                                 </div>
                             </div>
 
@@ -67,7 +70,7 @@
                                 <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
                                 <div class="col-md-6">
                                     <input type="text" id="address" class="form-control" name="address"
-                                           placeholder="Address">
+                                           placeholder="Address" minlength="15">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -80,7 +83,7 @@
 
                             <br>
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary ">
                                     Add customer
                                 </button>
                             </div>

@@ -1,4 +1,4 @@
-package com.tsystems.bussiness.services.interfaces;
+package com.tsystems.business.services.interfaces;
 
 import com.tsystems.db.dto.ContractDto;
 import netscape.javascript.JSException;
@@ -19,5 +19,6 @@ public interface ContractService extends GenericService<ContractDto, Integer> {
 
     ContractDto findByNumber(String number);
 
+    ContractDto addNew(ContractDto contractDto, Integer customerId);
 
 }

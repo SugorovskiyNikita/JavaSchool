@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityListeners;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -22,7 +23,7 @@ import java.util.Properties;
  * Created by nikita on 07.09.20.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tsystems.bussiness.services", "com.tsystems.db.dao"})
+@ComponentScan(basePackages = {"com.tsystems.business.services", "com.tsystems.db.dao"})
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
 public class SpringConfig {

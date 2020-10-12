@@ -1,10 +1,12 @@
 #nav {
     background-color: #e30074;
-    color: #F4EEE8;
+
 }
 #navi {
     background-color: #e30074;
-
+}
+#navi:hover {
+    color: #1b1e21;
 }
 
 html, body {
@@ -17,3 +19,5 @@ body {
 .content {
     ᅠᅠflex: 1 0 auto;
 }
+
+

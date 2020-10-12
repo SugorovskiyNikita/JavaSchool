@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/resources/css/forlist.css">
 </head>
 <body>
+<jsp:include page="navbarAdmin.jsp"/>
 <div class="container target">
 <h1>Tariff list</h1>
 <table class="table table-striped">
@@ -26,20 +27,22 @@
         <th scope="col">Name</th>
         <th scope="col">Cost</th>
         <th scope="col">Description</th>
+        <th><button class="btn-success btn"><a href="/admin/addTariff" style="color: #ebebeb">Add new Tariff</a></button></th>
     </tr>
     <c:forEach items="${tariffs}" var="tariff">
         <tr>
-            <td><a href="/tariff/${tariff.id}">${tariff.id}</a></td>
+            <td>${tariff.id}</td>
             <td>${tariff.name}</td>
             <td>${tariff.cost}</td>
             <td>${tariff.description}</td>
-            <td><a href="/delete/${tariff.id}">Delete</a></td>
-            <td><a href="/update/${tariff.id}">Edit</a></td>
+            <td><button class="btn btn-primary"> <a style="color: #ebebeb" href="/update/${tariff.id}">Edit</a></button></td>
+            <td><button class="btn btn-danger"><a style="color: #ebebeb" href="/deleteTariff/${tariff.id}">Delete</a></button></td>
+
         </tr>
     </c:forEach>
 </table>
 <br>
-<a href="/addTariff">Add new Tariff</a>
+
 </div>
 </body>
 </html>

@@ -18,8 +18,8 @@ public class TariffDaoImpl extends GenericDaoImpl<Tariff, Integer> implements Ta
     }
 
     @Override
-    public void remove(Integer tariff) {
-        em.remove(tariff);
+    public void remove(Integer id) {
+        em.remove(em.getReference(Tariff.class, id));
     }
 
     @Override

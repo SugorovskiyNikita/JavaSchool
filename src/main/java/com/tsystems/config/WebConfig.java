@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.tsystems.bussiness.controller")
+@ComponentScan("com.tsystems.business.controller")
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

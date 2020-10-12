@@ -8,5 +8,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RoleDao {
+
     Role getRoleById(Integer id);
+
+    Role findByName(String roleName);
 }

@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by nikita on 24.09.2020.
  */
+
 public class SecurityUser implements UserDetails {
 
     private Customer customer;
@@ -33,7 +34,7 @@ public class SecurityUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (Role role : customer.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
         return authorities;
     }

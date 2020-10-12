@@ -2,6 +2,7 @@ package com.tsystems.db.dao.implementations;
 
 import com.tsystems.db.dao.interfaces.GenericDao;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
@@ -37,8 +38,8 @@ public abstract class GenericDaoImpl<T, Integer> implements GenericDao<T, Intege
     }
 
     @Override
-    public void remove(java.lang.Integer entity) {
-        em.remove(entity);
+    public void remove(Integer id) {
+        em.remove(em.getReference(entityClass,id));
     }
 
 }

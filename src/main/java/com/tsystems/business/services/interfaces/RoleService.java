@@ -1,4 +1,4 @@
-package com.tsystems.bussiness.services.interfaces;
+package com.tsystems.business.services.interfaces;
 
 import com.tsystems.db.dto.RoleDto;
 import org.springframework.stereotype.Service;
@@ -10,5 +10,9 @@ import java.io.Serializable;
  */
 @Service
 public interface RoleService<T> extends Serializable {
+
     RoleDto getRoleById(Integer id);
+
+    RoleDto findByName(String roleName);
+
 }

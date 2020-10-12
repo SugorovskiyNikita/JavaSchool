@@ -1,11 +1,13 @@
-package com.tsystems.bussiness.services.implementations;
+package com.tsystems.business.services.implementations;
 
 import com.tsystems.db.dao.interfaces.ContractDao;
+import com.tsystems.db.dao.interfaces.CustomerDao;
 import com.tsystems.db.dto.ContractDto;
 import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
-import com.tsystems.bussiness.services.interfaces.ContractService;
+import com.tsystems.business.services.interfaces.ContractService;
+import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +28,23 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private ContractDao contractDao;
 
+    @Autowired
+    private CustomerDao customerDao;
+
     @Override
-    public ContractDto add(ContractDto contractDto) {
+    public ContractDto addNew(ContractDto contractDto, Integer customerId) {
         // Create new contract. Default balance on new contract == 100 and non blocked
         Contract contract = contractDto.convertToEntity();
+        contract.setCustomer(customerDao.loadByKey(customerId));
         contract.setBalance(new BigDecimal("100.00"));
         contract.setIsBlocked(0);
         return new ContractDto(contractDao.add(contract));
 
+    }
+
+    @Override
+    public ContractDto add(ContractDto entityDto) throws WrongOptionConfigurationException {
+        return null;
     }
 
     @Override

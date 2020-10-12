@@ -5,6 +5,7 @@
 <html lang="java">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -16,9 +17,12 @@
     <title>Customers List</title>
 </head>
 <body>
+<jsp:include page="navbarAdmin.jsp"/>
 <div class="container target">
 <h1>Customer list</h1>
-<input id='myInput' onkeyup='searchTable()' type='text'>
+    <input id='myInput' onkeyup='searchTable()' type='text'>
+
+
 <table id = "myTable" class="table table-striped">
     <tr>
         <th scope="col">Id</th>
@@ -26,25 +30,28 @@
         <th scope="col">Surname</th>
         <th scope="col">Email</th>
         <th scope="col">Is Blocked</th>
-        <th scope="col">Contract Id</th>
+        <th scope="col"></th>
+        <th scope="col"><button type="button" class="btn btn-success" ><a id="link" href="/admin/addCustomer">Add new Customer</a></button></th>
+
+
     </tr>
     <c:forEach items="${customers}" var="customer">
         <tr>
-            <td><a href="/customer">${customer.id}</a></td>
+            <td>${customer.id}</td>
             <td>${customer.name}</td>
             <td>${customer.surname}</td>
             <td>${customer.email}</td>
-            <td>${customer.isBlocked}</td>
-            <c:forEach var="contract" items="${customer.contracts}">
-            <td>${contract.id}</td>
-            </c:forEach>
-            <td><button type="button" class="btn btn-dark"><a id="link1" href="/delete/${customer.id}">Delete</a></button></td>
-            <td><button type="button" class="btn btn-dark"><a id="link2" href="/update/${customer.id}">Edit</a></button></td>
+            <td>
+                <c:choose>
+                    <c:when test="${customer.isBlocked >= 1}">Yes</c:when>
+                    <c:otherwise>No</c:otherwise>
+                </c:choose>
+            </td>
+            <td><button type="button" class="btn btn-dark"><a id="link1" href="/admin/customerInfo/${customer.id}">Show details</a></button></td>
         </tr>
     </c:forEach>
 </table>
 
-<button type="button" class="btn btn-success" ><a id="link" href="/addCustomer">Add new Customer</a></button>
 </div>
 </body>
 </html>

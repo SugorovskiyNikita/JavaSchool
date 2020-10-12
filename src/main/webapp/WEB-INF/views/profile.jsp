@@ -6,6 +6,7 @@
 <html lang="java">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <style>
     .btn {
         margin: 0 5px;
@@ -20,6 +21,7 @@
 </head>
 <body>
 <jsp:include page="navbarCustomer.jsp" />
+<div class="container-fluid h-100">
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
@@ -121,6 +123,7 @@
         </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

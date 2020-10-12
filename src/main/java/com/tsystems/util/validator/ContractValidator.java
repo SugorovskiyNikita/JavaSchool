@@ -1,7 +1,7 @@
 package com.tsystems.util.validator;
 
 import com.tsystems.db.entities.Contract;
-import com.tsystems.bussiness.services.interfaces.ContractService;
+import com.tsystems.business.services.interfaces.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

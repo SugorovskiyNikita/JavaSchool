@@ -30,8 +30,8 @@ public class OptionDaoImpl extends GenericDaoImpl<Option, Integer> implements Op
     }
 
     @Override
-    public void remove(Integer option) {
-        em.remove(option);
+    public void remove(Integer id) {
+        em.remove(id);
     }
 
     @Override

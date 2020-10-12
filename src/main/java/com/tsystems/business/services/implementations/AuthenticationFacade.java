@@ -1,6 +1,6 @@
-package com.tsystems.bussiness.services.implementations;
+package com.tsystems.business.services.implementations;
 
-import com.tsystems.bussiness.services.interfaces.IAuthenticationFacade;
+import com.tsystems.business.services.interfaces.IAuthenticationFacade;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

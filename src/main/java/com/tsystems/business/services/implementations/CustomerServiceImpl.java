@@ -1,4 +1,4 @@
-package com.tsystems.bussiness.services.implementations;
+package com.tsystems.business.services.implementations;
 
 import com.tsystems.db.dao.interfaces.CustomerDao;
 import com.tsystems.db.dao.interfaces.RoleDao;
@@ -8,7 +8,7 @@ import com.tsystems.db.dto.RoleDto;
 import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Customer;
 import com.tsystems.db.entities.Role;
-import com.tsystems.bussiness.services.interfaces.CustomerService;
+import com.tsystems.business.services.interfaces.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -95,5 +95,12 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto findByEmail(String email) {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
+    }
+
+    @Override
+    public CustomerDto setBlock(Integer id, Integer blockLevel) {
+        Customer customer = customerDao.loadByKey(id);
+        customer.setIsBlocked(blockLevel);
+        return new CustomerDto(customer);
     }
 }

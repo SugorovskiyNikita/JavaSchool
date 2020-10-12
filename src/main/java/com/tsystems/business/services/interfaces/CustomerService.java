@@ -1,4 +1,4 @@
-package com.tsystems.bussiness.services.interfaces;
+package com.tsystems.business.services.interfaces;
 
 import com.tsystems.db.dto.CustomerDto;
 import org.springframework.stereotype.Service;
@@ -10,5 +10,7 @@ import org.springframework.stereotype.Service;
 public interface CustomerService extends GenericService<CustomerDto, Integer>{
 
     CustomerDto findByEmail(String email) throws Exception;
+
+    CustomerDto setBlock(Integer id, Integer blockLevel);
 
 }

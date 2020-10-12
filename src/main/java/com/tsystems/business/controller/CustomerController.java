@@ -1,13 +1,8 @@
-package com.tsystems.bussiness.controller;
+package com.tsystems.business.controller;
 
 import com.tsystems.db.dao.interfaces.OptionDao;
-import com.tsystems.db.dto.ContractDto;
-import com.tsystems.db.dto.CustomerDto;
-import com.tsystems.bussiness.services.interfaces.*;
-import com.tsystems.db.dto.OptionDto;
-import com.tsystems.db.dto.TariffDto;
-import com.tsystems.db.entities.Option;
-import com.tsystems.db.entities.Tariff;
+import com.tsystems.db.dto.*;
+import com.tsystems.business.services.interfaces.*;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -66,7 +61,7 @@ public class CustomerController {
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute CustomerDto customer) throws WrongOptionConfigurationException {
         customerService.add(customer);
-        return "redirect:/customers";
+        return "redirect:/admin/customers";
     }
 
 
@@ -79,7 +74,7 @@ public class CustomerController {
     @GetMapping("delete/{id}")
     public String deleteCustomer(@PathVariable("id") int key, Model model) {
         model.addAttribute("customer", customerService.loadByKey(key));
-        return "redirect:/customers";
+        return "redirect:/admin/customers";
     }
 
     @GetMapping("/customer")
@@ -93,14 +88,14 @@ public class CustomerController {
     public String welcome( Model model) throws Exception {
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
+        String roles = authentication.getAuthorities().toString();
+        String roleName = roles.substring(1, roles.length()-1);
+        RoleDto role = roleService.findByName(roleName);
         model.addAttribute("customer", customer);
+        model.addAttribute("role", role);
         return "welcome";
     }
 
-    /*@GetMapping("/changeTariff")
-    public String changeTariff() {
-        return "changeTariff";
-    }*/
 
     @PostMapping("/changeTariff")
     public String changeTariff(Model model, HttpServletRequest request) throws Exception {
@@ -114,20 +109,7 @@ public class CustomerController {
         return "changeTariff";
     }
 
-    /*@GetMapping("/changeOption")
-    public String changeOptionG(Model model) throws Exception {
-            Authentication authentication = authenticationFacade.getAuthentication();
-            CustomerDto customer = customerService.findByEmail(authentication.getName());
-            ContractDto contract = customer.getContracts().first();
-            model.addAttribute("tariffs", tariffService.loadAll());
-            model.addAttribute("customer", customer);
-            model.addAttribute("contract", contract);
-            model.addAttribute("option", optionService.loadAll());
-        return "changeOption";
-    }*/
-
     @PostMapping("/changeOption")
-
     public String changeOption(Model model, HttpServletRequest request) throws Exception {
 
         Integer contractId = Integer.parseInt(request.getParameter("contractId"));
@@ -139,6 +121,32 @@ public class CustomerController {
         model.addAttribute("contract", contract);
         model.addAttribute("options", options);
         return "changeOption";
+    }
+
+    @PostMapping("/admin/blockCustomer")
+    public String blockAdminCustomer( HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("customerId"));
+        CustomerDto customer = customerService.loadByKey(id);
+        int blockLevel;
+        if (request.isUserInRole("ROLE_ADMIN")) { // Check with block level must be set
+            blockLevel = 2; // Blocked by T-mobile
+        } else {
+            blockLevel = 1; // Blocked by user
+        }
+        CustomerDto entity = customerService.setBlock(id, blockLevel);
+
+        return "redirect:/admin/customerInfo/" + customer.getId();
+    }
+
+    @PostMapping("/admin/unblockCustomer")
+    public String unblockAdminCustomer( HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("customerId"));
+        CustomerDto customer = customerService.loadByKey(id);
+        CustomerDto customerDto = customerService.loadByKey(id);
+        if (!request.isUserInRole("ROLE_ADMIN") && customerDto.getIsBlocked() == 2)
+            return "redirect:/customer";
+        CustomerDto entity = customerService.setBlock(id, 0);
+        return "redirect:/admin/customerInfo/" + customer.getId();
     }
 
 

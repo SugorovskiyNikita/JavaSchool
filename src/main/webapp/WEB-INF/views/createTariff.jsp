@@ -19,6 +19,7 @@
         input:valid:not(:placeholder-shown) {border: 2px solid #000000;}
     </style>
 <body>
+<jsp:include page="navbarAdmin.jsp"/>
 <div class="container-fluid">
     <form name="tariff" action="/addTariff" method="post">
         <fieldset class="form-group">

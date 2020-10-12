@@ -15,30 +15,6 @@ import javax.servlet.*;
  */
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer /*implements WebApplicationInitializer*/ {
 
-    /*@Override
-    public void onStartup(ServletContext servletContext) throws ServletException{
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(SpringConfig.class, WebConfig.class);
-        context.setServletContext(servletContext);
-
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-
-        ContextLoaderListener contextLoaderListener = new ContextLoaderListener(context);
-
-        servletContext.addListener(contextLoaderListener);
-
-
-        // Filter.
-        FilterRegistration.Dynamic fr = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
-
-        fr.setInitParameter("encoding", "UTF-8");
-        fr.setInitParameter("forceEncoding", "true");
-        fr.addMappingForUrlPatterns(null, true, "/*");
-
-    } */
-
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{SecurityConfig.class};

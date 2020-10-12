@@ -2,7 +2,7 @@ package com.tsystems.util.validator;
 
 import com.tsystems.db.dto.CustomerDto;
 import com.tsystems.db.entities.Customer;
-import com.tsystems.bussiness.services.interfaces.CustomerService;
+import com.tsystems.business.services.interfaces.CustomerService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

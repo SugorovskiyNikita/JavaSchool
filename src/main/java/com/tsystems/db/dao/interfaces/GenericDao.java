@@ -17,7 +17,7 @@ public interface GenericDao<T, PK> {
 
     T loadByKey(PK key);
 
-    void remove(Integer entity);
+    void remove(PK id);
 
     void update(T Entity);
 

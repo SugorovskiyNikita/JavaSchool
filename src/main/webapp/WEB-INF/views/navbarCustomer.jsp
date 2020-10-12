@@ -26,38 +26,22 @@
     </div>
     <!-- /.navbar-header -->
 
-    <ul class="nav navbar-top-links navbar-right">
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="/change_password"><i class="fa fa-gear fa-fw"></i> Change password</a>
-                </li>
-                <%--                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                                </li>--%>
-                <li class="divider"></li>
-                <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                </li>
-            </ul>
-            <!-- /.dropdown-user -->
-        </li>
-    </ul>
-    <!-- /.navbar-top-links -->
-
-    <div id="navi" class="navbar-default sidebar" role="navigation">
+    <div id="navi" class="navbar-text sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li>
-                    <a href="/customer" style="color: #ebebeb"><i  class="fa fa-user fa-fw"></i> Me</a>
+                <li style="float:right">
+                    <a href="/customer" style="color: #1b1e21"><i  class="fa fa-user fa-fw"></i> Me</a>
                 </li>
 
-                <li>
-                    <a href="/tariffs" style="color: #ebebeb"><i class="fa fa-cog fa-fw"></i> Tariffs</a>
+                <li style="float:right">
+                    <a href="/tariffs" style="color: #1b1e21"><i class="fa fa-cog fa-fw"></i> Tariffs</a>
                 </li>
 
-                <li>
-                    <a href="/options" style="color: #ebebeb"><i class="fa fa-cogs fa-fw"></i> Options</a>
+                <li style="float:right">
+                    <a href="/options" style="color: #1b1e21"><i class="fa fa-cogs fa-fw"></i> Options</a>
+                </li>
+                <li style="float:right">
+                    <a href="/logout" style="color: #1b1e21"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
         </div>

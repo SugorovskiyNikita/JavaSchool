@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/style.css" type="text/css" rel="stylesheet">
     <title>Step 1. Choose tariff</title>
@@ -64,12 +65,7 @@
                             <input type="hidden" name="contractId" value=${contract.id}>
                             <input type="hidden" name="tariffId" value=${tariff.id}>
                             <a href="#" id="chosenTariff" onclick="document.forms['chooseTariffForm${tariff.id}'].submit()">${tariff.name}</a>
-                            <script>
-                                document.getElementById('chosenTariff').addEventListener('change', function (e) {
-                                    let value = document.getElementById('chosenTariff').value // записываем значение в переменную
-                                    localStorage.setItem('inputValue', value) // записываем значение в localStorage
-                                })
-                            </script>
+
                         </form:form>
                     </td>
                     <td>

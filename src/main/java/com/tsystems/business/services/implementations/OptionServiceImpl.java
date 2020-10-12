@@ -1,11 +1,11 @@
-package com.tsystems.bussiness.services.implementations;
+package com.tsystems.business.services.implementations;
 
 import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.dao.interfaces.TariffDao;
 import com.tsystems.db.dto.OptionDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
-import com.tsystems.bussiness.services.interfaces.OptionService;
+import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

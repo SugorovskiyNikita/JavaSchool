@@ -1,9 +1,9 @@
-package com.tsystems.bussiness.controller;
+package com.tsystems.business.controller;
 
 
 import com.tsystems.db.dto.OptionDto;
-import com.tsystems.bussiness.services.interfaces.OptionService;
-import com.tsystems.bussiness.services.interfaces.TariffService;
+import com.tsystems.business.services.interfaces.OptionService;
+import com.tsystems.business.services.interfaces.TariffService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by nikita on 16.09.2020.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class OptionController {
 
     @Autowired
@@ -56,7 +56,7 @@ public class OptionController {
 
 
         optionService.addNew(newOption, requiredFromId, forbiddenWithId, forTariffsId);
-        return "redirect:/options";
+        return "redirect:/admin/options";
     }
 
     @GetMapping("/options")

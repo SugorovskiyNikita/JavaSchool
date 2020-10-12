@@ -2,8 +2,13 @@ package com.tsystems.db.dto;
 
 import com.tsystems.db.entities.Contract;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -12,12 +17,16 @@ import java.util.stream.Collectors;
  * Created by nikita on 24.09.2020.
  */
 @Data
+@NoArgsConstructor
 public class ContractDto implements DtoMapper<Contract>, Comparable<ContractDto> {
 
     private Integer id;
 
+    @NotNull
     private String number;
 
+    @Min(0)
+    @Max(2)
     private Integer isBlocked;
 
     private CustomerDto customer;
@@ -28,9 +37,6 @@ public class ContractDto implements DtoMapper<Contract>, Comparable<ContractDto>
 
     private TreeSet<OptionDto> usedOptions = new TreeSet<>();
 
-    public ContractDto() {
-        // Empty
-    }
 
     /**
      * Create dto object from entity

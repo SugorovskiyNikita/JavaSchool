@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <title>Step 2. Choose options</title>
@@ -155,8 +155,6 @@
         </c:otherwise>
         </c:choose>
     </div>
-
-
 </div>
 </body>
 </html>
