@@ -64,6 +64,7 @@
                             <td>${option.name}</td>
                         </c:forEach>
 
+
                         <td>
                             <c:choose>
                             <c:when test="${contract.isBlocked  >= 1  == true}">
@@ -90,6 +91,8 @@
                                     </c:otherwise>
                                     </c:choose>
                         </td>
+                        <td><button type="button" class="btn btn-dark btn-sm"> <a style="color: #F4EEE8;" href="/admin/changeOption/${contract.id}">Options</a></button>
+                        </td>
                     </tr>
                     </tbody>
                 </c:forEach>
@@ -99,6 +102,8 @@
             <br>
             <button type="button" class="btn btn-success"> <a style="color: #F4EEE8;"  onclick="document.forms['addContract'].submit()">Add contract</a></button>
             <button type="button" class="btn btn-primary"> <a style="color: #F4EEE8;" href="/admin/customer/${customer.id}">Change tariff</a></button>
+            <button type="button" class="btn btn-dark"> <a style="color: #F4EEE8;" href="/admin/changeOption/${customer.id}">Change options</a></button>
+
 
             <br>
             <br>

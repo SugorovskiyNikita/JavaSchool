@@ -98,7 +98,7 @@
                                                    enctype="application/x-www-form-urlencoded">
                                             <input type="text" hidden name="contractId" value=${contract.id}>
 
-                                    <button type="button" class="btn btn-success btn-sm"><a class="inline-link-unlock" title="Unblock contract" href="#"
+                                    <button type="button" class="btn btn-success btn-sm"><a style="color: #ebebeb" class="inline-link-unlock" title="Unblock contract" href="#"
                                                onclick="document.forms['unblock${contract.id}'].submit()">Unblock</a>
                                         </form:form>
                                     </c:when>
@@ -109,7 +109,7 @@
                                                    enctype="application/x-www-form-urlencoded">
                                             <input type="text" hidden name="contractId" value=${contract.id}>
 
-                                    <button type="button" class="btn btn-danger btn-sm"><a class="inline-link-lock" title="Block contract" href="#"
+                                    <button type="button" class="btn btn-danger btn-sm"><a style="color: #ebebeb" class="inline-link-lock" title="Block contract" href="#"
                                                onclick="document.forms['block${contract.id}'].submit()">Block</a>
                                         </form:form>
 

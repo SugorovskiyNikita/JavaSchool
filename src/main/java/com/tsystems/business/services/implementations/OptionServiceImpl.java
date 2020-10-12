@@ -31,22 +31,22 @@ public class OptionServiceImpl implements OptionService {
 
 
     @Override
-    public OptionDto addNew(OptionDto newOption, List<Integer> requiredFromId, List<Integer> forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException {
+    public OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException {
 
         Option option = newOption.convertToEntity();
 
         Set<Option> requireds = new HashSet<>();
         if (requiredFromId != null) {
-            for (Integer id : requiredFromId) {
-                Option opt = optionDao.loadByKey(id);
+            for (String id : requiredFromId) {
+                Option opt = optionDao.loadByKey(Integer.parseInt(id));
                 requireds.add(opt);
             }
         }
 
         Set<Option> forbiddens = new HashSet<>();
         if (forbiddenWithId != null) {
-            for (Integer id : forbiddenWithId) {
-                Option opt = optionDao.loadByKey(id);
+            for (String id : forbiddenWithId) {
+                Option opt = optionDao.loadByKey(Integer.parseInt(id));
                 forbiddens.add(opt);
             }
         }

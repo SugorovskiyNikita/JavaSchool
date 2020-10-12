@@ -34,13 +34,6 @@
                 </li>
 
                 <li style="float:right">
-                    <a href="/tariffs" style="color: #1b1e21"><i class="fa fa-cog fa-fw"></i> Tariffs</a>
-                </li>
-
-                <li style="float:right">
-                    <a href="/options" style="color: #1b1e21"><i class="fa fa-cogs fa-fw"></i> Options</a>
-                </li>
-                <li style="float:right">
                     <a href="/logout" style="color: #1b1e21"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>

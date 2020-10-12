@@ -34,18 +34,15 @@
         <div class="col-sm-4">
             <!--left col-->
             <ul class="list-group">
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id: </strong></span> ${customer.id}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name: </strong></span> ${customer.name}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Surname: </strong></span> ${customer.surname}</li>
-                <li class="list-group-item text-right"><span class="pull-left" dataformatas="yyyy-MM-dd"><strong class="">Birthday: </strong></span><fmt:formatDate value="${customer.dateOfBirth}" pattern="dd-MM-yyyy" /></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport data: </strong></span>${customer.passportData}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport number: </strong></span>${customer.passportNumber}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address: </strong></span>${customer.address}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span>${customer.email}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id blocked: </strong></span>${customer.isBlocked}</li>
-                <c:forEach var="contracts" items="${customer.contracts}">
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="" name="contract">Contracts: </strong></span>${contracts.id}</li>
-                </c:forEach>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Customer id: </strong></span> ${contract.customer.id}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name: </strong></span> ${contract.customer.name}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Surname: </strong></span> ${contract.customer.surname}</li>
+                <li class="list-group-item text-right"><span class="pull-left" dataformatas="yyyy-MM-dd"><strong class="">Birthday: </strong></span><fmt:formatDate value="${contract.customer.dateOfBirth}" pattern="dd-MM-yyyy" /></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport data: </strong></span>${contract.customer.passportData}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Passport number: </strong></span>${contract.customer.passportNumber}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Address: </strong></span>${contract.customer.address}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email: </strong></span>${contract.customer.email}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Id blocked: </strong></span>${contract.customer.isBlocked}</li>
             </ul>
         </div>
         <div class="row">
@@ -54,51 +51,53 @@
                 <label for="contract" class="col-sm">Contract</label>
                 <div class="col-sm">
                     <div class="controls">
-                        <select required id="contract" size="1" name="contractId" class="form-control" onchange="this.value">
-                            <c:forEach var="contracts" items="${customer.contracts}">
-                                <option value="${contracts.id}">${contracts.id}</option>
-                            </c:forEach>
-                        </select>
+                        <li id="contract" class="form-control">${contract.id}</li>
+                        <input type="hidden" name="contractId" value="${contract.id}">
                     </div>
                 </div>
                 <br>
-                <label class="col-sm">Phone number</label>
+                <label for="number" class="col-sm">Number</label>
                 <div class="col-sm">
-                    <input id="number" name="number">
-                    <script>
-                        function getRandomTel() {
-                            var m = "+7999";
-                            var x = m + (Math.floor(Math.random() * 10000000));
-                            return x;
-                        }
-                        document.getElementById('number').value = getRandomTel()
-                    </script>
+                    <div class="controls">
+                        <li id="number" class="form-control">${contract.number}</li>
+                        <input type="hidden" name="number" value="${contract.number}">
+                    </div>
                 </div>
                 <br>
+
                 <label for="tariff" class="col-sm">Tariff</label>
                 <div class="col-sm">
                     <div class="controls">
-                        <select required id="tariff" size="1" name="tariffId" class="form-control" onchange="this.value">
-                            <c:forEach var="tariff" items="${tariff}">
-                            <option value="${tariff.id}">${tariff.name}
-                                </c:forEach>
-                        </select>
+                        <li id="tariff" class="form-control">${contract.tariff.name}</li>
+                        <input type="hidden" name="tariffId" value="${contract.tariff}">
                     </div>
                 </div>
                 <br>
-                <label for="option" class="col-sm">Options</label>
                 <div class="col-sm">
+                    <label for="option">Options</label>
                     <div class="controls" id="options-area">
                         <c:forEach items="${options}" var="option">
+                        <c:choose>
+                        <c:when test="${used.contains(option)}">
+                        <label class="custom-control custom-checkbox" id="option">
+                            <span class="custom-control-indicator"></span>
+                            <input type="checkbox" id="box${option.id}" name="options" value="${option.id}" checked="checked">
+                            <span class="custom-control-description">${option.name}</span>
+                            </c:when>
+                            <c:otherwise>
                             <label class="custom-control custom-checkbox" id="option">
-                                <input type="checkbox" id="box${option.id}" name="options" value="${option.id}">
                                 <span class="custom-control-indicator"></span>
+                                <input type="checkbox" id="box${option.id}" name="options" value="${option.id}">
                                 <span class="custom-control-description">${option.name}</span>
+                                </c:otherwise>
+                                </c:choose>
+
                                 <script>
                                     $(function(){
                                         $("#box${option.id}").click(function(){
 
                                             if($("#box${option.id}").is(":checked")) {
+
 
                                                 <c:if test="${option.requiredFrom.size() != 0}">
 
@@ -142,19 +141,19 @@
                                     });
                                 </script>
                             </label>
-                        </c:forEach>
+                            </c:forEach>
                     </div>
-                </div>
 
-                <br>
-                <button type="submit" class="btn btn-primary">
-                    Update contract
-                </button>
-            </form>
+                    <br>
+                    <button type="submit" class="btn btn-primary">
+                        Update contract
+                    </button>
+
+                </div>
         </div>
+        <br>
+        </form>
     </div>
-    <br>
-</div>
 
 </body>
 </html>

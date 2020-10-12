@@ -34,14 +34,21 @@ public class OptionController {
         return "createOption";}
 
     @PostMapping("/admin/addOption")
-    public String addOption(@RequestParam("requiredFrom") List<Integer> requiredFromId,
-                            @RequestParam("forbiddenWith") List<Integer> forbiddenWithId,
-                            @RequestParam("forTariffs") List<Integer> forTariffsId, HttpServletRequest request) throws WrongOptionConfigurationException {
+    public String addOption(@RequestParam("forTariffs") List<Integer> forTariffsId,
+                            HttpServletRequest request) throws WrongOptionConfigurationException {
 
         String name = request.getParameter("name");
         String cost = request.getParameter("cost");
         String connectCost = request.getParameter("connectCost");
         String desc = request.getParameter("description");
+
+        String[] requiredFromId;
+        String[] forbiddenWithId;
+        if ((requiredFromId = request.getParameterValues("requiredFrom")) == null)
+            requiredFromId = new String[0];
+        if ((forbiddenWithId = request.getParameterValues("forbiddenWith")) == null)
+            forbiddenWithId = new String[0];
+
 
         OptionDto newOption = new OptionDto();
         newOption.setName(name);

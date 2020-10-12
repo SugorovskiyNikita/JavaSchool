@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Service
 public interface OptionService extends GenericService<OptionDto, Integer> {
-   OptionDto addNew(OptionDto newOption, List<Integer> requiredFromId, List<Integer> forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException;
+   OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException;
 
    List<OptionDto> getOptionsOfTariffs(Integer tariffs);
 }

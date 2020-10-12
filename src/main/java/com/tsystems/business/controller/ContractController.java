@@ -9,6 +9,8 @@ import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.business.services.interfaces.TariffService;
 import com.tsystems.db.dto.OptionDto;
 ;
+import com.tsystems.db.dto.TariffDto;
+import com.tsystems.db.entities.Tariff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,8 +52,19 @@ public class ContractController {
     public String chooseTariffAndOption(@PathVariable("id") int id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         model.addAttribute("tariff", tariffService.loadAll());
-        model.addAttribute("option", optionService.loadAll());
+        model.addAttribute("options", optionService.loadAll());
         return "showCustomer";
+    }
+
+    @GetMapping("/admin/changeOption/{id}")
+    public String chooseTariffAndOptionAdmin(@PathVariable("id") int id, Model model) {
+        ContractDto contract = contractService.loadByKey(id);
+        TariffDto tariff = tariffService.loadByKey(contract.getTariff().getId());
+        model.addAttribute("contract", contractService.loadByKey(id));
+        model.addAttribute("options", optionService.getOptionsOfTariffs(tariff.getId()));
+        model.addAttribute("used", contract.getUsedOptions());
+        model.addAttribute("tariff", contract.getTariff());
+        return "changeOptionsAdmin";
     }
 
     @GetMapping("/admin/customerInfo/{id}")

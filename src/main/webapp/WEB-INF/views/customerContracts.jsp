@@ -24,7 +24,18 @@
     <c:choose>
         <c:when test="${optionsList.size() != 0}">
             <c:if test="${contract.isBlocked != 1 && contract.isBlocked != 2 && contract.balance > 0}">
-                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Change option</button></a>
+                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Change tariff</button></a>
+                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-dark">Change option</button></a>
+
+                <form:form id="chooseOptionForm${contract.tariff.id}"
+                           method="POST"
+                           action="/changeOnlyOption"
+                           enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="contractId" value=${contract.id}>
+                    <input type="hidden" name="tariffId" value=${contract.tariff.id}>
+
+                </form:form>
+
             </c:if>
             </p>
             <br>
@@ -36,9 +47,6 @@
                     <th>
                         Price
                     </th>
-                    <th>
-                        Cost of connection
-                    </th>
                 </tr>
                 <c:forEach var="usedOptions" items="${optionsList}">
                     <tr>
@@ -48,9 +56,7 @@
                         <td>
                                 ${usedOptions.cost}
                         </td>
-                        <td>
-                                ${usedOptions.connectCost}
-                        </td>
+
                     </tr>
                 </c:forEach>
             </table>
@@ -65,9 +71,11 @@
     </c:choose>
 
     <form:form id="changeTariffForm" method="POST"
-               action="/changeTariff"
+               action="/changeOnlyOption"
                enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="contractId" value=${contract.id}>
+        <input type="hidden" name="number" value="${contract.number}">
+        <input type="hidden" name="tariffId" value=${contract.tariff.id}>
     </form:form>
 </div>
 

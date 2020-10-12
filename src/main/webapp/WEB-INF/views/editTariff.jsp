@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-sm-10">
             <h1 class="">Customer information</h1>
-            <button type="button" class="btn btn-warning"> <a id="link" href="/admin/tariffs">Return to all tariffs</a></button>
+            <button type="button" class="btn btn-warning"> <a style="color: #ebebeb" href="/admin/tariffs">Return to all tariffs</a></button>
         </div>
         <div class="col-sm-2"><img title="profile image" class="img-circle img-responsive" src="https://freevectorlogo.net/wp-content/uploads/2013/12/t-mobile-vector-logo-400x400.png">
         </div>
