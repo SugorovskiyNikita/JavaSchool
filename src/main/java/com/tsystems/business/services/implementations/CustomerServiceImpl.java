@@ -60,8 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setPassword(passwordEncoder.encode("password"));
 
         //Give role, default "USER"
-        Role role = new RoleDto().convertToEntity();
-        role.setId(1);
+        Role role = roleDao.getRoleById(1);
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         customer.setRoles(roles);

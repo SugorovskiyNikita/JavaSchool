@@ -33,7 +33,7 @@
             <th scope="col">Surname</th>
             <th scope="col">Email</th>
             <th scope="col">Is Blocked</th>
-            <th scope="col"></th>
+            <th scope="col">Address</th>
             <th scope="col">
                 <button type="button" class="btn btn-success"><a id="link" href="/admin/addCustomer">Add new
                     Customer</a></button>
@@ -53,6 +53,7 @@
                         <c:otherwise>No</c:otherwise>
                     </c:choose>
                 </td>
+                <td>${customer.address}</td>
                 <td>
                     <button type="button" class="btn btn-dark"><a id="link1" href="/admin/customerInfo/${customer.id}">Show
                         details</a></button>

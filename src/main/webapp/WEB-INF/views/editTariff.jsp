@@ -28,7 +28,7 @@
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
-            <h1 class="">Customer information</h1>
+            <h1 class="">Tariff information</h1>
             <button type="button" class="btn btn-warning"><a style="color: #ebebeb" href="/admin/tariffs">Return to all
                 tariffs</a></button>
         </div>
@@ -41,12 +41,15 @@
         <div class="row">
             <div class="col-sm-4">
                 <!--left col-->
-                <label> Tariff information</label>
+
                 <ul class="list-group">
                     <input type="hidden" name="tariffId" value="${tariff.id}">
+                    <label>Tariff name</label>
                     <input class="form-control" type="text" name="name" placeholder="Name of tariff"
                            value="${tariff.name}">
+                    <label>Tariff price</label>
                     <input class="form-control" type="number" name="cost" placeholder="Cost" value="${tariff.cost}">
+                    <label>Tariff description</label>
                     <input class="form-control" type="text" name="description" placeholder="Description"
                            value="${tariff.description}">
                 </ul>

@@ -12,13 +12,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
             crossorigin="anonymous"></script>
+    <script src="/resources/js/search_line.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/forlist.css"/>">
 </head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
 <div class="container target">
     <h1>Options list</h1>
-    <table class="table table-striped">
+    <input id='myInput' onkeyup='searchTable()' type='text'>
+    <table id="myTable" class="table table-striped">
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
