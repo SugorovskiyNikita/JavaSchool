@@ -46,6 +46,7 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
 
     /**
      * Create dto object from entity
+     *
      * @param option entity to convert
      */
     public OptionDto(Option option) {
@@ -100,4 +101,29 @@ public class OptionDto implements DtoMapper<Option>, Comparable<OptionDto> {
         return ObjectUtils.compare(this.id, o.getId());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OptionDto optionDto = (OptionDto) o;
+
+        if (id != null ? !id.equals(optionDto.id) : optionDto.id != null) return false;
+        if (name != null ? !name.equals(optionDto.name) : optionDto.name != null) return false;
+        if (cost != null ? !cost.equals(optionDto.cost) : optionDto.cost != null) return false;
+        if (connectCost != null ? !connectCost.equals(optionDto.connectCost) : optionDto.connectCost != null)
+            return false;
+        return description != null ? description.equals(optionDto.description) : optionDto.description == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (cost != null ? cost.hashCode() : 0);
+        result = 31 * result + (connectCost != null ? connectCost.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
+    }
 }

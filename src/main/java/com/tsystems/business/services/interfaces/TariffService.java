@@ -3,6 +3,7 @@ package com.tsystems.business.services.interfaces;
 import com.tsystems.db.dto.TariffDto;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public interface TariffService extends GenericService<TariffDto, Integer> {
 
-    TariffDto update(TariffDto tariffDto, List<Integer> newOptions,String name, Integer cost, String description);
+    TariffDto update(Integer tariffDto, List<Integer> newOptions, String name, BigDecimal cost, String description);
 
     TariffDto addNew (TariffDto tariff, List<Integer> newOptions);
 

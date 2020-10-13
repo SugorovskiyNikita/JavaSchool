@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class TariffController {
     @GetMapping("/admin/addTariff")
     public String createTariff(Model model) {
         model.addAttribute("options", optionService.loadAll());
-        return "createTariff";}
+        return "createTariff";
+    }
 
     @PostMapping("/admin/addNewTariff")
     public String addTariff(@RequestParam("options") List<Integer> newOptions, @ModelAttribute("tariff") TariffDto tariff) throws WrongOptionConfigurationException {
@@ -49,7 +51,7 @@ public class TariffController {
     }
 
     @GetMapping("/admin/editTariff/{id}")
-    public String editTariff (@PathVariable("id") int id, Model model) {
+    public String editTariff(@PathVariable("id") int id, Model model) {
         model.addAttribute("tariff", tariffService.loadByKey(id));
         model.addAttribute("options", optionService.loadAll());
         model.addAttribute("possible", optionService.getOptionsOfTariffs(id));
@@ -57,14 +59,13 @@ public class TariffController {
     }
 
     @PostMapping("/admin/editTariff")
-    public String editTariff (@RequestParam("tariffId") Integer id,
-                              @RequestParam("options") List<Integer> newOptions,
-                              @RequestParam("name") String name,
-                              @RequestParam("cost") Integer cost,
-                              @RequestParam("description") String description) {
-        TariffDto tariffDto = tariffService.loadByKey(id);
-        tariffService.update(tariffDto, newOptions, name, cost,description);
-        return "redirect:/admin/editTariff/" + tariffDto.getId();
+    public String editTariff(@RequestParam("tariffId") Integer id,
+                             @RequestParam("options") List<Integer> newOptions,
+                             @RequestParam("name") String name,
+                             @RequestParam("cost") BigDecimal cost,
+                             @RequestParam("description") String description) {
+        tariffService.update(id, newOptions, name, cost, description);
+        return "redirect:/admin/editTariff/" + id;
     }
 
 }

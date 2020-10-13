@@ -2,6 +2,7 @@ package com.tsystems.db.entities;
 
 import lombok.Data;
 import org.apache.commons.lang3.builder.HashCodeExclude;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,6 +37,7 @@ public class Option {
     @Column(name = "description")
     private String description;
 
+    @ToStringExclude
     @HashCodeExclude
     @JoinTable(name = "Required_option_relationships", joinColumns = {
             @JoinColumn(name = "id_first", referencedColumnName = "id")}, inverseJoinColumns = {
@@ -52,6 +54,7 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Option> forbidden = new HashSet<>();
 
+    @ToStringExclude
     @HashCodeExclude
     @JoinTable(name = "Possible_options_of_tariffs", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
@@ -60,6 +63,7 @@ public class Option {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<Tariff> possibleTariffsOfOption = new HashSet<>();
 
+    @ToStringExclude
     @HashCodeExclude
     @JoinTable(name = "Used_options_of_tariff", joinColumns = {
             @JoinColumn(name = "option_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
@@ -103,6 +107,21 @@ public class Option {
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Option option = (Option) o;
+
+        if (id != null ? !id.equals(option.id) : option.id != null) return false;
+        if (name != null ? !name.equals(option.name) : option.name != null) return false;
+        if (cost != null ? !cost.equals(option.cost) : option.cost != null) return false;
+        if (connectCost != null ? !connectCost.equals(option.connectCost) : option.connectCost != null) return false;
+        return description != null ? description.equals(option.description) : option.description == null;
+
+    }
+
+    @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
@@ -110,5 +129,16 @@ public class Option {
         result = 31 * result + (connectCost != null ? connectCost.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Option{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", connectCost=" + connectCost +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

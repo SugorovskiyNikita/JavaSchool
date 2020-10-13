@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="true"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page session="true" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -64,7 +64,8 @@
                                    enctype="application/x-www-form-urlencoded">
                             <input type="hidden" name="contractId" value=${contract.id}>
                             <input type="hidden" name="tariffId" value=${tariff.id}>
-                            <a href="#" id="chosenTariff" onclick="document.forms['chooseTariffForm${tariff.id}'].submit()">${tariff.name}</a>
+                            <a href="#" id="chosenTariff"
+                               onclick="document.forms['chooseTariffForm${tariff.id}'].submit()">${tariff.name}</a>
 
                         </form:form>
                     </td>

@@ -8,6 +8,7 @@ import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.ContractService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@Slf4j
 public class ContractServiceImpl implements ContractService {
 
     @Autowired

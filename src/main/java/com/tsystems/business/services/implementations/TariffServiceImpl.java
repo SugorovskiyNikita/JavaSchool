@@ -58,21 +58,21 @@ public class TariffServiceImpl implements TariffService {
     }
 
     @Override
-    public TariffDto update(TariffDto tariffDto, List<Integer> newOptions, String name, Integer cost, String description) {
-        Tariff tariff = tariffDto.convertToEntity();
+    public TariffDto update(Integer id, List<Integer> newOptions, String name, BigDecimal cost, String description) {
+        Tariff tariff = tariffDao.loadByKey(id);
         tariff.setName(name);
-        tariff.setCost(new BigDecimal(cost));
+        tariff.setCost(cost);
         tariff.setDescription(description);
         Set<Option> options = new HashSet<>();
         if (newOptions != null) {
-            for (Integer id : newOptions) {
-                Option opt = optionDao.loadByKey(id);
-                opt.setId(id);
+            for (Integer ids : newOptions) {
+                Option opt = optionDao.loadByKey(ids);
                 options.add(opt);
             }
         }
         tariff.setPossibleOptions(options);
-        return new TariffDto(tariff).addDependencies(tariff);
+
+        return new TariffDto(tariffDao.add(tariff)).addDependencies(tariff);
     }
 
     @Override
@@ -82,7 +82,6 @@ public class TariffServiceImpl implements TariffService {
         if (newOptions != null) {
             for (Integer id : newOptions) {
                 Option opt = optionDao.loadByKey(id);
-                opt.setId(id);
                 options.add(opt);
             }
         }

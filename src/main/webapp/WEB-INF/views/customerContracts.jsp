@@ -19,19 +19,25 @@
         <h2>Contracts</h2>
     </div>
 
-    <p><h2>Connected options</h2>
+    <p>
+    <h2>Connected options</h2>
 
     <c:choose>
         <c:when test="${optionsList.size() != 0}">
             <c:if test="${contract.isBlocked != 1 && contract.isBlocked != 2 && contract.balance > 0}">
-                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-info">Change tariff</button></a>
-                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()"><button type="button" class="btn btn-lg btn-dark">Change option</button></a>
+                <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()">
+                    <button type="button" class="btn btn-lg btn-info">Change tariff</button>
+                </a>
+                <a title="Change tariff or options" href="#" onclick="document.forms['chooseOptionForm${contract.tariff.id}'].submit()">
+                    <button type="button" class="btn btn-lg btn-dark">Change option</button>
+                </a>
 
                 <form:form id="chooseOptionForm${contract.tariff.id}"
                            method="POST"
-                           action="/changeOnlyOption"
+                           action="/changeOnlyOptions"
                            enctype="application/x-www-form-urlencoded">
                     <input type="hidden" name="contractId" value=${contract.id}>
+                    <input type="hidden" name="number" value="${contract.number}">
                     <input type="hidden" name="tariffId" value=${contract.tariff.id}>
 
                 </form:form>
@@ -64,17 +70,18 @@
         <c:otherwise>
             <h2>No connected option</h2>
             <c:if test="${contract.isBlocked != 1 && contract.isBlocked != 2 && contract.balance > 0}">
-               <button type="button" class="btn btn-lg btn-info"> <a title="Change tariff or options" href="#" onclick="document.forms['changeTariffForm'].submit()">Connect options</a></button>
+                <button type="button" class="btn btn-lg btn-info"><a title="Change tariff or options" href="#"
+                                                                     onclick="document.forms['changeTariffForm'].submit()">Connect
+                 options</a></button>
             </c:if>
             </p>
         </c:otherwise>
     </c:choose>
 
     <form:form id="changeTariffForm" method="POST"
-               action="/changeOnlyOption"
+               action="/changeTariff"
                enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="contractId" value=${contract.id}>
-        <input type="hidden" name="number" value="${contract.number}">
         <input type="hidden" name="tariffId" value=${contract.tariff.id}>
     </form:form>
 </div>

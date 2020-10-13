@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="true"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ page session="true" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -30,7 +30,7 @@
         <p>
             Client balance: ${contract.balance}
         </p>
-        <p >
+        <p>
             Chosen tariff title: ${tariff.name}
         </p>
         <p>
@@ -85,25 +85,20 @@
                         <td style="width: 0">
                             <c:choose>
                                 <c:when test="${used.contains(option)}">
-                                    <input type="checkbox" id="box${option.id}" name="options" value="${option.id}" checked="checked">
+                                    <input type="checkbox" id="box${option.id}" name="options" value="${option.id}"
+                                           checked="checked">
                                 </c:when>
                                 <c:otherwise>
                                     <input type="checkbox" id="box${option.id}" name="options" value="${option.id}">
                                 </c:otherwise>
                             </c:choose>
                         </td>
-                        <td id="dep${option.id}" style="display: none;">
-                            (will be enabled automatically)
-                        </td>
-                        <td id="inc${option.id}" style="display: none;">
-                            (incompatible with chosen option)
-                        </td>
                     </tr>
                     <script>
-                        $(function(){
-                            $("#box${option.id}").click(function(){
+                        $(function () {
+                            $("#box${option.id}").click(function () {
 
-                                if($("#box${option.id}").is(":checked")) {
+                                if ($("#box${option.id}").is(":checked")) {
 
                                     <c:if test="${option.requiredFrom.size() != 0}">
 
@@ -152,7 +147,7 @@
             <input type="hidden" name="number" value="${contract.number}">
             <input type="hidden" name="contractId" value=${contract.id}>
             <input type="hidden" name="tariffId" value=${tariff.id}>
-            <button type="submit" class="btn btn-success" >Save</button>
+            <button type="submit" class="btn btn-success">Save</button>
         </form:form>
         </c:when>
         <c:otherwise>

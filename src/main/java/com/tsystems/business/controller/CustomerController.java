@@ -123,15 +123,15 @@ public class CustomerController {
         return "changeOption";
     }
 
-    @PostMapping("/changeOnlyOption")
+    @PostMapping("/changeOnlyOptions")
     public String changeOnlyOption(@RequestParam("contractId") Integer contractId,
-                                   @RequestParam("tariffId") Integer tariffId, Model model) throws Exception {
+                                   @RequestParam("tariffId") Integer tariffId, Model model) {
         ContractDto contract = contractService.loadByKey(contractId);
         model.addAttribute("tariff", tariffService.loadByKey(tariffId));
         model.addAttribute("contract", contract);
         model.addAttribute("options", optionService.getOptionsOfTariffs(tariffId));
         model.addAttribute("used", contract.getUsedOptions());
-        return "changeOnlyOption";
+        return "changeOnlyOptions";
     }
 
     @PostMapping("/admin/blockCustomer")
