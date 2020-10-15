@@ -1,9 +1,7 @@
 package com.tsystems.db.entities;
 
 
-
 import lombok.Data;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,8 +59,8 @@ public class Customer {
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns =
     @JoinColumn(name = "user_id"),
-    inverseJoinColumns =
-    @JoinColumn(name = "role_id"))
+            inverseJoinColumns =
+            @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public Customer() {

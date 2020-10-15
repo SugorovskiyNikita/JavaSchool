@@ -17,45 +17,51 @@
             crossorigin="anonymous"></script>
     <script src="/resources/js/search_line.js"></script>
     <link rel="stylesheet" href="/resources/css/forlist.css">
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+
     <title>Contracts List</title>
 </head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
-<div class="container target">
-    <h1>Contract list</h1>
-    <input id='myInput' onkeyup='searchTable()' type='text'>
-    <table id="myTable" class="table table-striped">
-        <tr>
-            <th scope="col">Contract Id</th>
-            <th scope="col">Number</th>
-            <th scope="col">Customer id</th>
-            <th scope="col">Tariff</th>
-            <th scope="col">Is Blocked</th>
-            <th scope="col">
-                <button type="button" class="btn btn-success"><a id="link" href="/admin/addCustomer">Add new
-                    Customer</a></button>
-            </th>
-        </tr>
-        <c:forEach items="${contracts}" var="contract">
-            <tr>
+<div id="page-container">
+    <div id="content-wrap">
+        <div class="container target">
+            <h1>Contract list</h1>
+            <input id='myInput' onkeyup='searchTable()' type='text'>
+            <table id="myTable" class="table table-striped">
+                <tr>
+                    <th scope="col">Contract Id</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Customer id</th>
+                    <th scope="col">Tariff</th>
+                    <th scope="col">Is Blocked</th>
+                    <th scope="col">
+                        <button type="button" class="btn btn-success"><a id="link" href="/admin/addCustomer">Add new
+                            Customer</a></button>
+                    </th>
+                </tr>
+                <c:forEach items="${contracts}" var="contract">
+                    <tr>
 
-                <td>${contract.id}</td>
-                <td>${contract.number}</td>
-                <td>${contract.customer.id}</td>
-                <td>${contract.tariff.name}</td>
-                <td><c:choose>
-                    <c:when test="${contract.isBlocked >= 1}">Yes</c:when>
-                    <c:otherwise>No</c:otherwise>
-                </c:choose></td>
-                <td>
-                    <button type="button" class="btn btn-dark"><a id="link1"
-                                                                  href="/admin/customerInfo/${contract.customer.id}">Show
-                        details</a></button>
-                </td>
-            </tr>
-        </c:forEach>
-
-    </table>
+                        <td>${contract.id}</td>
+                        <td>${contract.number}</td>
+                        <td>${contract.customer.id}</td>
+                        <td>${contract.tariff.name}</td>
+                        <td><c:choose>
+                            <c:when test="${contract.isBlocked >= 1}">Yes</c:when>
+                            <c:otherwise>No</c:otherwise>
+                        </c:choose></td>
+                        <td>
+                            <button type="button" class="btn btn-dark"><a id="link1"
+                                                                          href="/admin/customerInfo/${contract.customer.id}">Show
+                                details</a></button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

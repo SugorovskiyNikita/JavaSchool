@@ -23,6 +23,8 @@
 </head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
+<div id="page-container">
+    <div id="content-wrap">
 <div class="container target">
     <div class="row">
         <div class="col-sm-12">
@@ -54,8 +56,8 @@
                         class="">Address: </strong></span>${customer.address}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong
                         class="">Email: </strong></span>${customer.email}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong
-                        class="">Id blocked: </strong></span>${customer.isBlocked}</li>
+                <!--<li class="list-group-item text-right"><span class="pull-left"><strong
+                        class="">Id blocked: </strong></span>${customer.isBlocked}</li>-->
             </ul>
         </div>
         <div class="col-sm-9">
@@ -133,42 +135,6 @@
                                                              href="/admin/customer/${customer.id}">Change tariff</a>
             </button>
 
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <div>
-
-                <c:choose>
-                <c:when test="${customer.isBlocked  >= 1  == true}">
-                <form:form id="unblock${customer.id}" method="POST"
-                           action="/admin/unblockCustomer"
-                           enctype="application/x-www-form-urlencoded">
-                <input type="text" hidden name="customerId" value=${customer.id}>
-
-                <button type="button" class="btn btn-success"><a class="inline-link-unlock" title="Unblock contract"
-                                                                 style="color: #ebebeb;" href="#"
-                                                                 onclick="document.forms['unblock${customer.id}'].submit()">Unblock
-                    customer</a>
-                    </form:form>
-                    </c:when>
-                    <c:otherwise>
-
-                    <form:form id="block${customer.id}" method="POST"
-                               action="/admin/blockCustomer"
-                               enctype="application/x-www-form-urlencoded">
-                    <input type="text" hidden name="customerId" value=${customer.id}>
-                    <button type="button" class="btn btn-danger"><a class="inline-link-lock" title="Block contract"
-                                                                    style="color: #ebebeb;" href="#"
-                                                                    onclick="document.forms['block${customer.id}'].submit()">Block
-                        customer</a>
-                        </form:form>
-                        </c:otherwise>
-                        </c:choose>
-            </div>
-
-
             <form:form id="addContract" method="POST"
                        action="/admin/addContractForCustomer"
                        enctype="application/x-www-form-urlencoded">
@@ -179,6 +145,8 @@
     <br>
 
 </div>
-
+    </div>
+</div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

@@ -1,8 +1,6 @@
 package com.tsystems.db.dao.implementations;
 
 import com.tsystems.db.dao.interfaces.RoleDao;
-import com.tsystems.db.entities.Customer;
-import com.tsystems.db.entities.Customer_;
 import com.tsystems.db.entities.Role;
 import com.tsystems.db.entities.Role_;
 import org.springframework.stereotype.Repository;

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  */
 public class PassGen {
 
-    public String randomPass(){
+    public String randomPass() {
         String password = new Random().ints(7, 48, 57)
                 .mapToObj(i -> String.valueOf((char) i)).collect(Collectors.joining());
         return password;

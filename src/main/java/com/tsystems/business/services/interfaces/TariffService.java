@@ -14,6 +14,6 @@ public interface TariffService extends GenericService<TariffDto, Integer> {
 
     TariffDto update(Integer tariffDto, List<Integer> newOptions, String name, BigDecimal cost, String description);
 
-    TariffDto addNew (TariffDto tariff, List<Integer> newOptions);
+    TariffDto addNew(TariffDto tariff, List<Integer> newOptions);
 
 }

@@ -4,11 +4,11 @@ import com.tsystems.db.dao.interfaces.CustomerDao;
 import com.tsystems.db.dao.interfaces.RoleDao;
 import com.tsystems.db.dto.ContractDto;
 import com.tsystems.db.dto.CustomerDto;
-import com.tsystems.db.dto.RoleDto;
 import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Customer;
 import com.tsystems.db.entities.Role;
 import com.tsystems.business.services.interfaces.CustomerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,13 +30,16 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private  CustomerDao customerDao;
+    private CustomerDao customerDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private static final Logger logger = Logger.getLogger(CustomerServiceImpl.class);
 
 
     @Override
@@ -64,20 +67,31 @@ public class CustomerServiceImpl implements CustomerService {
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         customer.setRoles(roles);
+        try {
+            customerDao.add(customer);
+            logger.info("New customer and new contract is created. Email = " + customer.getEmail());
+        } catch (Exception e) {
+            logger.warn("Customer" + customerDto.getEmail() + "error adding to the DB" + e);
+        }
+        return new CustomerDto(customer);
 
-
-
-        return new CustomerDto(customerDao.add(customer));
     }
 
     @Override
     public void remove(Integer key) {
-        customerDao.remove(key);
+        try {
+            customerDao.remove(key);
+            logger.info("Customer Id = " + key + " has been deleted.");
+        } catch (Exception e) {
+            logger.warn("Customer Id = " + key + " has not deleted." + e);
+        }
+
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CustomerDto> loadAll() {
+        logger.info("Loading all customers from the database.");
         return customerDao.loadAll().stream()
                 .map(e -> new CustomerDto(e).addDependencies(e))
                 .collect(Collectors.toList());
@@ -100,6 +114,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto setBlock(Integer id, Integer blockLevel) {
         Customer customer = customerDao.loadByKey(id);
         customer.setIsBlocked(blockLevel);
+        logger.info("Customer block level has been changed. Customer id = " + customer.getId() + " block level = " + blockLevel);
         return new CustomerDto(customer);
     }
 }

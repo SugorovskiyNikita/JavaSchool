@@ -12,7 +12,7 @@ import java.util.Set;
  * Created by nikita on 04.09.20.
  */
 @Entity
-@Table(name = "contracts",schema = "tmobile")
+@Table(name = "contracts", schema = "tmobile")
 @Data
 
 public class Contract {
@@ -20,7 +20,7 @@ public class Contract {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer id;
+    private Integer id;
 
     @Column(name = "number")
     private String number;
@@ -32,7 +32,7 @@ public class Contract {
     private BigDecimal balance;
 
     @ToStringExclude
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer")
     private Customer customer;
 

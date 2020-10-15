@@ -14,9 +14,13 @@
             crossorigin="anonymous"></script>
     <script src="/resources/js/search_line.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/css/forlist.css"/>">
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+    <title>Options</title>
 </head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
+<div id="page-container">
+    <div id="content-wrap">
 <div class="container target">
     <h1>Options list</h1>
     <input id='myInput' onkeyup='searchTable()' type='text'>
@@ -43,5 +47,8 @@
         </c:forEach>
     </table>
 </div>
+    </div>
+</div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

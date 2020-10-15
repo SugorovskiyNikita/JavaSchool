@@ -4,7 +4,6 @@ import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.entities.Option;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**

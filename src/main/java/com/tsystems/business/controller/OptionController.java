@@ -31,7 +31,8 @@ public class OptionController {
     public String createOption(Model model) {
         model.addAttribute("tariff", tariffService.loadAll());
         model.addAttribute("option", optionService.loadAll());
-        return "createOption";}
+        return "createOption";
+    }
 
     @PostMapping("/admin/addOption")
     public String addOption(@RequestParam("forTariffs") List<Integer> forTariffsId,
@@ -67,7 +68,7 @@ public class OptionController {
     }
 
     @GetMapping("/admin/options")
-    public String getAllOptions(Model model){
+    public String getAllOptions(Model model) {
         model.addAttribute("options", optionService.loadAll());
         return "optionsList";
     }

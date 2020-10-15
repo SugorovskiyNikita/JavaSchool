@@ -17,12 +17,6 @@ import java.util.List;
 @Repository
 public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implements CustomerDao {
 
-    /*@Override
-    public Customer findByEmail(String email) {
-        Customer customer = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class)
-                .setParameter("email", email).getSingleResult();
-        return customer;
-    }*/
 
     @Override
     public Customer findByEmail(String email) {
@@ -36,9 +30,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
 
         Customer customer = selectByLogin.getSingleResult();
         return customer;
-
-
-}
+    }
 
     @Override
     public Customer add(Customer customer) {
@@ -47,7 +39,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer, Integer> implement
 
     @Override
     public Customer loadByKey(Integer key) {
-        return em.find(Customer.class,key);
+        return em.find(Customer.class, key);
     }
 
     @Override

@@ -77,8 +77,8 @@ public class ContractController {
 
     @PostMapping("/admin/updateContract")
     public String updateContract(@RequestParam("tariffId") Integer tariffId,
-                              @RequestParam("options") List<Integer> options,
-                              @RequestParam("contractId") Integer id, @RequestParam("number") String number){
+                                 @RequestParam("options") List<Integer> options,
+                                 @RequestParam("contractId") Integer id, @RequestParam("number") String number) {
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
         ContractDto entity = contractService.updateContract(id, tariffId, options, number);
         return "redirect:/admin/customerInfo/" + customer.getId();
@@ -87,8 +87,8 @@ public class ContractController {
 
     @PostMapping("/updateContractCustomer")
     public String updateContractCustomer(@RequestParam("tariffId") Integer tariffId,
-                                 @RequestParam("options") List<Integer> options,
-                                 @RequestParam("contractId") Integer id, @RequestParam("number") String number){
+                                         @RequestParam("options") List<Integer> options,
+                                         @RequestParam("contractId") Integer id, @RequestParam("number") String number) {
 
         ContractDto entity = contractService.updateContract(id, tariffId, options, number);
 
@@ -118,7 +118,7 @@ public class ContractController {
     }
 
     @PostMapping("/block")
-    public String block( HttpServletRequest request) {
+    public String block(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("contractId"));
         int blockLevel;
         if (request.isUserInRole("ROLE_ADMIN")) { // Check with block level must be set
@@ -132,7 +132,7 @@ public class ContractController {
     }
 
     @PostMapping("/unblock")
-    public String unblock( HttpServletRequest request) {
+    public String unblock(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("contractId"));
         ContractDto contractDto = contractService.loadByKey(id);
 
@@ -161,7 +161,7 @@ public class ContractController {
     }
 
     @PostMapping("/admin/block")
-    public String blockAdmin( HttpServletRequest request) {
+    public String blockAdmin(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("contractId"));
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
         int blockLevel;
@@ -175,7 +175,7 @@ public class ContractController {
     }
 
     @PostMapping("/admin/unblock")
-    public String unblockAdmin( HttpServletRequest request) {
+    public String unblockAdmin(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("contractId"));
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
 

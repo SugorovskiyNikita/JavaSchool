@@ -25,6 +25,8 @@
 </head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
+<div id="page-container">
+    <div id="content-wrap">
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
@@ -88,6 +90,8 @@
         <br>
     </form>
 </div>
-
+    </div>
+</div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

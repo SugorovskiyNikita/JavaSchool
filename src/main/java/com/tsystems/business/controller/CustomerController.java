@@ -49,11 +49,12 @@ public class CustomerController {
 
     @GetMapping("/login")
     public String login() {
-        return "login"; }
+        return "login";
+    }
 
 
-        @GetMapping("/admin/customers")
-        public String getAllCustomers(Model model) {
+    @GetMapping("/admin/customers")
+    public String getAllCustomers(Model model) {
         model.addAttribute("customers", customerService.loadAll());
         return "customersList";
     }
@@ -78,18 +79,18 @@ public class CustomerController {
     }
 
     @GetMapping("/customer")
-    public String loadCustomer( Model model, Authentication authentication) throws Exception {
+    public String loadCustomer(Model model, Authentication authentication) throws Exception {
         CustomerDto customer = customerService.findByEmail(authentication.getName());
         model.addAttribute("customer", customer);
         return "profile";
     }
 
     @GetMapping("/welcome")
-    public String welcome( Model model) throws Exception {
+    public String welcome(Model model) throws Exception {
         Authentication authentication = authenticationFacade.getAuthentication();
         CustomerDto customer = customerService.findByEmail(authentication.getName());
         String roles = authentication.getAuthorities().toString();
-        String roleName = roles.substring(1, roles.length()-1);
+        String roleName = roles.substring(1, roles.length() - 1);
         RoleDto role = roleService.findByName(roleName);
         model.addAttribute("customer", customer);
         model.addAttribute("role", role);
@@ -135,7 +136,7 @@ public class CustomerController {
     }
 
     @PostMapping("/admin/blockCustomer")
-    public String blockAdminCustomer( HttpServletRequest request) {
+    public String blockAdminCustomer(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("customerId"));
         CustomerDto customer = customerService.loadByKey(id);
         int blockLevel;
@@ -150,7 +151,7 @@ public class CustomerController {
     }
 
     @PostMapping("/admin/unblockCustomer")
-    public String unblockAdminCustomer( HttpServletRequest request) {
+    public String unblockAdminCustomer(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("customerId"));
         CustomerDto customer = customerService.loadByKey(id);
         CustomerDto customerDto = customerService.loadByKey(id);

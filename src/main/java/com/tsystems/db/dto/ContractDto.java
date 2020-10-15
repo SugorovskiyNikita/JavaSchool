@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -40,6 +39,7 @@ public class ContractDto implements DtoMapper<Contract>, Comparable<ContractDto>
 
     /**
      * Create dto object from entity
+     *
      * @param contract entity to convert
      */
     public ContractDto(Contract contract) {

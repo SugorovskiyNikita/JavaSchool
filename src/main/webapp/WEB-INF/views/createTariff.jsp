@@ -20,43 +20,64 @@
             border: 2px solid #000000;
         }
     </style>
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+    <title>New tariff</title>
+</head>
 <body>
 <jsp:include page="navbarAdmin.jsp"/>
-<div class="container-fluid">
-    <form name="tariff" action="/admin/addNewTariff" method="post">
-        <fieldset class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Name tariff" id="name"
-                   required>
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="cost">Cost</label>
-            <input type="text" class="form-control" name="cost" placeholder="Cost tariff" id="cost"
-                   required pattern=\d+(\.\d{2})?>
-        </fieldset>
-        <fieldset class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" name="Description" placeholder="Description" id="description">
-        </fieldset>
-        <br>
+<div id="page-container">
+    <div id="content-wrap">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Add tariff</div>
+                        <div class="card-body">
+                            <form name="tariff" action="/admin/addNewTariff" method="post">
+                                <fieldset class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Tariff name"
+                                           id="name"
+                                           required>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label for="cost">Cost</label>
+                                    <input type="text" class="form-control" name="cost" placeholder="Tariff cos"
+                                           id="cost"
+                                           required pattern=\d+(\.\d{2})?>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control" name="Description" placeholder="Description"
+                                           id="description">
+                                </fieldset>
+                                <br>
 
 
-        <label for="option" class="col-sm">Options</label>
-        <div class="col-sm">
-            <div class="controls" id="options-area">
-                <c:forEach items="${options}" var="option">
-                    <label class="custom-control custom-checkbox" id="option">
-                        <input type="checkbox" id="box${option.id}" name="options" value="${option.id}">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">${option.name}</span>
-
-                    </label>
-                </c:forEach>
-                <input type="submit" name="submit" value="Add tariff" class="btn btn-success">
+                                <label for="option" class="col-sm">Options</label>
+                                <div class="col-sm">
+                                    <div class="controls" id="options-area">
+                                        <c:forEach items="${options}" var="option">
+                                            <label class="custom-control custom-checkbox" id="option">
+                                                <input type="checkbox" id="box${option.id}" name="options"
+                                                       value="${option.id}">
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">${option.name}</span>
+                                            </label>
+                                        </c:forEach>
+                                        <input type="submit" name="submit" value="Add tariff" class="btn btn-success">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+</div>
 </div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>
 

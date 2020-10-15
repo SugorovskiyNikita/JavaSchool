@@ -19,6 +19,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+
     <title>Welcome</title>
 </head>
 
@@ -32,21 +34,25 @@
 </c:choose>
 
 <body>
-<div id="wel" align="center">
-    <h1 id="first" class="alert">Welcome, <c:out value="${customer.name}" default="guest"/> !</h1>
-</div>
-<div class="container">
-    <div class="row" style="display: flex; background-size: contain; flex-wrap: wrap;">
-        <div class="col-sm-6">
-            <img src="https://i.ytimg.com/vi/a84UlLe6zDg/maxresdefault.jpg" width="480" height="320">
+<div id="page-container">
+    <div id="content-wrap">
+        <div id="wel" align="center">
+            <h1 id="first" class="alert">Welcome, <c:out value="${customer.name}" default="guest"/> !</h1>
         </div>
-        <div class="col-sm-6">
-            <img src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/large/public/article_images/2020/09/t-mobile-project-10million.jpg"
-                 width="480" height="320">
+        <div class="container">
+            <div class="row" style="display: flex; background-size: contain; flex-wrap: wrap;">
+                <div class="col-sm-6">
+                    <img src="https://i.ytimg.com/vi/a84UlLe6zDg/maxresdefault.jpg" width="480" height="320">
+                </div>
+                <div class="col-sm-6">
+                    <img src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/large/public/article_images/2020/09/t-mobile-project-10million.jpg"
+                         width="480" height="320">
+                </div>
+            </div>
+
         </div>
     </div>
-
 </div>
-
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

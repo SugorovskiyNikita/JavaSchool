@@ -49,12 +49,12 @@ public class CustomerDtoValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthday", "Required");
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"passportNumber", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passportNumber", "Required");
         if (customerDto.getPassportNumber().length() != 10) {
             errors.rejectValue("passportNumber", "Format.customer.passportNumber");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"passportData", "Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "passportData", "Required");
         if (customerDto.getPassportNumber().length() < 20) {
             errors.rejectValue("passportData", "Format.customer.passportData");
         }

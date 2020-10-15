@@ -7,6 +7,7 @@ import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.util.exceptions.WrongOptionConfigurationException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,9 @@ public class OptionServiceImpl implements OptionService {
 
     @Autowired
     private TariffDao tariffDao;
+
+    @Autowired
+    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
 
 
     @Override
@@ -63,12 +67,19 @@ public class OptionServiceImpl implements OptionService {
         }
         option.setPossibleTariffsOfOption(tariffs);
 
-        Option saved = optionDao.add(option);
-        return new OptionDto(saved).addDependencies(saved);
+        try {
+            optionDao.add(option);
+
+            logger.info("New option has been created. Name = " + option.getName());
+        } catch (Exception e) {
+            logger.warn("Option error adding to the DB" + e);
+        }
+
+        return new OptionDto(option).addDependencies(option);
     }
 
     @Override
-    public OptionDto add(OptionDto entityDto) throws WrongOptionConfigurationException {
+    public OptionDto add(OptionDto entityDto) {
         return null;
     }
 

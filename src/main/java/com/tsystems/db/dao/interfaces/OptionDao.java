@@ -2,7 +2,6 @@ package com.tsystems.db.dao.interfaces;
 
 import com.tsystems.db.entities.Option;
 import org.springframework.stereotype.Repository;
-import sun.awt.SunToolkit;
 
 import java.util.List;
 

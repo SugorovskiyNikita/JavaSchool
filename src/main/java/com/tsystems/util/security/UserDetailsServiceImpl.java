@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) {
-            return new SecurityUser(customerDao.findByEmail(email));
+        return new SecurityUser(customerDao.findByEmail(email));
     }
 
 }

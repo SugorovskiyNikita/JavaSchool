@@ -6,6 +6,7 @@ import com.tsystems.db.dto.TariffDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.TariffService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +30,26 @@ public class TariffServiceImpl implements TariffService {
     @Autowired
     private OptionDao optionDao;
 
+    @Autowired
+    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
+
     @Override
     public TariffDto add(TariffDto tariffDto) {
         Tariff tariff = tariffDto.convertToEntity();
-        return new TariffDto(tariffDao.add(tariff));
+        try {
+            tariffDao.add(tariff);
+            logger.info("New tariff created. Name = " + tariff.getName());
+        } catch (Exception e) {
+            logger.warn("Tariff" + tariff.getName() + "error adding to the DB" + e);
+        }
+        return new TariffDto(tariff);
+
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TariffDto> loadAll() {
+        logger.info("Loading all tariffs from the database.");
         return tariffDao
                 .loadAll()
                 .stream()
@@ -55,6 +67,7 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public void remove(Integer key) {
         tariffDao.remove(key);
+        logger.info("Tariff was deleted. Id = " + key);
     }
 
     @Override
@@ -71,6 +84,7 @@ public class TariffServiceImpl implements TariffService {
             }
         }
         tariff.setPossibleOptions(options);
+        logger.info("Tariff has been updated. Id = " + tariff.getId());
 
         return new TariffDto(tariffDao.add(tariff)).addDependencies(tariff);
     }
@@ -86,6 +100,13 @@ public class TariffServiceImpl implements TariffService {
             }
         }
         tar.setPossibleOptions(options);
-        return new TariffDto(tariffDao.add(tar)).addDependencies(tar);
+        try {
+            tariffDao.add(tar);
+            logger.info("New contract is created. Number = " + tar.getName());
+        } catch (Exception e) {
+            logger.warn("Tariff error adding to the DB" + e);
+        }
+
+        return new TariffDto(tar).addDependencies(tar);
     }
 }

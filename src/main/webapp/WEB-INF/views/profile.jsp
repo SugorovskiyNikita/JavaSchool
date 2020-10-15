@@ -17,11 +17,15 @@
         }
 
     </style>
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+
 
     <title>Profile</title>
 </head>
 <body>
 <jsp:include page="navbarCustomer.jsp"/>
+<div id="page-container">
+    <div id="content-wrap">
 <div class="container-fluid h-100">
     <div class="container target">
         <div class="row">
@@ -137,5 +141,8 @@
         </div>
     </div>
 </div>
+    </div>
+</div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

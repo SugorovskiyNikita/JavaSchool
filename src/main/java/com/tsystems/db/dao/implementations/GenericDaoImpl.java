@@ -39,7 +39,7 @@ public abstract class GenericDaoImpl<T, Integer> implements GenericDao<T, Intege
 
     @Override
     public void remove(Integer id) {
-        em.remove(em.getReference(entityClass,id));
+        em.remove(em.getReference(entityClass, id));
     }
 
 }

@@ -83,3 +83,23 @@
     font-size: 1em;
     line-height: 1.1;
 }
+
+#page-container {
+    position: relative;
+    min-height: 85vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+}
+
+#footer {
+    background-color: #1b1e21;
+    color: #1b1e21;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    min-height: 50px;
+    vertical-align: bottom;
+    margin-top:25px;
+}

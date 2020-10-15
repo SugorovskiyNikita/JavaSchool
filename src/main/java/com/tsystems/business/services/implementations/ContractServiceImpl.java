@@ -7,8 +7,7 @@ import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.ContractService;
-import com.tsystems.util.exceptions.WrongOptionConfigurationException;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-@Slf4j
 public class ContractServiceImpl implements ContractService {
 
     @Autowired
@@ -33,6 +31,9 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private CustomerDao customerDao;
 
+    @Autowired
+    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
+
     @Override
     public ContractDto addNew(ContractDto contractDto, Integer customerId) {
         // Create new contract. Default balance on new contract == 100 and non blocked
@@ -40,18 +41,25 @@ public class ContractServiceImpl implements ContractService {
         contract.setCustomer(customerDao.loadByKey(customerId));
         contract.setBalance(new BigDecimal("100.00"));
         contract.setIsBlocked(0);
-        return new ContractDto(contractDao.add(contract));
+        try {
+            contractDao.add(contract);
+            logger.info("New contract is created. Number = " + contract.getNumber());
+        } catch (Exception e) {
+            logger.warn("Contract error adding to the DB" + e);
+        }
 
+        return new ContractDto(contract);
     }
 
     @Override
-    public ContractDto add(ContractDto entityDto) throws WrongOptionConfigurationException {
+    public ContractDto add(ContractDto entityDto) {
         return null;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<ContractDto> loadAll() {
+        logger.info("Loading all contracts from the database.");
         return contractDao
                 .loadAll()
                 .stream()
@@ -62,12 +70,14 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void remove(Integer key) {
         contractDao.remove(key);
+        logger.info("Contract was deleted. Id = " + key);
     }
 
     @Override
     public ContractDto setBlock(Integer id, Integer blockLevel) {
         Contract contract = contractDao.loadByKey(id);
         contract.setIsBlocked(blockLevel);
+        logger.info("Contract block level has been changed. Contract id = " + contract.getId() + " block level = " + blockLevel);
         return new ContractDto(contract);
     }
 
@@ -113,6 +123,7 @@ public class ContractServiceImpl implements ContractService {
                 .map(Option::getConnectCost)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         contract.setBalance(contract.getBalance().subtract(summ));
+        logger.info("Contract has been updated. Id = " + contract.getId());
 
         return new ContractDto(contract).addDependencies(contract);
     }

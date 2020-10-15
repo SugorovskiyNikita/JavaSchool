@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.apache.commons.lang3.ObjectUtils;
 
 
-import javax.persistence.StoredProcedureParameter;
 import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -63,6 +62,7 @@ public class CustomerDto implements DtoMapper<Customer>, Comparable<CustomerDto>
 
     /**
      * Create dto object from entity
+     *
      * @param customer entity to convert
      */
     public CustomerDto(Customer customer) {

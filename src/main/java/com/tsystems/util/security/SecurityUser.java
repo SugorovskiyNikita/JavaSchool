@@ -18,7 +18,9 @@ public class SecurityUser implements UserDetails {
 
     private Customer customer;
 
-    public SecurityUser(Customer customer){ this.customer = customer;}
+    public SecurityUser(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
     public String getUsername() {

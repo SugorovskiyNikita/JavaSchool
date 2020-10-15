@@ -30,7 +30,9 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
     }
 
     @Override
-    public void remove(Integer id) { em.remove(id);}
+    public void remove(Integer id) {
+        em.remove(id);
+    }
 
     @Override
     public void update(Contract contract) {

@@ -30,6 +30,19 @@
                 <h1 id="first" class="alert" style="color: #e30876">T-mobile</h1>
             </div>
             <form method="post">
+
+                <form action="${loginUrl}" method="post">
+                    <c:if test="${param.error != null}">
+                        <p style="color:#f51a34;">
+                            Invalid username or password.
+                        </p>
+                    </c:if>
+
+                    <c:if test="${param.logout != null}">
+                        <p style="color:#f51a34;">
+                            You have been logged out.
+                        </p>
+                    </c:if>
                 <div class="form-group">
                     <input _ngcontent-c0="" name="username" class="form-control form-control-lg"
                            placeholder="User email" type="text">
@@ -44,6 +57,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="footer.jsp"/>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>
