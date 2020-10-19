@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  server:
+    build:
+      context: ./eCare
+      dockerfile: Dockerfile
+    container_name: server
+    ports:
+      - 8080:8080
+      - 8000:8000
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: 'tmobile'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '76459'
+      MYSQL_ROOT_PASSWORD: '76459'
+      MYSQL_HOST: 'db'
+    depends_on:
+      - db
+    networks:
+      - main
+    links:
+      - db
+
+  db:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - my-db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: 'tmobile'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '76459'
+      MYSQL_ROOT_PASSWORD: '764591993'
+    restart: always
+    networks:
+     - main
+
+volumes:
+  my-db:
+
+networks:
+  main:
