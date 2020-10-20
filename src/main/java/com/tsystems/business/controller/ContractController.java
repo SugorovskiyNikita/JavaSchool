@@ -7,18 +7,14 @@ import com.tsystems.business.services.interfaces.ContractService;
 import com.tsystems.business.services.interfaces.CustomerService;
 import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.business.services.interfaces.TariffService;
-import com.tsystems.db.dto.OptionDto;
-;
 import com.tsystems.db.dto.TariffDto;
-import com.tsystems.db.entities.Tariff;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -26,22 +22,18 @@ import java.util.Set;
  */
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class ContractController {
 
-    @Autowired
-    public ContractService contractService;
+    public final ContractService contractService;
 
-    @Autowired
-    public CustomerService customerService;
+    public final CustomerService customerService;
 
-    @Autowired
-    public TariffService tariffService;
+    public final TariffService tariffService;
 
-    @Autowired
-    public OptionService optionService;
+    public final OptionService optionService;
 
-    @Autowired
-    public AuthenticationFacade authenticationFacade;
+    public final AuthenticationFacade authenticationFacade;
 
     @GetMapping("/admin/addCustomer")
     public String creatCustomerPage() {
@@ -78,9 +70,10 @@ public class ContractController {
     @PostMapping("/admin/updateContract")
     public String updateContract(@RequestParam("tariffId") Integer tariffId,
                                  @RequestParam("options") List<Integer> options,
-                                 @RequestParam("contractId") Integer id, @RequestParam("number") String number) {
+                                 @RequestParam("contractId") Integer id,
+                                 @RequestParam("number") String number) {
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
-        ContractDto entity = contractService.updateContract(id, tariffId, options, number);
+        contractService.updateContract(id, tariffId, options, number);
         return "redirect:/admin/customerInfo/" + customer.getId();
 
     }
@@ -88,9 +81,9 @@ public class ContractController {
     @PostMapping("/updateContractCustomer")
     public String updateContractCustomer(@RequestParam("tariffId") Integer tariffId,
                                          @RequestParam("options") List<Integer> options,
-                                         @RequestParam("contractId") Integer id, @RequestParam("number") String number) {
-
-        ContractDto entity = contractService.updateContract(id, tariffId, options, number);
+                                         @RequestParam("contractId") Integer id,
+                                         @RequestParam("number") String number) {
+        contractService.updateContract(id, tariffId, options, number);
 
         return "redirect:/customer";
     }
@@ -126,7 +119,7 @@ public class ContractController {
         } else {
             blockLevel = 1; // Blocked by user
         }
-        ContractDto entity = contractService.setBlock(id, blockLevel);
+        contractService.setBlock(id, blockLevel);
 
         return "redirect:/customer";
     }
@@ -139,19 +132,16 @@ public class ContractController {
         if (!request.isUserInRole("ROLE_ADMIN") && contractDto.getIsBlocked() == 2)
             return "redirect:/customer";
 
-        ContractDto entity = contractService.setBlock(id, 0);
+        contractService.setBlock(id, 0);
 
         return "redirect:/customer";
     }
 
     @PostMapping("/viewContract")
-    public String viewContractByCustomer(Model model, HttpServletRequest request) {
-        Integer contractId = Integer.parseInt(request.getParameter("contractId"));
-        ContractDto contract = contractService.loadByKey(contractId);
-        model.addAttribute("contract", contract);
-        Set<OptionDto> optionsList = contract.getUsedOptions();
-        model.addAttribute("optionsList", optionsList);
-
+    public String viewContractByCustomer(Model model,
+                                         @RequestParam("contractId") Integer contractId) {
+        model.addAttribute("contract", contractService.loadByKey(contractId));
+        model.addAttribute("optionsList", contractService.loadByKey(contractId).getUsedOptions());
         return "customerContracts";
     }
 
@@ -170,7 +160,7 @@ public class ContractController {
         } else {
             blockLevel = 1; // Blocked by user
         }
-        ContractDto entity = contractService.setBlock(id, blockLevel);
+        contractService.setBlock(id, blockLevel);
         return "redirect:/admin/customerInfo/" + customer.getId();
     }
 
@@ -178,14 +168,10 @@ public class ContractController {
     public String unblockAdmin(HttpServletRequest request) {
         Integer id = Integer.parseInt(request.getParameter("contractId"));
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
-
         ContractDto contractDto = contractService.loadByKey(id);
-
         if (!request.isUserInRole("ROLE_ADMIN") && contractDto.getIsBlocked() == 2)
             return "redirect:/customer";
-
-        ContractDto entity = contractService.setBlock(id, 0);
-
+        contractService.setBlock(id, 0);
         return "redirect:/admin/customerInfo/" + customer.getId();
     }
 

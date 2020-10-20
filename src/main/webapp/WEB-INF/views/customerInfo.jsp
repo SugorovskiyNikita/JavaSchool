@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="">Customer information</h1>
-            <button type="button" class="btn btn-info"><a style="color: #F4EEE8;" href="/admin/customers">Return to all
+            <button type="button" class="btn btn-info"><a style="color: #ebebeb;" href="/admin/customers">Return to all
                 customers</a></button>
         </div>
 

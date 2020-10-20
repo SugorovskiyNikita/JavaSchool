@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-10">
                     <h1 class="">Customer information</h1>
-                    <button type="button" class="btn btn-warning"><a id="link" href="/admin/customers">Return to all
+                    <button type="button" class="btn btn-warning"><a style="color: #ebebeb" id="link" href="/admin/customers">Return to all
                         customers</a></button>
                 </div>
                 <div class="col-sm-2"><img title="profile image" class="img-circle img-responsive"
