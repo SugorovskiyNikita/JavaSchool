@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -31,13 +33,26 @@ public class OptionController {
 
     @PostMapping("/admin/addOption")
     public String addOption(@RequestParam("forTariffs") List<Integer> forTariffsId,
-                            @RequestParam(value = "requiredFrom", required = false) String[] requiredFromId,
-                            @RequestParam(value = "forbiddenWith", required = false) String[] forbiddenWithId,
-                            @ModelAttribute OptionDto newOption) {
-        if (requiredFromId == null)
+                            @RequestParam("name") String name,
+                            @RequestParam("cost") Integer cost,
+                            @RequestParam("connectCost") Integer connectCost,
+                            @RequestParam("description") String desc,
+                            HttpServletRequest request)  {
+
+        String[] requiredFromId;
+        String[] forbiddenWithId;
+        if ((requiredFromId = request.getParameterValues("requiredFrom")) == null)
             requiredFromId = new String[0];
-        if (forbiddenWithId == null)
+        if ((forbiddenWithId = request.getParameterValues("forbiddenWith")) == null)
             forbiddenWithId = new String[0];
+
+
+        OptionDto newOption = new OptionDto();
+        newOption.setName(name);
+        newOption.setCost(new BigDecimal(cost));
+        newOption.setConnectCost(new BigDecimal(connectCost));
+        newOption.setDescription(desc);
+
         optionService.addNew(newOption, requiredFromId, forbiddenWithId, forTariffsId);
         return "redirect:/admin/options";
     }

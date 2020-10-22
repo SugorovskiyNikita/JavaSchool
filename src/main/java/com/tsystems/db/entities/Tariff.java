@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * Created by nikita on 13.09.2020.
  */
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -41,9 +42,6 @@ public class Tariff {
     })
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Option> possibleOptions;
-
-    public Tariff() {
-    }
 
     public Tariff(Integer id, String name, BigDecimal cost, String description) {
         this.id = id;

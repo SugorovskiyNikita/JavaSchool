@@ -2,6 +2,8 @@ package com.tsystems.db.entities;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 /**
  * Created by nikita on 04.09.20.
  */
+@RequiredArgsConstructor
 @Entity
 @Table(name = "customers")
 @Data
@@ -52,7 +55,6 @@ public class Customer {
     @Column(name = "is_blocked")
     private Integer isBlocked;
 
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Contract> contracts;
 
@@ -62,17 +64,6 @@ public class Customer {
             inverseJoinColumns =
             @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-
-    public Customer() {
-    }
-
-    public Customer(Integer id, String name, String surname, String email, Integer isBlocked) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.isBlocked = isBlocked;
-    }
 
     @Override
     public boolean equals(Object o) {

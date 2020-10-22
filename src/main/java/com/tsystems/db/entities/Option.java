@@ -1,6 +1,7 @@
 package com.tsystems.db.entities;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -87,24 +88,6 @@ public class Option {
         this.description = description;
 
     }
-
-
-    public Set<Option> getRequired() {
-        return required;
-    }
-
-    public void setRequired(Set<Option> required) {
-        this.required = required;
-    }
-
-    public Set<Option> getForbidden() {
-        return forbidden;
-    }
-
-    public void setForbidden(Set<Option> forbidden) {
-        this.forbidden = forbidden;
-    }
-
 
     @Override
     public boolean equals(Object o) {

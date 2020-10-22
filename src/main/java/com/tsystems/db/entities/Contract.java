@@ -1,6 +1,8 @@
 package com.tsystems.db.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -11,6 +13,7 @@ import java.util.Set;
 /**
  * Created by nikita on 04.09.20.
  */
+@RequiredArgsConstructor
 @Entity
 @Table(name = "contracts", schema = "tmobile")
 @Data
@@ -48,17 +51,6 @@ public class Contract {
     })
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Option> usedOptions;
-
-    public Contract() {
-        //Empty constructor
-    }
-
-    public Contract(Integer id, String number, BigDecimal balance, Integer isBlocked) {
-        this.id = id;
-        this.number = number;
-        this.balance = balance;
-        this.isBlocked = isBlocked;
-    }
 
     @Override
     public boolean equals(Object o) {

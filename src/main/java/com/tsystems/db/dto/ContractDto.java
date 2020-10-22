@@ -36,7 +36,6 @@ public class ContractDto implements DtoMapper<Contract>, Comparable<ContractDto>
 
     private TreeSet<OptionDto> usedOptions = new TreeSet<>();
 
-
     /**
      * Create dto object from entity
      *
