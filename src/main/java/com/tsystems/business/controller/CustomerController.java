@@ -97,7 +97,7 @@ public class CustomerController {
                                Model model) {
         model.addAttribute("tariff", tariffService.loadByKey(tariffId));
         model.addAttribute("contract", contractService.loadByKey(contractId));
-        model.addAttribute("options", optionService.getOptionsOfTariffs(tariffId));
+        model.addAttribute("options", optionService.getOptionsOfTariff(tariffId));
         return "changeOption";
     }
 
@@ -107,7 +107,7 @@ public class CustomerController {
         ContractDto contract = contractService.loadByKey(contractId);
         model.addAttribute("tariff", tariffService.loadByKey(tariffId));
         model.addAttribute("contract", contract);
-        model.addAttribute("options", optionService.getOptionsOfTariffs(tariffId));
+        model.addAttribute("options", optionService.getOptionsOfTariff(tariffId));
         model.addAttribute("used", contract.getUsedOptions());
         return "changeOnlyOptions";
     }

@@ -6,14 +6,28 @@ import java.util.List;
 /**
  * Created by nikita on 15.09.2020.
  */
-public interface GenericService<T, PK extends Serializable> {
+public interface GenericService<T, Integer extends Serializable> {
 
-    T add(T entityDto);
-
+    /**
+     * Load all entries
+     *
+     * @return all entries
+     */
     List<T> loadAll();
 
-    T loadByKey(PK key);
+    /**
+     * Find entity by id
+     *
+     * @param id id of entity
+     * @return loaded entity
+     */
+    T loadByKey(Integer id);
 
-    void remove(Integer PK);
+    /**
+     * Remove entity by id
+     *
+     * @param id id of entity
+     */
+    void remove(Integer id);
 
 }

@@ -6,6 +6,7 @@ import com.tsystems.db.dto.OptionDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.OptionService;
+import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,23 +22,21 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class OptionServiceImpl implements OptionService {
 
-    @Autowired
-    private OptionDao optionDao;
+    private final OptionDao optionDao;
 
-    @Autowired
-    private TariffDao tariffDao;
+    private final TariffDao tariffDao;
 
-    @Autowired
     private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
-
 
     @Override
     public OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) {
 
         Option option = newOption.convertToEntity();
 
+        //Add the required options
         Set<Option> requireds = new HashSet<>();
         if (requiredFromId != null) {
             for (String id : requiredFromId) {
@@ -45,7 +44,7 @@ public class OptionServiceImpl implements OptionService {
                 requireds.add(opt);
             }
         }
-
+        //Add the forbidden options
         Set<Option> forbiddens = new HashSet<>();
         if (forbiddenWithId != null) {
             for (String id : forbiddenWithId) {
@@ -53,10 +52,9 @@ public class OptionServiceImpl implements OptionService {
                 forbiddens.add(opt);
             }
         }
-
         option.setRequired(requireds);
         option.setForbidden(forbiddens);
-
+        //Add tariffs for the option
         Set<Tariff> tariffs = new HashSet<>();
         if (forTariffsId != null) {
             for (Integer id : forTariffsId) {
@@ -75,11 +73,6 @@ public class OptionServiceImpl implements OptionService {
         }
 
         return new OptionDto(option).addDependencies(option);
-    }
-
-    @Override
-    public OptionDto add(OptionDto entityDto) {
-        return null;
     }
 
     @Override
@@ -105,8 +98,8 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    public List<OptionDto> getOptionsOfTariffs(Integer tariffs) {
-        List<Option> options = optionDao.getOptionsForTariff(tariffs);
+    public List<OptionDto> getOptionsOfTariff(Integer tariff) {
+        List<Option> options = optionDao.getOptionsForTariff(tariff);
         return options.stream().map(e -> new OptionDto(e).addDependencies(e))
                 .collect(Collectors.toList());
     }

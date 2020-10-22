@@ -9,7 +9,6 @@ import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.ContractService;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +30,7 @@ public class ContractServiceImpl implements ContractService {
 
     private final CustomerDao customerDao;
 
-    private static Logger logger = Logger.getLogger(ContractServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
 
 
     @Override
@@ -44,11 +43,6 @@ public class ContractServiceImpl implements ContractService {
         contractDao.add(contract);
         logger.info("New contract is created. Customer = " + customerId);
         return new ContractDto(contract);
-    }
-
-    @Override
-    public ContractDto add(ContractDto entityDto) {
-        return null;
     }
 
     @Override
@@ -83,9 +77,6 @@ public class ContractServiceImpl implements ContractService {
         if (contract == null) {
             return new ContractDto();
         }
-
-        contract.getUsedOptions().size();
-        Set<Option> oldOptions = contract.getUsedOptions();
 
         //Create new tariff
         Tariff tariff = new Tariff();

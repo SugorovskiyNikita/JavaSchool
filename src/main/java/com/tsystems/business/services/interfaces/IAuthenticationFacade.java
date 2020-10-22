@@ -7,5 +7,9 @@ import org.springframework.security.core.Authentication;
  */
 public interface IAuthenticationFacade {
 
+    /**
+     *
+     * @return information about the user in the current session
+     */
     Authentication getAuthentication();
 }

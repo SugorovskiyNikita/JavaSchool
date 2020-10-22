@@ -44,16 +44,16 @@ public class TariffController {
     }
 
     @GetMapping("/deleteTariff/{id}")
-    public String deleteTariff(@PathVariable("id") int key) {
+    public String deleteTariff(@PathVariable("id") Integer key) {
         tariffService.remove(key);
         return "redirect:/admin/tariffs";
     }
 
     @GetMapping("/admin/editTariff/{id}")
-    public String editTariff(@PathVariable("id") int id, Model model) {
+    public String editTariff(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("tariff", tariffService.loadByKey(id));
         model.addAttribute("options", optionService.loadAll());
-        model.addAttribute("possible", optionService.getOptionsOfTariffs(id));
+        model.addAttribute("possible", optionService.getOptionsOfTariff(id));
         return "editTariff";
     }
 

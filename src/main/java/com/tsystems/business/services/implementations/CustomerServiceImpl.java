@@ -10,7 +10,6 @@ import com.tsystems.db.entities.Role;
 import com.tsystems.business.services.interfaces.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -105,13 +104,5 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto findByEmail(String email) {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
-    }
-
-    @Override
-    public CustomerDto setBlock(Integer id, Integer blockLevel) {
-        Customer customer = customerDao.loadByKey(id);
-        customer.setIsBlocked(blockLevel);
-        logger.info("Customer block level has been changed. Customer id = " + customer.getId() + " block level = " + blockLevel);
-        return new CustomerDto(customer);
     }
 }

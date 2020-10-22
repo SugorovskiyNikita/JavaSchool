@@ -1,18 +1,24 @@
 package com.tsystems.business.services.interfaces;
 
 import com.tsystems.db.dto.RoleDto;
-import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
 
 /**
  * Created by nikita on 08.10.2020.
  */
-@Service
-public interface RoleService<T> extends Serializable {
+public interface RoleService<T> {
 
+    /**
+     *
+     * @param id id of role
+     * @return role DTO object
+     */
     RoleDto getRoleById(Integer id);
 
+    /**
+     *
+     * @param roleName name of role
+     * @return role DTO object
+     */
     RoleDto findByName(String roleName);
 
 }

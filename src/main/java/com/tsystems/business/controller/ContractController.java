@@ -52,7 +52,7 @@ public class ContractController {
         ContractDto contract = contractService.loadByKey(id);
         TariffDto tariff = tariffService.loadByKey(contract.getTariff().getId());
         model.addAttribute("contract", contractService.loadByKey(id));
-        model.addAttribute("options", optionService.getOptionsOfTariffs(tariff.getId()));
+        model.addAttribute("options", optionService.getOptionsOfTariff(tariff.getId()));
         model.addAttribute("used", contract.getUsedOptions());
         model.addAttribute("tariff", contract.getTariff());
         return "changeOptionsAdmin";
