@@ -5,7 +5,6 @@ import com.tsystems.db.dto.RoleDto;
 import com.tsystems.db.entities.Role;
 import com.tsystems.business.services.interfaces.RoleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
