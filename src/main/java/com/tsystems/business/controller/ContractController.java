@@ -40,7 +40,7 @@ public class ContractController {
     }
 
     @GetMapping("/admin/customer/{id}")
-    public String chooseTariffAndOption(@PathVariable("id") int id, Model model) {
+    public String chooseTariffAndOption(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         model.addAttribute("tariff", tariffService.loadAll());
         model.addAttribute("options", optionService.loadAll());
@@ -48,7 +48,7 @@ public class ContractController {
     }
 
     @GetMapping("/admin/changeOption/{id}")
-    public String chooseTariffAndOptionAdmin(@PathVariable("id") int id, Model model) {
+    public String chooseTariffAndOptionAdmin(@PathVariable("id") Integer id, Model model) {
         ContractDto contract = contractService.loadByKey(id);
         TariffDto tariff = tariffService.loadByKey(contract.getTariff().getId());
         model.addAttribute("contract", contractService.loadByKey(id));
@@ -59,7 +59,7 @@ public class ContractController {
     }
 
     @GetMapping("/admin/customerInfo/{id}")
-    public String getById(@PathVariable("id") int id, Model model) {
+    public String getById(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("customer", customerService.loadByKey(id));
         model.addAttribute("tariff", tariffService.loadAll());
         model.addAttribute("option", optionService.loadAll());

@@ -57,9 +57,9 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void remove(Integer key) {
-        contractDao.remove(key);
-        logger.info("Contract was deleted. Id = " + key);
+    public void remove(Integer id) {
+        contractDao.remove(id);
+        logger.info("Contract was deleted. Id = " + id);
     }
 
     @Override
@@ -123,8 +123,8 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     @Transactional(readOnly = true)
-    public ContractDto loadByKey(Integer key) {
-        Contract contract = contractDao.loadByKey(key);
+    public ContractDto loadByKey(Integer id) {
+        Contract contract = contractDao.loadByKey(id);
         // Return contract DTO object with dependencies
         return new ContractDto(contract).addDependencies(contract);
     }

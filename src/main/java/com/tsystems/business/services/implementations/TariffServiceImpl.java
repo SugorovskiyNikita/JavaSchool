@@ -44,15 +44,15 @@ public class TariffServiceImpl implements TariffService {
 
     @Override
     @Transactional(readOnly = true)
-    public TariffDto loadByKey(Integer key) {
-        Tariff tariff = tariffDao.loadByKey(key);
+    public TariffDto loadByKey(Integer id) {
+        Tariff tariff = tariffDao.loadByKey(id);
         return new TariffDto(tariff).addDependencies(tariff);
     }
 
     @Override
-    public void remove(Integer key) {
-        tariffDao.remove(key);
-        logger.info("Tariff was deleted. Id = " + key);
+    public void remove(Integer id) {
+        tariffDao.remove(id);
+        logger.info("Tariff was deleted. Id = " + id);
     }
 
     @Override

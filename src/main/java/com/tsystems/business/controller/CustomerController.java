@@ -59,8 +59,8 @@ public class CustomerController {
     }
 
     @GetMapping("delete/{id}")
-    public String deleteCustomer(@PathVariable("id") Integer key, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(key));
+    public String deleteCustomer(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("customer", customerService.loadByKey(id));
         return "redirect:/admin/customers";
     }
 

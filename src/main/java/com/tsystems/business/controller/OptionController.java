@@ -49,8 +49,8 @@ public class OptionController {
     }
 
     @GetMapping("/admin/deleteOption/{id}")
-    public String deleteOption(@PathVariable("id") Integer key) {
-        optionService.remove(key);
+    public String deleteOption(@PathVariable("id") Integer id) {
+        optionService.remove(id);
         return "redirect:/admin/options";
     }
 

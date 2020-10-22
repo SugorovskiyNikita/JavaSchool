@@ -44,8 +44,8 @@ public class TariffController {
     }
 
     @GetMapping("/deleteTariff/{id}")
-    public String deleteTariff(@PathVariable("id") Integer key) {
-        tariffService.remove(key);
+    public String deleteTariff(@PathVariable("id") Integer id) {
+        tariffService.remove(id);
         return "redirect:/admin/tariffs";
     }
 

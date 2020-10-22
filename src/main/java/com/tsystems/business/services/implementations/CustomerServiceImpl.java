@@ -74,12 +74,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void remove(Integer key) {
+    public void remove(Integer id) {
         try {
-            customerDao.remove(key);
-            logger.info("Customer Id = " + key + " has been deleted.");
+            customerDao.remove(id);
+            logger.info("Customer Id = " + id + " has been deleted.");
         } catch (Exception e) {
-            logger.warn("Customer Id = " + key + " has not deleted." + e);
+            logger.warn("Customer Id = " + id + " has not deleted." + e);
         }
 
     }
@@ -95,8 +95,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public CustomerDto loadByKey(Integer key) {
-        Customer customer = customerDao.loadByKey(key);
+    public CustomerDto loadByKey(Integer id) {
+        Customer customer = customerDao.loadByKey(id);
         return new CustomerDto(customer).addDependencies(customer);
     }
 

@@ -85,15 +85,15 @@ public class OptionServiceImpl implements OptionService {
     }
 
     @Override
-    public void remove(Integer key) {
-        optionDao.remove(key);
+    public void remove(Integer id) {
+        optionDao.remove(id);
     }
 
 
     @Override
     @Transactional(readOnly = true)
-    public OptionDto loadByKey(Integer key) {
-        Option option = optionDao.loadByKey(key);
+    public OptionDto loadByKey(Integer id) {
+        Option option = optionDao.loadByKey(id);
         return new OptionDto(option).addDependencies(option);
     }
 
