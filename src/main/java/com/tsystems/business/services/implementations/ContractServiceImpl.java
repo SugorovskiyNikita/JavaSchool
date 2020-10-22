@@ -7,6 +7,7 @@ import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.ContractService;
+import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,31 +24,25 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ContractServiceImpl implements ContractService {
 
-    @Autowired
-    private ContractDao contractDao;
+    private final ContractDao contractDao;
 
-    @Autowired
-    private CustomerDao customerDao;
+    private final CustomerDao customerDao;
 
-    @Autowired
-    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
+    private static Logger logger = Logger.getLogger(ContractServiceImpl.class);
+
 
     @Override
-    public ContractDto addNew(ContractDto contractDto, Integer customerId) {
+    public ContractDto addNew(Integer customerId) {
         // Create new contract. Default balance on new contract == 100 and non blocked
-        Contract contract = contractDto.convertToEntity();
+        Contract contract = new Contract();
         contract.setCustomer(customerDao.loadByKey(customerId));
         contract.setBalance(new BigDecimal("100.00"));
         contract.setIsBlocked(0);
-        try {
-            contractDao.add(contract);
-            logger.info("New contract is created. Number = " + contract.getNumber());
-        } catch (Exception e) {
-            logger.warn("Contract error adding to the DB" + e);
-        }
-
+        contractDao.add(contract);
+        logger.info("New contract is created. Customer = " + customerId);
         return new ContractDto(contract);
     }
 

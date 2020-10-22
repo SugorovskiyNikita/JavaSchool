@@ -8,6 +8,7 @@ import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Customer;
 import com.tsystems.db.entities.Role;
 import com.tsystems.business.services.interfaces.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,20 +28,16 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
-    private CustomerDao customerDao;
+    private final CustomerDao customerDao;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RoleDao roleDao;
+    private final RoleDao roleDao;
 
-    @Autowired
     private static final Logger logger = Logger.getLogger(CustomerServiceImpl.class);
-
 
     @Override
     public CustomerDto add(CustomerDto customerDto) {

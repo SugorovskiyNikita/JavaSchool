@@ -3,11 +3,12 @@ package com.tsystems.business.controller;
 import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.db.dto.TariffDto;
 import com.tsystems.business.services.interfaces.TariffService;
-import com.tsystems.util.exceptions.WrongOptionConfigurationException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,14 +17,12 @@ import java.util.List;
  * Created by nikita on 13.09.2020.
  */
 @Controller
-@RequestMapping("/")
+@RequiredArgsConstructor
 public class TariffController {
 
-    @Autowired
-    private TariffService tariffService;
+    private final TariffService tariffService;
 
-    @Autowired
-    private OptionService optionService;
+    private final OptionService optionService;
 
     @GetMapping("/admin/addTariff")
     public String createTariff(Model model) {
@@ -32,7 +31,8 @@ public class TariffController {
     }
 
     @PostMapping("/admin/addNewTariff")
-    public String addTariff(@RequestParam("options") List<Integer> newOptions, @ModelAttribute("tariff") TariffDto tariff) throws WrongOptionConfigurationException {
+    public String addTariff(@RequestParam("options") List<Integer> newOptions,
+                            @ModelAttribute("tariff") TariffDto tariff) {
         tariffService.addNew(tariff, newOptions);
         return "redirect:/admin/tariffs";
     }
@@ -67,4 +67,10 @@ public class TariffController {
         return "redirect:/admin/editTariff/" + id;
     }
 
+    @GetMapping(value = "/tariffs", produces = "application/json")
+    @ResponseBody
+    public String getTariffsRest() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(tariffService.loadAll());
+    }
 }

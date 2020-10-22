@@ -21,7 +21,6 @@ import java.util.List;
  * Created by nikita on 20.09.2020.
  */
 @Controller
-@RequestMapping("/")
 @RequiredArgsConstructor
 public class ContractController {
 
@@ -84,7 +83,6 @@ public class ContractController {
                                          @RequestParam("contractId") Integer id,
                                          @RequestParam("number") String number) {
         contractService.updateContract(id, tariffId, options, number);
-
         return "redirect:/customer";
     }
 
@@ -97,10 +95,8 @@ public class ContractController {
 
     @PostMapping("/admin/addContractForCustomer")
     public String addContractForCustomer(@RequestParam("customerId") Integer customerId) {
-        ContractDto contractDto = new ContractDto();
-        CustomerDto customer = customerService.loadByKey(customerId);
-        contractService.addNew(contractDto, customerId);
-        return "redirect:/admin/customerInfo/" + customer.getId();
+        contractService.addNew(customerId);
+        return "redirect:/admin/customerInfo/" + customerId;
     }
 
     @GetMapping("/admin/contracts")
@@ -120,7 +116,6 @@ public class ContractController {
             blockLevel = 1; // Blocked by user
         }
         contractService.setBlock(id, blockLevel);
-
         return "redirect:/customer";
     }
 
@@ -133,7 +128,6 @@ public class ContractController {
             return "redirect:/customer";
 
         contractService.setBlock(id, 0);
-
         return "redirect:/customer";
     }
 

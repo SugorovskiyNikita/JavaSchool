@@ -19,6 +19,6 @@ public interface ContractService extends GenericService<ContractDto, Integer> {
 
     ContractDto findByNumber(String number);
 
-    ContractDto addNew(ContractDto contractDto, Integer customerId);
+    ContractDto addNew(Integer customerId);
 
 }

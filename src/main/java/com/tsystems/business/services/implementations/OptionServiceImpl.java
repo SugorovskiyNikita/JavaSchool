@@ -6,7 +6,6 @@ import com.tsystems.db.dto.OptionDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.OptionService;
-import com.tsystems.util.exceptions.WrongOptionConfigurationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class OptionServiceImpl implements OptionService {
 
 
     @Override
-    public OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) throws WrongOptionConfigurationException {
+    public OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) {
 
         Option option = newOption.convertToEntity();
 

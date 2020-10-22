@@ -1,7 +1,5 @@
 package com.tsystems.business.services.interfaces;
 
-import com.tsystems.util.exceptions.WrongOptionConfigurationException;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,7 +8,7 @@ import java.util.List;
  */
 public interface GenericService<T, PK extends Serializable> {
 
-    T add(T entityDto) throws WrongOptionConfigurationException;
+    T add(T entityDto);
 
     List<T> loadAll();
 

@@ -1,7 +1,6 @@
 package com.tsystems.config;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +21,14 @@ import java.util.Properties;
  * Created by nikita on 07.09.20.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tsystems.business.services", "com.tsystems.db.dao"})
+@ComponentScan(basePackages = "com.tsystems.business.services")
+@ComponentScan(basePackages = "com.tsystems.db.dao")
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
+@RequiredArgsConstructor
 public class SpringConfig {
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
 
     private Properties hibernateProperties() {
         Properties properties = new Properties();
@@ -62,11 +62,5 @@ public class SpringConfig {
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        ModelMapper mapper = new ModelMapper();
-        return mapper;
     }
 }
