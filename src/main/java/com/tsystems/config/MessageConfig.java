@@ -1,53 +1,49 @@
-/*package com.tsystems.config;
+package com.tsystems.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jms.annotation.EnableJms;
-import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.SimpleMessageConverter;
+import org.springframework.stereotype.Component;
 
-import javax.jms.ConnectionFactory;
+import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.Properties;
+import javax.jms.Queue;
 
-
-/**
- * Created by nikita on 21.10.2020.
- */
-/*@Configuration
-@EnableJms
+@Component
 public class MessageConfig {
 
-    private static final String TEST_QUEUE = "MyQueue";
+    private static final String JMS_CONNECTION_FACTORY_JNDI = "jms/RemoteConnectionFactory";
+    private static final String JMS_QUEUE_JNDI = "jms/queue/test";
+    private static final String WILDFLY_REMOTING_URL = "http-remoting://127.0.0.1:8080";
+    private static final String JMS_USERNAME = "martin";
+    private static final String JMS_PASSWORD = "martin1!";
 
-    @Bean
-    public ConnectionFactory connectionFactory() throws NamingException {
-        Properties properties = new Properties();
-        properties.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
-        properties.put(Context.PROVIDER_URL, "http-remoting://127.0.0.1:8080");
+    public void sendMessage(String message) {
+        Properties props = new Properties();
+        props.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
+        props.put(Context.PROVIDER_URL, WILDFLY_REMOTING_URL);
+        props.put(Context.SECURITY_PRINCIPAL, JMS_USERNAME);
+        props.put(Context.SECURITY_CREDENTIALS, JMS_PASSWORD);
 
-        InitialContext initialContext = new InitialContext(properties);
-        ConnectionFactory connectionFactory =
-                (ConnectionFactory) initialContext.lookup("jms/RemoteConnectionFactory");
-        UserCredentialsConnectionFactoryAdapter connectionFactoryAdapter = new UserCredentialsConnectionFactoryAdapter();
-        connectionFactoryAdapter.setTargetConnectionFactory(connectionFactory);
-        return connectionFactoryAdapter;
-    }
+        try {
+            Context context = new InitialContext(props);
+            QueueConnectionFactory connectionFactory = (QueueConnectionFactory) context.lookup(JMS_CONNECTION_FACTORY_JNDI);
+            Queue queue = (Queue) context.lookup(JMS_QUEUE_JNDI);
+            QueueConnection connection = connectionFactory.createQueueConnection(JMS_USERNAME, JMS_PASSWORD);
+            connection.start();
+            QueueSession session = connection.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
+            QueueSender sender = session.createSender(queue);
 
-    @Bean
-    public JmsTemplate jmsTemplate() throws NamingException {
-        JmsTemplate template = new JmsTemplate();
-        template.setConnectionFactory(connectionFactory());
-        template.setDefaultDestinationName(TEST_QUEUE);
-        return template;
-    }
+            TextMessage textMessage = session.createTextMessage(message);
 
-    @Bean
-    MessageConverter converter() {
-        return new SimpleMessageConverter();
-    }
-}*/
+            sender.send(textMessage);
+
+            session.close();
+            connection.close();
+        } catch (NamingException | JMSException e) {
+            e.printStackTrace();
+        }
+
+}
+
+}

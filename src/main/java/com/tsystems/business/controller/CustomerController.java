@@ -38,7 +38,6 @@ public class CustomerController {
         return "login";
     }
 
-
     @GetMapping("/admin/customers")
     public String getAllCustomers(Model model) {
         model.addAttribute("customers", customerService.loadAll());
@@ -50,7 +49,6 @@ public class CustomerController {
         customerService.add(customer);
         return "redirect:/admin/customers";
     }
-
 
     @GetMapping("update/{id}")
     public String update(@PathVariable("id") Integer id, Model model) {
@@ -79,7 +77,6 @@ public class CustomerController {
         model.addAttribute("role", roleService.findByName(roleName));
         return "welcome";
     }
-
 
     @PostMapping("/changeTariff")
     public String changeTariff(@RequestParam("contractId") Integer contractId,
@@ -111,4 +108,13 @@ public class CustomerController {
         model.addAttribute("used", contract.getUsedOptions());
         return "changeOnlyOptions";
     }
+
+    /*@PostMapping("/changePassword")
+    public String changePassword(@RequestParam("contractId") Integer id,
+                                 @RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("newPassword") String newPassword) {
+        customerService.changePassword(id, oldPassword, newPassword);
+    }*/
+
+
 }

@@ -105,4 +105,9 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
     }
+
+    @Override
+    public Boolean changePassword(Integer id, String oldPassword, String newPassword) {
+        return null;
+    }
 }

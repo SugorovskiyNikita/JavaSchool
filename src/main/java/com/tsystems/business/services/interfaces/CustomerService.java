@@ -21,4 +21,5 @@ public interface CustomerService extends GenericService<CustomerDto, Integer> {
      */
     CustomerDto add(CustomerDto customerDto);
 
+    Boolean changePassword(Integer id,String oldPassword,String newPassword);
 }

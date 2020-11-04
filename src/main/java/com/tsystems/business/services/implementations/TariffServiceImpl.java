@@ -1,5 +1,6 @@
 package com.tsystems.business.services.implementations;
 
+import com.tsystems.config.MessageConfig;
 import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.dao.interfaces.TariffDao;
 import com.tsystems.db.dto.TariffDto;
@@ -24,6 +25,9 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class TariffServiceImpl implements TariffService {
+
+
+    final MessageConfig messageConfig;
 
     private final TariffDao tariffDao;
 
@@ -70,6 +74,7 @@ public class TariffServiceImpl implements TariffService {
         }
         tariff.setPossibleOptions(options);
         logger.info("Tariff has been updated. Id = " + tariff.getId());
+        messageConfig.sendMessage("Update");
 
         return new TariffDto(tariffDao.add(tariff)).addDependencies(tariff);
     }
