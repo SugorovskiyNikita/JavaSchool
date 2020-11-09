@@ -5,7 +5,7 @@ import com.tsystems.db.dto.RoleDto;
 /**
  * Created by nikita on 08.10.2020.
  */
-public interface RoleService<T> {
+public interface RoleService {
 
     /**
      *

@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="java">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,16 +61,16 @@
                            enctype="application/x-www-form-urlencoded">
                     <table class="table">
                         <tr>
-                            <th>
+                            <th scope="col">
                                 Option title
                             </th>
-                            <th>
+                            <th scope="col">
                                 Price
                             </th>
-                            <th>
+                            <th scope="col">
                                 Cost of connection
                             </th>
-                            <th style="width: 0">
+                            <th scope="col" style="width: 0">
                                 <img src="https://img.icons8.com/ios/452/checked-checkbox.png" height="19">
                             </th>
                         </tr>

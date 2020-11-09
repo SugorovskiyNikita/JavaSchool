@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="java">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,13 +48,13 @@
                 <br>
                 <table class="table">
                     <tr>
-                        <th>
+                        <th scope="col">
                             Title
                         </th>
-                        <th>
+                        <th scope="col">
                             Cost
                         </th>
-                        <th>
+                        <th scope="col">
                             Description
                         </th>
                     </tr>

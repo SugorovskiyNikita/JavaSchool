@@ -1,4 +1,4 @@
-package com.tsystems.config;
+package com.tsystems.business.services.implementations;
 
 import org.springframework.stereotype.Component;
 
@@ -10,26 +10,26 @@ import java.util.Properties;
 import javax.jms.Queue;
 
 @Component
-public class MessageConfig {
+public class MessageService {
 
     private static final String JMS_CONNECTION_FACTORY_JNDI = "jms/RemoteConnectionFactory";
     private static final String JMS_QUEUE_JNDI = "jms/queue/test";
     private static final String WILDFLY_REMOTING_URL = "http-remoting://127.0.0.1:8080";
     private static final String JMS_USERNAME = "martin";
-    private static final String JMS_PASSWORD = "martin1!";
+    private static final String JMS_PASS = "martin1!";
 
     public void sendMessage(String message) {
         Properties props = new Properties();
         props.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
         props.put(Context.PROVIDER_URL, WILDFLY_REMOTING_URL);
         props.put(Context.SECURITY_PRINCIPAL, JMS_USERNAME);
-        props.put(Context.SECURITY_CREDENTIALS, JMS_PASSWORD);
+        props.put(Context.SECURITY_CREDENTIALS, JMS_PASS);
 
         try {
             Context context = new InitialContext(props);
             QueueConnectionFactory connectionFactory = (QueueConnectionFactory) context.lookup(JMS_CONNECTION_FACTORY_JNDI);
             Queue queue = (Queue) context.lookup(JMS_QUEUE_JNDI);
-            QueueConnection connection = connectionFactory.createQueueConnection(JMS_USERNAME, JMS_PASSWORD);
+            QueueConnection connection = connectionFactory.createQueueConnection(JMS_USERNAME, JMS_PASS);
             connection.start();
             QueueSession session = connection.createQueueSession(false,Session.AUTO_ACKNOWLEDGE);
             QueueSender sender = session.createSender(queue);

@@ -8,6 +8,7 @@ import com.tsystems.business.services.interfaces.CustomerService;
 import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.business.services.interfaces.TariffService;
 import com.tsystems.db.dto.TariffDto;
+import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequiredArgsConstructor
-public class ContractController {
+public class ContractController extends Variable {
 
     public final ContractService contractService;
 
@@ -41,8 +42,8 @@ public class ContractController {
 
     @GetMapping("/admin/customer/{id}")
     public String chooseTariffAndOption(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(id));
-        model.addAttribute("tariff", tariffService.loadAll());
+        model.addAttribute(CUSTOMER_STR, customerService.loadByKey(id));
+        model.addAttribute(TARIFF_STR, tariffService.loadAll());
         model.addAttribute("options", optionService.loadAll());
         return "showCustomer";
     }
@@ -54,14 +55,14 @@ public class ContractController {
         model.addAttribute("contract", contractService.loadByKey(id));
         model.addAttribute("options", optionService.getOptionsOfTariff(tariff.getId()));
         model.addAttribute("used", contract.getUsedOptions());
-        model.addAttribute("tariff", contract.getTariff());
+        model.addAttribute(TARIFF_STR, contract.getTariff());
         return "changeOptionsAdmin";
     }
 
     @GetMapping("/admin/customerInfo/{id}")
     public String getById(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(id));
-        model.addAttribute("tariff", tariffService.loadAll());
+        model.addAttribute(CUSTOMER_STR, customerService.loadByKey(id));
+        model.addAttribute(TARIFF_STR, tariffService.loadAll());
         model.addAttribute("option", optionService.loadAll());
         return "customerInfo";
     }
@@ -73,7 +74,7 @@ public class ContractController {
                                  @RequestParam("number") String number) {
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
         contractService.updateContract(id, tariffId, options, number);
-        return "redirect:/admin/customerInfo/" + customer.getId();
+        return CUSTOMER_INFO + customer.getId();
 
     }
 
@@ -83,7 +84,7 @@ public class ContractController {
                                          @RequestParam("contractId") Integer id,
                                          @RequestParam("number") String number) {
         contractService.updateContract(id, tariffId, options, number);
-        return "redirect:/customer";
+        return REDIRECT_CUSTOMER;
     }
 
 
@@ -96,39 +97,39 @@ public class ContractController {
     @PostMapping("/admin/addContractForCustomer")
     public String addContractForCustomer(@RequestParam("customerId") Integer customerId) {
         contractService.addNew(customerId);
-        return "redirect:/admin/customerInfo/" + customerId;
+        return CUSTOMER_INFO + customerId;
     }
 
     @GetMapping("/admin/contracts")
     public String getAllContracts(Model model) {
         model.addAttribute("contracts", contractService.loadAll());
-        model.addAttribute("customer", customerService.loadAll());
+        model.addAttribute(CUSTOMER_STR, customerService.loadAll());
         return "contractsList";
     }
 
     @PostMapping("/block")
     public String block(HttpServletRequest request) {
-        Integer id = Integer.parseInt(request.getParameter("contractId"));
+        Integer id = Integer.parseInt(request.getParameter(CONTRACT_ID));
         int blockLevel;
-        if (request.isUserInRole("ROLE_ADMIN")) { // Check with block level must be set
+        if (request.isUserInRole(ROLE_ADMIN)) { // Check with block level must be set
             blockLevel = 2; // Blocked by T-mobile
         } else {
             blockLevel = 1; // Blocked by user
         }
         contractService.setBlock(id, blockLevel);
-        return "redirect:/customer";
+        return REDIRECT_CUSTOMER;
     }
 
     @PostMapping("/unblock")
     public String unblock(HttpServletRequest request) {
-        Integer id = Integer.parseInt(request.getParameter("contractId"));
+        Integer id = Integer.parseInt(request.getParameter(CONTRACT_ID));
         ContractDto contractDto = contractService.loadByKey(id);
 
-        if (!request.isUserInRole("ROLE_ADMIN") && contractDto.getIsBlocked() == 2)
-            return "redirect:/customer";
+        if (!request.isUserInRole(ROLE_ADMIN) && contractDto.getIsBlocked() == 2)
+            return REDIRECT_CUSTOMER;
 
         contractService.setBlock(id, 0);
-        return "redirect:/customer";
+        return REDIRECT_CUSTOMER;
     }
 
     @PostMapping("/viewContract")
@@ -146,27 +147,27 @@ public class ContractController {
 
     @PostMapping("/admin/block")
     public String blockAdmin(HttpServletRequest request) {
-        Integer id = Integer.parseInt(request.getParameter("contractId"));
+        Integer id = Integer.parseInt(request.getParameter(CONTRACT_ID));
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
         int blockLevel;
-        if (request.isUserInRole("ROLE_ADMIN")) { // Check with block level must be set
+        if (request.isUserInRole(ROLE_ADMIN)) { // Check with block level must be set
             blockLevel = 2; // Blocked by T-mobile
         } else {
             blockLevel = 1; // Blocked by user
         }
         contractService.setBlock(id, blockLevel);
-        return "redirect:/admin/customerInfo/" + customer.getId();
+        return CUSTOMER_INFO + customer.getId();
     }
 
     @PostMapping("/admin/unblock")
     public String unblockAdmin(HttpServletRequest request) {
-        Integer id = Integer.parseInt(request.getParameter("contractId"));
+        Integer id = Integer.parseInt(request.getParameter(CONTRACT_ID));
         CustomerDto customer = customerService.loadByKey(contractService.loadByKey(id).getCustomer().getId());
         ContractDto contractDto = contractService.loadByKey(id);
-        if (!request.isUserInRole("ROLE_ADMIN") && contractDto.getIsBlocked() == 2)
-            return "redirect:/customer";
+        if (!request.isUserInRole(ROLE_ADMIN) && contractDto.getIsBlocked() == 2)
+            return REDIRECT_CUSTOMER;
         contractService.setBlock(id, 0);
-        return "redirect:/admin/customerInfo/" + customer.getId();
+        return CUSTOMER_INFO + customer.getId();
     }
 
 

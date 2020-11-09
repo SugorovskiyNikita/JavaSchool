@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page session="true" %>
-<html>
+<!DOCTYPE html>
+<html lang="java">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,7 +37,7 @@
 <body>
 <div id="page-container">
     <div id="content-wrap">
-        <div id="wel" align="center">
+        <div id="wel" class="text-center">
             <h1 id="first" class="alert">Welcome, <c:out value="${customer.name}" default="guest"/> !</h1>
         </div>
         <div class="container">

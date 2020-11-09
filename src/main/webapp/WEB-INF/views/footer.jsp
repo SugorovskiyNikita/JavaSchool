@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-       <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+    <link rel="stylesheet" href="/resources/css/css1.css" type="text/css">
+    <title></title>
 
 </head>
 <footer class="footer" id="footer">

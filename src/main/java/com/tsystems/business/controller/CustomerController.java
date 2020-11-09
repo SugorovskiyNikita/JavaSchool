@@ -2,6 +2,7 @@ package com.tsystems.business.controller;
 
 import com.tsystems.db.dto.*;
 import com.tsystems.business.services.interfaces.*;
+import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequiredArgsConstructor
-public class CustomerController {
+public class CustomerController extends Variable {
 
     private final CustomerService customerService;
 
@@ -31,7 +32,7 @@ public class CustomerController {
     @GetMapping("/")
     public String index() {
         return "redirect:/login";
-    } //временно для удобства
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -52,39 +53,39 @@ public class CustomerController {
 
     @GetMapping("update/{id}")
     public String update(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(id));
+        model.addAttribute(CUSTOMER_STR, customerService.loadByKey(id));
         return "editCustomer";
     }
 
     @GetMapping("delete/{id}")
     public String deleteCustomer(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("customer", customerService.loadByKey(id));
+        model.addAttribute(CUSTOMER_STR, customerService.loadByKey(id));
         return "redirect:/admin/customers";
     }
 
     @GetMapping("/customer")
-    public String loadCustomer(Model model, Authentication authentication) throws Exception {
-        model.addAttribute("customer", customerService.findByEmail(authentication.getName()));
+    public String loadCustomer(Model model, Authentication authentication) {
+        model.addAttribute(CUSTOMER_STR, customerService.findByEmail(authentication.getName()));
         return "profile";
     }
 
     @GetMapping("/welcome")
-    public String welcome(Model model) throws Exception {
+    public String welcome(Model model) {
         Authentication authentication = authenticationFacade.getAuthentication();
         String roles = authentication.getAuthorities().toString();
         String roleName = roles.substring(1, roles.length() - 1);
-        model.addAttribute("customer", customerService.findByEmail(authentication.getName()));
+        model.addAttribute(CUSTOMER_STR, customerService.findByEmail(authentication.getName()));
         model.addAttribute("role", roleService.findByName(roleName));
         return "welcome";
     }
 
     @PostMapping("/changeTariff")
     public String changeTariff(@RequestParam("contractId") Integer contractId,
-                               Model model) throws Exception {
+                               Model model) {
         Authentication authentication = authenticationFacade.getAuthentication();
         model.addAttribute("tariffs", tariffService.loadAll());
-        model.addAttribute("customer", customerService.findByEmail(authentication.getName()));
-        model.addAttribute("contract", contractService.loadByKey(contractId));
+        model.addAttribute(CUSTOMER_STR, customerService.findByEmail(authentication.getName()));
+        model.addAttribute(CONTRACT_STR, contractService.loadByKey(contractId));
         return "changeTariff";
     }
 
@@ -93,7 +94,7 @@ public class CustomerController {
                                @RequestParam("tariffId") Integer tariffId,
                                Model model) {
         model.addAttribute("tariff", tariffService.loadByKey(tariffId));
-        model.addAttribute("contract", contractService.loadByKey(contractId));
+        model.addAttribute(CONTRACT_STR, contractService.loadByKey(contractId));
         model.addAttribute("options", optionService.getOptionsOfTariff(tariffId));
         return "changeOption";
     }
@@ -108,13 +109,4 @@ public class CustomerController {
         model.addAttribute("used", contract.getUsedOptions());
         return "changeOnlyOptions";
     }
-
-    /*@PostMapping("/changePassword")
-    public String changePassword(@RequestParam("contractId") Integer id,
-                                 @RequestParam("oldPassword") String oldPassword,
-                                 @RequestParam("newPassword") String newPassword) {
-        customerService.changePassword(id, oldPassword, newPassword);
-    }*/
-
-
 }

@@ -1,6 +1,8 @@
 package com.tsystems.db.dto;
 
 import com.tsystems.db.entities.Contract;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
  */
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ContractDto implements DtoMapper<Contract>, Comparable<ContractDto> {
 
     private Integer id;

@@ -3,7 +3,6 @@ package com.tsystems.db.dao.interfaces;
 import com.tsystems.db.entities.Tariff;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
 /**
  * Created by nikita on 13.09.2020.

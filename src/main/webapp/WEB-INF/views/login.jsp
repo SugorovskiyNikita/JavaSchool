@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page session="true" %>
-<html>
+<html lang="java">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,7 +26,7 @@
 <div class="container-fluid h-90">
     <div class="row justify-content-center align-items-center h-100">
         <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            <div align="center">
+            <div class="text-center">
                 <h1 id="first" class="alert" style="color: #e30876">T-mobile</h1>
             </div>
             <form method="post">

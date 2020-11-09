@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -105,7 +106,7 @@ public class ContractServiceImpl implements ContractService {
         //Update new contract balance
         Set<Option> newOptions = contract.getUsedOptions();
         BigDecimal summ = newOptions.stream()
-                .filter(e -> !optionIds.contains(e))
+                .filter(e -> !Objects.requireNonNull(optionIds).contains(e))
                 .map(Option::getConnectCost)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         contract.setBalance(contract.getBalance().subtract(summ));
@@ -113,13 +114,6 @@ public class ContractServiceImpl implements ContractService {
 
         return new ContractDto(contract).addDependencies(contract);
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public ContractDto findByNumber(String number) {
-        return new ContractDto(contractDao.findByNumber(number));
-    }
-
 
     @Override
     @Transactional(readOnly = true)

@@ -40,8 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDto add(CustomerDto customerDto) {
-        /*The password will be generated automatically
-         */
+        // The password will be generated automatically
         Customer customer = customerDto.convertToEntity();
         Contract contract = new ContractDto().convertToEntity();
         contract.setCustomer(customer);
@@ -55,7 +54,6 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setContracts(contracts);
 
         // NO PASSWORD. Password is created by user with first login
-        //customer.setPassword("password");
         customer.setPassword(passwordEncoder.encode("password"));
 
         //Give role, default "USER"
@@ -104,10 +102,5 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto findByEmail(String email) {
         Customer customer = customerDao.findByEmail(email);
         return new CustomerDto(customer).addDependencies(customer);
-    }
-
-    @Override
-    public Boolean changePassword(Integer id, String oldPassword, String newPassword) {
-        return null;
     }
 }

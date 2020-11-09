@@ -56,9 +56,8 @@
                                     <label for="dateOfBirth"
                                            class="col-md-4 col-form-label text-md-right">Birthday</label>
                                     <div class="col-md-6">
-                                        <input type="date" min="1900-01-01" max="2004-11-16" dataformatas="yyyy-MM-dd"
-                                               id="dateOfBirth" class="form-control"
-                                               name="dateOfBirth">
+                                        <input type="date" min="1900-01-01" max="2004-11-16" id="dateOfBirth"
+                                               class="form-control" name="dateOfBirth">
                                     </div>
                                 </div>
 

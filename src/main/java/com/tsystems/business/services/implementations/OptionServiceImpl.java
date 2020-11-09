@@ -28,7 +28,7 @@ public class OptionServiceImpl implements OptionService {
 
     private final TariffDao tariffDao;
 
-    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(OptionServiceImpl.class);
 
     @Override
     public OptionDto addNew(OptionDto newOption, String[] requiredFromId, String[] forbiddenWithId, List<Integer> forTariffsId) {

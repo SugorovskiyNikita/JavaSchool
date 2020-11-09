@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by nikita on 15.09.2020.
  */
-public interface GenericService<T, Integer extends Serializable> {
+public interface GenericService <T, Integer extends Serializable> {
 
     /**
      * Load all entries

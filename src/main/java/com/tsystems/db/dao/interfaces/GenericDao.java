@@ -9,17 +9,16 @@ import java.util.List;
  * Created by nikita on 11.09.2020.
  */
 @Repository
-public interface GenericDao<T, PK> {
+public interface GenericDao<T, Integer> {
 
     T add(T entity);
 
     List<T> loadAll();
 
-    T loadByKey(PK key);
+    T loadByKey(Integer key);
 
-    void remove(PK id);
+    void remove(Integer id);
 
-    void update(T Entity);
-
+    void update(T entity);
 
 }

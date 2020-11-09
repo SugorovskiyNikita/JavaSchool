@@ -56,8 +56,6 @@
                         class="">Address: </strong></span>${customer.address}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong
                         class="">Email: </strong></span>${customer.email}</li>
-                <!--<li class="list-group-item text-right"><span class="pull-left"><strong
-                        class="">Id blocked: </strong></span>${customer.isBlocked}</li>-->
             </ul>
         </div>
         <div class="col-sm-9">
@@ -65,12 +63,12 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Contract</th>
-                        <th>Number</th>
-                        <th>Tariff</th>
-                        <th>Used options</th>
-                        <th></th>
-                        <th></th>
+                        <th scope="col">Contract</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Tariff</th>
+                        <th scope="col">Used options</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
 
                     </tr>
                     </thead>

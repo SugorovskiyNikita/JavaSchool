@@ -1,12 +1,12 @@
 package com.tsystems.business.services.implementations;
 
-import com.tsystems.config.MessageConfig;
 import com.tsystems.db.dao.interfaces.OptionDao;
 import com.tsystems.db.dao.interfaces.TariffDao;
 import com.tsystems.db.dto.TariffDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.TariffService;
+import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -24,16 +24,16 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class TariffServiceImpl implements TariffService {
+public class TariffServiceImpl extends Variable implements TariffService {
 
 
-    final MessageConfig messageConfig;
+    final MessageService messageService;
 
     private final TariffDao tariffDao;
 
     private final OptionDao optionDao;
 
-    private static final Logger logger = Logger.getLogger(ContractServiceImpl.class);
+    private static final Logger logger = Logger.getLogger(TariffServiceImpl.class);
 
     @Override
     @Transactional(readOnly = true)
@@ -56,6 +56,7 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public void remove(Integer id) {
         tariffDao.remove(id);
+        messageService.sendMessage(UPDATE_TARIFF);
         logger.info("Tariff was deleted. Id = " + id);
     }
 
@@ -74,7 +75,7 @@ public class TariffServiceImpl implements TariffService {
         }
         tariff.setPossibleOptions(options);
         logger.info("Tariff has been updated. Id = " + tariff.getId());
-        messageConfig.sendMessage("Update");
+        messageService.sendMessage(UPDATE_TARIFF);
 
         return new TariffDto(tariffDao.add(tariff)).addDependencies(tariff);
     }
@@ -92,6 +93,7 @@ public class TariffServiceImpl implements TariffService {
         tariff.setPossibleOptions(options);
         try {
             tariffDao.add(tariff);
+            messageService.sendMessage(UPDATE_TARIFF);
             logger.info("New contract is created. Number = " + tariff.getName());
         } catch (Exception e) {
             logger.warn("Tariff error adding to the DB" + e);

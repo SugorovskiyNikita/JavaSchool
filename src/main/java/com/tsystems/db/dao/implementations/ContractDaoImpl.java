@@ -39,8 +39,4 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract, Integer> implement
         em.merge(contract);
     }
 
-    @Override
-    public Contract findByNumber(String number) {
-        return em.find(Contract.class, number);
-    }
 }

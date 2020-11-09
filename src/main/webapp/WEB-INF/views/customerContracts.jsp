@@ -15,7 +15,7 @@
 <div id="page-container">
     <div id="content-wrap">
         <div class="outer-wrapper container">
-            <div align="center">
+            <div class="text-center">
                 <h2>Contracts</h2>
             </div>
 
@@ -49,10 +49,10 @@
                     <br>
                     <table class="table">
                         <tr>
-                            <th>
+                            <th scope="col">
                                 Title
                             </th>
-                            <th>
+                            <th scope="col">
                                 Price
                             </th>
                         </tr>

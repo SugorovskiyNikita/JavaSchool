@@ -29,7 +29,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Cost</th>
                     <th scope="col">Description</th>
-                    <th>
+                    <th scope="col">
                         <button class="btn-success btn"><a href="/admin/addTariff" style="color: #ebebeb">Add new
                             Tariff</a>
                         </button>

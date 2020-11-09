@@ -48,7 +48,7 @@
                                 class="">Name: </strong></span> ${customer.name}</li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                 class="">Surname: </strong></span> ${customer.surname}</li>
-                        <li class="list-group-item text-right"><span class="pull-left" dataformatas="yyyy-MM-dd"><strong
+                        <li class="list-group-item text-right"><span class="pull-left"><strong
                                 class="">Birthday: </strong></span><fmt:formatDate value="${customer.dateOfBirth}"
                                                                                    pattern="dd-MM-yyyy"/></li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong

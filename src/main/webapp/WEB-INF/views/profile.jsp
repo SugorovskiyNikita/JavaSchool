@@ -66,13 +66,13 @@
 
                     <table class="table">
                         <tr>
-                            <th>ID</th>
-                            <th>Number</th>
-                            <th>Balance</th>
-                            <th>Tariff</th>
-                            <th>Blocked by customer?</th>
-                            <th>Blocked by operator?</th>
-                            <th></th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Tariff</th>
+                            <th scope="col">Blocked by customer?</th>
+                            <th scope="col">Blocked by operator?</th>
+                            <th scope="col"></th>
                         </tr>
                         <c:forEach var="contract" items="${customer.contracts}">
                             <tr>

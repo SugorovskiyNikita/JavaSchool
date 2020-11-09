@@ -1,7 +1,6 @@
 package com.tsystems.db.entities;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.apache.commons.lang3.builder.ToStringExclude;
 

@@ -3,7 +3,6 @@ package com.tsystems.db.dto;
 import com.tsystems.db.entities.Tariff;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
 import javax.validation.constraints.Digits;

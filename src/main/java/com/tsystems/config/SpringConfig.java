@@ -1,5 +1,6 @@
 package com.tsystems.config;
 
+import com.tsystems.business.services.implementations.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,7 +24,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @PropertySource(value = "classpath:db.properties")
 @RequiredArgsConstructor
-@Import({MessageConfig.class})
+@Import({MessageService.class})
 public class SpringConfig {
 
     private final Environment environment;

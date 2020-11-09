@@ -12,7 +12,7 @@ public interface CustomerService extends GenericService<CustomerDto, Integer> {
      * @param email number to search
      * @return found contract DTO object
      */
-    CustomerDto findByEmail(String email) throws Exception;
+    CustomerDto findByEmail(String email);
 
     /**
      * Add new customer
@@ -20,6 +20,4 @@ public interface CustomerService extends GenericService<CustomerDto, Integer> {
      * @return customer DTO object
      */
     CustomerDto add(CustomerDto customerDto);
-
-    Boolean changePassword(Integer id,String oldPassword,String newPassword);
 }

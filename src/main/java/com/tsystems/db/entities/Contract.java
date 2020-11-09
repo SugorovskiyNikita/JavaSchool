@@ -1,8 +1,6 @@
 package com.tsystems.db.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.apache.commons.lang3.builder.HashCodeExclude;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -17,7 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "contracts", schema = "tmobile")
 @Data
-
+@Builder
+@AllArgsConstructor
 public class Contract {
 
     @Id

@@ -76,8 +76,7 @@
                                                         multiple="multiple"
                                                         onchange="this.value">
                                                     <c:forEach var="tariff" items="${tariff}">
-                                                        <option name="forTariffs"
-                                                                value="${tariff.id}">${tariff.name}</option>
+                                                        <option value="${tariff.id}">${tariff.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -89,8 +88,7 @@
                                                         class="js-example-basic-multiple" multiple="multiple"
                                                         onchange="this.value">
                                                     <c:forEach var="option" items="${option}">
-                                                        <option name="requiredFrom"
-                                                                value="${option.id}">${option.name}</option>
+                                                        <option value="${option.id}">${option.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -102,8 +100,7 @@
                                                         class="js-example-basic-multiple" multiple="multiple"
                                                         onchange="this.value">
                                                     <c:forEach var="option" items="${option}">
-                                                        <option name="forbiddenWith"
-                                                                value="${option.id}">${option.name}</option>
+                                                        <option value="${option.id}">${option.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>

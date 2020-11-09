@@ -16,6 +16,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href="/resources/css/navbarCss.css" rel="stylesheet">
+    <title></title>
 </head>
 <nav id="nav" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
