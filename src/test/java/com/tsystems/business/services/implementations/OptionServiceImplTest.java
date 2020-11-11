@@ -42,6 +42,7 @@ public class OptionServiceImplTest {
     void onSetUp() {
         MockitoAnnotations.initMocks(this);
     }
+
     @Test
     public void test() throws Exception {
         Assert.assertNotNull(optionService);
@@ -67,8 +68,8 @@ public class OptionServiceImplTest {
         tariff.setId(10);
         when(tariffDao.loadByKey(10)).thenReturn(tariff);
         when(optionDao.add(any(Option.class))).thenReturn(optionDto.convertToEntity());
-        String[] requiredFromId = new String[]{"1","2"};
-        String[] forbiddenWithId = new String[]{"3","4"};
+        String[] requiredFromId = new String[]{"1", "2"};
+        String[] forbiddenWithId = new String[]{"3", "4"};
         List<Integer> forTariffsId = new ArrayList<>();
         forTariffsId.add(10);
         OptionDto optionDto1 = optionService.addNew(optionDto, requiredFromId, forbiddenWithId, forTariffsId);

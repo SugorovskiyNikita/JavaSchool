@@ -8,7 +8,6 @@ import com.tsystems.business.services.interfaces.CustomerService;
 import com.tsystems.business.services.interfaces.OptionService;
 import com.tsystems.business.services.interfaces.TariffService;
 import com.tsystems.db.dto.TariffDto;
-import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static com.tsystems.util.variable.Variable.*;
+
 
 /**
  * Created by nikita on 20.09.2020.
  */
 @Controller
 @RequiredArgsConstructor
-public class ContractController extends Variable {
+public class ContractController {
 
     public final ContractService contractService;
 

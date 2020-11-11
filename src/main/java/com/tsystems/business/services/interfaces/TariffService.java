@@ -2,6 +2,7 @@ package com.tsystems.business.services.interfaces;
 
 import com.tsystems.db.dto.TariffDto;
 
+import javax.naming.NamingException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface TariffService extends GenericService<TariffDto, Integer> {
      * @param description new description for tariff
      * @return update tariff DTO object
      */
-    TariffDto update(Integer tariffDto, List<Integer> newOptions, String name, BigDecimal cost, String description);
+    TariffDto update(Integer tariffDto, List<Integer> newOptions, String name, BigDecimal cost, String description) throws NamingException;
 
 
     /**

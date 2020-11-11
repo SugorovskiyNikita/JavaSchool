@@ -49,7 +49,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void test() throws Exception{
+    public void test() throws Exception {
         Assert.assertNotNull(customerService);
 
     }
@@ -64,7 +64,7 @@ public class CustomerServiceImplTest {
         when(roleDao.getRoleById(1)).thenReturn(role);
         when(customerDao.add(any(Customer.class))).thenReturn(customerDto.convertToEntity());
         CustomerDto customerDto1 = customerService.add(customerDto);
-        Assert.assertNotNull("Customer successfully created",customerDto1);
+        Assert.assertNotNull("Customer successfully created", customerDto1);
     }
 
     @Test

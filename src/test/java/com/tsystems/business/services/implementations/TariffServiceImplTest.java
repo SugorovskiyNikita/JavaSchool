@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.naming.NamingException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -48,6 +49,7 @@ public class TariffServiceImplTest {
     void onSetUp() {
         MockitoAnnotations.initMocks(this);
     }
+
     @Test
     public void test() throws Exception {
         Assert.assertNotNull(tariffService);
@@ -75,14 +77,14 @@ public class TariffServiceImplTest {
     }
 
     @Test
-    public void testRemove() {
+    public void testRemove() throws NamingException {
         tariffService.remove(1);
         messageService.sendMessage("updateTariff");
         verify(tariffDao, atLeastOnce()).remove(any());
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws NamingException {
         Tariff tariff = new Tariff();
         tariff.setId(1);
         String name = "test";
@@ -99,13 +101,13 @@ public class TariffServiceImplTest {
         when(optionDao.loadByKey(2)).thenReturn(option);
         when(optionDao.loadByKey(3)).thenReturn(option1);
         when(tariffDao.add(any(Tariff.class))).thenReturn(tariff);
-        TariffDto tariffDto = tariffService.update(1,newOptions, name, cost, description);
+        TariffDto tariffDto = tariffService.update(1, newOptions, name, cost, description);
         messageService.sendMessage("Update");
         Assert.assertNotNull("Tariff successfully updateTariff", tariffDto);
     }
 
     @Test
-    public void addNew() {
+    public void addNew() throws NamingException {
         TariffDto tariffDto = new TariffDto();
         tariffDto.setId(5);
         Option option = new Option();

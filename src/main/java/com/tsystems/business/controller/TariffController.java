@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.naming.NamingException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class TariffController {
     }
 
     @GetMapping("/deleteTariff/{id}")
-    public String deleteTariff(@PathVariable("id") Integer id) {
+    public String deleteTariff(@PathVariable("id") Integer id) throws NamingException {
         tariffService.remove(id);
         return "redirect:/admin/tariffs";
     }
@@ -62,7 +63,7 @@ public class TariffController {
                              @RequestParam("options") List<Integer> newOptions,
                              @RequestParam("name") String name,
                              @RequestParam("cost") BigDecimal cost,
-                             @RequestParam("description") String description) {
+                             @RequestParam("description") String description) throws NamingException {
         tariffService.update(id, newOptions, name, cost, description);
         return "redirect:/admin/editTariff/" + id;
     }

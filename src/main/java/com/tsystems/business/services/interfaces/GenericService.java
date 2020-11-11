@@ -1,5 +1,6 @@
 package com.tsystems.business.services.interfaces;
 
+import javax.naming.NamingException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,6 +29,6 @@ public interface GenericService <T, Integer extends Serializable> {
      *
      * @param id id of entity
      */
-    void remove(Integer id);
+    void remove(Integer id) throws NamingException;
 
 }

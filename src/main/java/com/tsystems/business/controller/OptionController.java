@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.List;
@@ -64,7 +65,7 @@ public class OptionController {
     }
 
     @GetMapping("/admin/deleteOption/{id}")
-    public String deleteOption(@PathVariable("id") Integer id) {
+    public String deleteOption(@PathVariable("id") Integer id) throws NamingException {
         optionService.remove(id);
         return "redirect:/admin/options";
     }

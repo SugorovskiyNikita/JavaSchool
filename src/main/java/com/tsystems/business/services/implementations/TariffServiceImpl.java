@@ -6,25 +6,26 @@ import com.tsystems.db.dto.TariffDto;
 import com.tsystems.db.entities.Option;
 import com.tsystems.db.entities.Tariff;
 import com.tsystems.business.services.interfaces.TariffService;
-import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.NamingException;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.tsystems.util.variable.Variable.*;
 /**
  * Created by nikita on 13.09.2020.
  */
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class TariffServiceImpl extends Variable implements TariffService {
+public class TariffServiceImpl implements TariffService {
 
 
     final MessageService messageService;
@@ -54,14 +55,14 @@ public class TariffServiceImpl extends Variable implements TariffService {
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(Integer id) throws NamingException {
         tariffDao.remove(id);
         messageService.sendMessage(UPDATE_TARIFF);
         logger.info("Tariff was deleted. Id = " + id);
     }
 
     @Override
-    public TariffDto update(Integer id, List<Integer> newOptions, String name, BigDecimal cost, String description) {
+    public TariffDto update(Integer id, List<Integer> newOptions, String name, BigDecimal cost, String description) throws NamingException {
         Tariff tariff = tariffDao.loadByKey(id);
         tariff.setName(name);
         tariff.setCost(cost);

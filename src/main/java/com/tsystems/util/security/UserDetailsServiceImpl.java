@@ -1,7 +1,6 @@
 package com.tsystems.util.security;
 
 import com.tsystems.db.dao.interfaces.CustomerDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private CustomerDao customerDao;
+    private final CustomerDao customerDao;
+
+    public UserDetailsServiceImpl(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
 
     @Override
     @Transactional

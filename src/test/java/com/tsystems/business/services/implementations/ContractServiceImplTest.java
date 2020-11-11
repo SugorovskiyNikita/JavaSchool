@@ -5,8 +5,6 @@ import com.tsystems.db.dao.interfaces.CustomerDao;
 import com.tsystems.db.dto.ContractDto;
 import com.tsystems.db.entities.Contract;
 import com.tsystems.db.entities.Customer;
-import com.tsystems.db.entities.Option;
-import com.tsystems.db.entities.Tariff;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +33,7 @@ public class ContractServiceImplTest {
     private ContractDao contractDao;
 
     @Test
-    public void test() throws Exception{
+    public void test() throws Exception {
         Assert.assertNotNull(contractService);
     }
 
@@ -47,26 +45,6 @@ public class ContractServiceImplTest {
     @BeforeEach
     void onSetUp() {
         MockitoAnnotations.initMocks(this);
-        Customer customer = new Customer();
-        customer.setId(2);
-        Tariff tariff = new Tariff();
-        tariff.setId(3);
-        Option option1 = new Option();
-        option1.setId(4);
-        Option option2 = new Option();
-        option2.setId(5);
-        Set<Option> options = new HashSet<>();
-        options.add(option1);
-        options.add(option2);
-        contract = Contract.builder()
-                .id(1)
-                .balance(new BigDecimal(100))
-                .customer(customer)
-                .isBlocked(0)
-                .number("+79811447779")
-                .tariff(tariff)
-                .usedOptions(options)
-                .build();
     }
 
     @Test
@@ -75,7 +53,7 @@ public class ContractServiceImplTest {
         customer.setId(3);
         when(customerDao.loadByKey(3)).thenReturn(customer);
         ContractDto contractDto = contractService.addNew(3);
-        Assert.assertNotNull("Contract successfully created",contractDto);
+        Assert.assertNotNull("Contract successfully created", contractDto);
     }
 
     @Test

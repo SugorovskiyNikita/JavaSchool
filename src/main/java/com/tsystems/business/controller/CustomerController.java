@@ -2,12 +2,13 @@ package com.tsystems.business.controller;
 
 import com.tsystems.db.dto.*;
 import com.tsystems.business.services.interfaces.*;
-import com.tsystems.util.variable.Variable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import static com.tsystems.util.variable.Variable.*;
 
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequiredArgsConstructor
-public class CustomerController extends Variable {
+public class CustomerController {
 
     private final CustomerService customerService;
 

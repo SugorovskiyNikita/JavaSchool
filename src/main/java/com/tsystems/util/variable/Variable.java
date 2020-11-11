@@ -5,6 +5,9 @@ package com.tsystems.util.variable;
  */
 public class Variable {
 
+    private Variable() {
+    }
+
     public static final String CUSTOMER_STR = "customer";
 
     public static final String CONTRACT_STR = "contract";
